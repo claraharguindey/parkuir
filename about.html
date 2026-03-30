@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Qué es Parkuir</title>
+<link rel="stylesheet" href="style.css">
+<style>
+body {
+  overflow: hidden;
+  height: 100vh;
+  touch-action: none;
+  user-select: none;
+}
+
+#gyro-bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: var(--bg);
+}
+
+header { position: relative; z-index: 10; }
+
+#stage {
+  position: fixed;
+  inset: 0;
+  top: 47px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+  overflow: hidden;
+}
+
+#text-block {
+  position: absolute;
+  width: min(640px, 90vw);
+  cursor: grab;
+  transform-origin: center center;
+  will-change: transform;
+}
+#text-block:active { cursor: grabbing; }
+
+.about-pregunta {
+  font-size: clamp(1.8rem, 5vw, 3.5rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  line-height: 0.95;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1.5px solid var(--ink);
+}
+.about-intro {
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.75;
+  margin-bottom: 1.5rem;
+}
+.about-body p {
+  font-size: 0.9rem;
+  line-height: 1.8;
+  font-weight: 400;
+  margin-bottom: 1.2rem;
+}
+.about-final {
+  margin-top: 1.5rem;
+  padding-top: 1.2rem;
+  border-top: 1.5px solid var(--ink);
+  font-size: 0.95rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  line-height: 1.35;
+}
+
+#gesture-hint {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0.35;
+  z-index: 20;
+  pointer-events: none;
+  white-space: nowrap;
+  transition: opacity 0.8s;
+}
+#gesture-hint.hidden { opacity: 0; }
+
+#btn-reset {
+  position: fixed;
+  bottom: 1.2rem;
+  right: 2rem;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  background: none;
+  border: 1px solid var(--ink);
+  color: var(--ink);
+  padding: 4px 10px;
+  cursor: pointer;
+  z-index: 20;
+  opacity: 0.4;
+  font-family: inherit;
+  transition: opacity 0.2s;
+}
+#btn-reset:hover { opacity: 1; }
+
+/* ── MODO LECTURA ── */
+body.reading {
+  overflow: auto;
+  touch-action: auto;
+}
+body.reading #stage {
+  position: relative;
+  top: auto;
+  display: block;
+  overflow: visible;
+  height: auto;
+}
+body.reading #text-block {
+  position: relative;
+  transform: none !important;
+  cursor: auto;
+  width: min(640px, 90vw);
+  margin: 3rem auto 5rem;
+}
+body.reading #gyro-bg { display: none; }
+body.reading #gesture-hint { display: none; }
+body.reading #btn-reset { display: none; }
+
+#controls-aside {
+  position: fixed;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 30;
+  border: 1.5px solid var(--ink);
+  border-left: none;
+  background: var(--bg);
+  padding: 1rem 1rem 1rem 0.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+#controls-aside button {
+  background: none;
+  border: 1.5px solid var(--ink);
+  color: var(--ink);
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 5px 8px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s, color 0.15s;
+}
+#controls-aside button:hover,
+#controls-aside button.active { background: var(--ink); color: var(--bg); }
+#controls-aside hr {
+  border: none;
+  border-top: 1px solid var(--ink);
+  opacity: 0.3;
+  margin: 0;
+}
+.aside-label {
+  opacity: 0.45;
+  writing-mode: horizontal-tb;
+}
+.aside-instructions {
+  opacity: 0.5;
+  line-height: 1.8;
+}
+</style>
+</head>
+<body>
+
+<div id="gyro-bg"></div>
+
+<aside id="controls-aside">
+  <span class="aside-label">Modo</span>
+  <button id="mode-btn" onclick="toggleMode()">Gestos</button>
+  <button id="read-btn" onclick="toggleMode()">Leer</button>
+  <hr>
+    <img style="filter: grayscale(1); width: 200px;" src="/images/gestures.png" alt="" srcset="">
+
+</aside>
+
+<header>
+  <span>PARKUIR</span>
+  <nav>
+    <a href="about.html">Qué es Parkuir</a>
+    <a href="cronograma.html">Cronograma</a>
+    <a href="#">Reglamento</a>
+    <a href="#">Jugadorxs</a>
+    <a href="#">Archivo</a>
+  </nav>
+</header>
+
+<div id="stage">
+  <div id="text-block">
+    <h1 class="about-pregunta">¿Qué es eso del Parkuir?</h1>
+    <p class="about-intro">
+      ¡Holi! Somos Maria Laudes y Guiu Gimeno Bardis, aunque en Parkuir hemos tenido muchísimos otros nombres: Fast Zópez, Rayito McQueen, David Meca Liento, Torrija Jete… Esta web nace del deseo de compartir qué es esto que llamamos Parkuir y de archivar todo lo que hemos estado haciendo hasta ahora.
+    </p>
+    <div class="about-body">
+      <p>Parkuir es un deporte-antideporte que nace a través de nuestro vínculo y recorrido. Un día, en el tren de camino a València, estábamos compartiendo nuestras vivencias en contextos deportivos. Maria le contaba a Guiu sus recuerdos en las clases de gimnasia como persona gorda, y por los mil y un deportes que le hicieron pasar: desde hiphop hasta baloncesto, con el fin de intentar controlar su cuerpo, pero no lo consiguieron. Guiu le contaba a Maria que hacía poco se había apuntado a la piscina municipal, y le narraba las experiencias de ser una persona trans y estar en el vestuario o en la piscina.</p>
+      <p>Es desde aquí que empezamos a bromear con estas experiencias y a pensar en qué tipo de deporte encajaría con nosotres y con muches otres: uno donde no nos cansáramos mucho, donde pudiéramos jugar, lucir divines, y, si no es mucho pedir, sobre todo uno donde no nos violentaran. De los deportes que conocíamos, no encontramos ninguno que cumpliera estas condiciones, así que decidimos crear uno.</p>
+      <p>El parkour siempre nos había gustado mucho: pintaba divertido y no necesitabas nada para poder hacerlo. Era muy normal entre nosotres bromear haciendo saltos ridículos y terminar gritando: ¡Parkuuuuur! Nos gustaba el parkour porque resignificaba y se relacionaba de una forma muy poco funcional con los espacios públicos, y porque era apto para pobres. Pero también es cierto que no nos imaginábamos haciendo piruetas, y además rompía una de nuestras reglas: no cansarse. El parkour está cargado de connotaciones de género y capacitismo. Pero, ¿qué pasaría si lo adaptáramos a nuestros deseos?, ¿si lo travistiéramos un poquito? Pues que nacería Parkuir: como el parkour, pero desde una perspectiva cuir, resaltando y jugando con la idea de fracaso, no productividad, juego y deseo.</p>
+    </div>
+    <p class="about-final">
+      Parkuir es un deporte para no encajar, para habitar el espacio público desde el goce y la desobediencia. En Parkuir se camina raro, nos travestimos, se practica la caída, no se suda nada y, sobre todo, se disfruta.
+    </p>
+  </div>
+</div>
+
+<button id="btn-reset" onclick="resetTransform()">↺ reset</button>
+
+<script>
+// ── MODO ──
+let readingMode = false;
+
+function toggleMode() {
+  readingMode = !readingMode;
+  const modeBtn = document.getElementById('mode-btn');
+  const readBtn = document.getElementById('read-btn');
+  if (readingMode) {
+    document.body.classList.add('reading');
+    modeBtn.classList.remove('active');
+    readBtn.classList.add('active');
+    // reading mode active
+  } else {
+    document.body.classList.remove('reading');
+    modeBtn.classList.add('active');
+    readBtn.classList.remove('active');
+    applyTransform();
+  }
+}
+
+let tx=0, ty=0, scale=1, angle=0;
+const block = document.getElementById('text-block');
+const hint  = document.getElementById('gesture-hint');
+
+function applyTransform() {
+  block.style.transform = `translate(${tx}px,${ty}px) rotate(${angle}deg) scale(${scale})`;
+}
+
+function resetTransform() {
+  tx=0; ty=0; scale=1; angle=0;
+  block.style.transition = 'transform 0.45s cubic-bezier(0.25,0.46,0.45,0.94)';
+  applyTransform();
+  setTimeout(() => block.style.transition='', 500);
+}
+
+let hintHidden = false;
+function hideHint() {
+  if (!hintHidden) { hintHidden=true; hint.classList.add('hidden'); }
+}
+
+// ── utilidades ──
+function ptDist(a, b) {
+  return Math.hypot(a.clientX-b.clientX, a.clientY-b.clientY);
+}
+function ptMid(a, b) {
+  return { x:(a.clientX+b.clientX)/2, y:(a.clientY+b.clientY)/2 };
+}
+function ptAngle(a, b) {
+  return Math.atan2(b.clientY-a.clientY, b.clientX-a.clientX) * 180/Math.PI;
+}
+
+// ── touch ──
+let prevT=null, prevD=null, prevA=null, prevM=null;
+
+document.addEventListener('touchstart', e=>{
+  if (readingMode) return;
+  e.preventDefault();
+  hideHint();
+  prevT = [...e.touches];
+  if (e.touches.length===2) {
+    prevD = ptDist(e.touches[0],e.touches[1]);
+    prevA = ptAngle(e.touches[0],e.touches[1]);
+    prevM = ptMid(e.touches[0],e.touches[1]);
+  }
+},{passive:false});
+
+document.addEventListener('touchmove', e=>{
+  if (readingMode) return;
+  e.preventDefault();
+  const t = [...e.touches];
+
+  if (t.length===1 && prevT?.length===1) {
+    tx += t[0].clientX - prevT[0].clientX;
+    ty += t[0].clientY - prevT[0].clientY;
+  } else if (t.length===2) {
+    const d = ptDist(t[0],t[1]);
+    const a = ptAngle(t[0],t[1]);
+    const m = ptMid(t[0],t[1]);
+    if (prevD) scale = Math.max(0.25, Math.min(5, scale * d/prevD));
+    if (prevA!==null) angle += a - prevA;
+    if (prevM) { tx += m.x-prevM.x; ty += m.y-prevM.y; }
+    prevD=d; prevA=a; prevM=m;
+  }
+
+  prevT=t;
+  applyTransform();
+},{passive:false});
+
+document.addEventListener('touchend', e=>{
+  prevT=[...e.touches];
+  if (e.touches.length<2){ prevD=null; prevA=null; prevM=null; }
+});
+
+// ── mouse ──
+let mDown=false, lastM=null;
+
+block.addEventListener('mousedown', e=>{
+  if (readingMode) return;
+  mDown=true; lastM={x:e.clientX,y:e.clientY}; e.preventDefault();
+});
+document.addEventListener('mousemove', e=>{
+  if (!mDown||!lastM) return;
+  hideHint();
+  if (e.shiftKey) {
+    angle += (e.clientX-lastM.x)*0.4;
+  } else {
+    tx += e.clientX-lastM.x;
+    ty += e.clientY-lastM.y;
+  }
+  lastM={x:e.clientX,y:e.clientY};
+  applyTransform();
+});
+document.addEventListener('mouseup',()=>{ mDown=false; lastM=null; });
+
+// rueda = zoom
+document.addEventListener('wheel', e=>{
+  if (readingMode) { return; }
+  e.preventDefault();
+  hideHint();
+  scale = Math.max(0.25, Math.min(5, scale * (e.deltaY>0 ? 0.93 : 1.07)));
+  applyTransform();
+},{passive:false});
+
+// ── giroscopio ──
+let gyroBase=null;
+
+function onOrientation(e) {
+  if (e.beta===null) return;
+  if (!gyroBase) { gyroBase={b:e.beta,g:e.gamma}; return; }
+  const db = Math.max(-25,Math.min(25, e.beta  - gyroBase.b));
+  const dg = Math.max(-25,Math.min(25, e.gamma - gyroBase.g));
+
+  // fondo con gradiente sutil que sigue la inclinación
+  document.getElementById('gyro-bg').style.background =
+    `radial-gradient(ellipse at ${50+dg*1.2}% ${50+db*0.6}%, #f5ddd2, var(--bg) 70%)`;
+
+  // parallax ligero sobre la transformación actual
+  block.style.transform =
+    `translate(${tx+dg*0.6}px,${ty+db*0.6}px) rotate(${angle}deg) scale(${scale})`;
+}
+
+window.addEventListener('deviceorientation', onOrientation);
+
+// permiso iOS 13+
+document.addEventListener('click', async ()=>{
+  if (typeof DeviceOrientationEvent?.requestPermission==='function') {
+    try {
+      if (await DeviceOrientationEvent.requestPermission()==='granted')
+        window.addEventListener('deviceorientation', onOrientation);
+    } catch(e){}
+  }
+},{once:true});
+
+// ── init ──
+applyTransform();
+setTimeout(()=>hint.classList.add('hidden'), 6000);
+</script>
+</body>
+</html>

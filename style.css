@@ -1,0 +1,152 @@
+@font-face {
+  font-family: "ClashGrotesk-Regular";
+  src:
+    url("../fonts/ClashGrotesk-Regular.woff2") format("woff2"),
+    url("../fonts/ClashGrotesk-Regular.woff") format("woff"),
+    url("../fonts/ClashGrotesk-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-display: swap;
+  font-style: normal;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #f0d5c8;
+  --ink: #292929;
+  --fs: clamp(4rem, 14vw, 13rem);
+  --gap: clamp(2px, 0.4vw, 6px);
+}
+
+body {
+  background: var(--bg);
+  overflow-x: hidden;
+  font-family: sans-serif;
+  color: var(--ink);
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.9rem 2rem;
+  border-bottom: 1.5px solid var(--ink);
+  font-size: 1rem;
+  text-transform: uppercase;
+}
+header a {
+  color: inherit;
+  text-decoration: none;
+}
+header a:hover {
+  text-decoration: underline;
+}
+nav {
+  display: flex;
+  gap: 2.5rem;
+}
+
+p {
+  font-family: ClashGrotesk-Regular;
+}
+main {
+  padding: 0 1.5rem var(--gap);
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+}
+
+.row {
+  display: flex;
+  align-items: stretch;
+  white-space: nowrap;
+  height: calc(var(--fs) * 1.18);
+  overflow: hidden;
+  gap: 0.05em;
+}
+
+.row span {
+  font-size: var(--fs);
+  font-weight: 900;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* contenedor base para todas las imágenes */
+.img-wrap {
+  flex-shrink: 0;
+  height: var(--fs);
+  aspect-ratio: 4/3;
+  align-self: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.img-wrap img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  filter: grayscale(100%) contrast(1.1) brightness(1.05);
+}
+
+.img-wrap.jpg {
+  background: var(--ink);
+  border: 1px solid black;
+}
+.img-wrap.jpg img {
+  object-fit: cover;
+  mix-blend-mode: screen;
+  filter: grayscale(100%) contrast(1.1) brightness(1.1);
+}
+
+/* cámara */
+#cam-wrap {
+  flex-shrink: 0;
+  height: var(--fs);
+  aspect-ratio: 4/3;
+  align-self: center;
+  position: relative;
+  overflow: hidden;
+  background: var(--ink);
+  border: 1px solid var(--ink);
+}
+#cam-wrap canvas {
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
+  filter: grayscale(100%) contrast(1.2);
+}
+
+footer {
+  border-top: 1.5px solid var(--ink);
+  padding: 0.9rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  text-transform: uppercase;
+}
+
+#cam-hint {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 2rem;
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 106, 233, 0.35);
+  z-index: 10;
+  pointer-events: none;
+}
+

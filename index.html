@@ -1,238 +1,122 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PARKUIR</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
   <script src="https://unpkg.com/ml5@1/dist/ml5.min.js"></script>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    :root {
-      --bg: #f0d5c8;
-      --ink: #ff6ae9;
-      --fs: clamp(4rem, 14vw, 13rem);
-      --gap: clamp(2px, 0.4vw, 6px);
-    }
-
-    body {
-      background: var(--bg);
-      overflow-x: hidden;
-      font-family: sans-serif;
-      color: var(--ink);
-    }
-
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0.9rem 2rem;
-      border-bottom: 1.5px solid var(--ink);
-      font-size: 1rem;
-      text-transform: uppercase;
-    }
-    header a { color: inherit; text-decoration: none; }
-    header a:hover { text-decoration: underline; }
-    nav { display: flex; gap: 2.5rem; }
-
-    main {
-      padding: 0 1.5rem var(--gap);
-      display: flex;
-      flex-direction: column;
-      gap: var(--gap);
-    }
-
-    .row {
-      display: flex;
-      align-items: stretch;
-      white-space: nowrap;
-      height: calc(var(--fs) * 1.18);
-      overflow: hidden;
-      gap: 0.05em;
-    }
-
-    .row span {
-      font-size: var(--fs);
-      font-weight: 900;
-      line-height: 1;
-      text-transform: uppercase;
-      letter-spacing: -0.01em;
-      display: flex;
-      align-items: center;
-      flex-shrink: 0;
-    }
-
-    /* contenedor base para todas las imágenes */
-    .img-wrap {
-      flex-shrink: 0;
-      height: var(--fs);
-      aspect-ratio: 4/3;
-      align-self: center;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-
-    .img-wrap img {
-      width: 100%;
-      height: 100%;
-      display: block;
-    }
-
-    /* JPG: fondo magenta + screen → duotono bicolor */
-    .img-wrap.jpg {
-      background: var(--ink);
-    }
-    .img-wrap.jpg img {
-      object-fit: cover;
-      mix-blend-mode: screen;
-      filter: grayscale(100%) contrast(1.1) brightness(1.1);
-    }
-
-    /* cámara */
-    #cam-wrap {
-      flex-shrink: 0;
-      height: var(--fs);
-      aspect-ratio: 4/3;
-      align-self: center;
-      position: relative;
-      overflow: hidden;
-      background: var(--ink);
-    }
-    #cam-wrap canvas {
-      position: absolute !important;
-      top: 0; left: 0;
-      width: 100% !important;
-      height: 100% !important;
-      mix-blend-mode: screen;
-    }
-
-    footer {
-      border-top: 1.5px solid var(--ink);
-      padding: 0.9rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      text-transform: uppercase;
-    }
-
-    #cam-hint {
-      position: fixed; bottom: 1.5rem; right: 2rem;
-      font-size: 0.55rem; font-weight: 700;
-      letter-spacing: 0.2em; text-transform: uppercase;
-      color: rgba(255,106,233,0.35);
-      z-index: 10; pointer-events: none;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<div id="cam-hint">mueve tu cuerpo ↑</div>
+  <header>
+    <a href="/">Parkuir</a>
+    <nav>
+      <a href="/about.html">Qué es Parkuir</a>
+      <a href="/cronograma.html">Cronograma</a>
+      <a href="#">Reglamento</a>
+      <a href="#">Jugadorxs</a>
+      <a href="#">Archivo</a>
+    </nav>
+  </header>
 
-<header>
-  <span>PARKUIR</span>
-  <nav>
-    <a href="#">Proyecto</a>
-    <a href="#">Sesiones</a>
-    <a href="main.html">Entrar</a>
-  </nav>
-</header>
+  <main>
 
-<main>
+    <div class="row">
+      <span>PAR</span>
+      <div class="img-wrap jpg"><img src="./images/parkuir-2.jpg" alt=""></div>
+      <span>KUIR</span>
+    </div>
 
-  <div class="row">
-    <span>PAR</span>
-    <div class="img-wrap jpg"><img src="./images/parkuir-2.jpg" alt=""></div>
-    <span>KUIR</span>
-  </div>
+    <div class="row">
+      <span>DEPOR</span>
+      <div id="cam-wrap"></div>
+      <span>TE</span>
+      <div class="img-wrap png"><img src="./images/ventolin.png" alt=""></div>
+    </div>
 
-  <div class="row">
-    <span>DE</span>
-    <span>POR</span>
-    <div id="cam-wrap"></div>
-    <span>TE</span>
-    <div class="img-wrap png"><img src="./images/duotone-2.png" alt=""></div>
-  </div>
+    <div class="row">
+      <span>SUB</span>
+      <div class="img-wrap png"><img src="./images/parkuir-4.png" alt=""></div>
+      <span>VER</span>
+      <span>SI</span>
+    </div>
 
-  <div class="row">
-    <span>SUB</span>
-    <div class="img-wrap png"><img src="./images/duotone.png" alt=""></div>
-    <span>VER</span>
-    <span>SI</span>
-  </div>
+    <div class="row">
+      <div class="img-wrap jpg"><img src="./images/parkuir-3.jpg" alt=""></div>
+      <span>VO</span>
+      <span>.</span>
+    </div>
 
-  <div class="row">
-    <div class="img-wrap jpg"><img src="./images/parkuir-3.jpg" alt=""></div>
-    <span>VO</span>
-    <span>.</span>
-  </div>
+  </main>
 
-</main>
+  <footer>
+    <span>Contáctanos</span>
+    <span>2026</span>
+  </footer>
 
-<footer>
-  <span>Movimiento Urbano</span>
-  <span>02 / 2025</span>
-</footer>
+  <script>
+    new p5(function (p) {
+      let capture, bodyPose, poses = [];
 
-<script>
-new p5(function(p) {
-  let capture, bodyPose, poses = [];
+      const CONNECTIONS = [
+        [5, 6], [5, 7], [7, 9], [6, 8], [8, 10],
+        [5, 11], [6, 12], [11, 12],
+        [11, 13], [13, 15], [12, 14], [14, 16]
+      ];
 
-  const CONNECTIONS = [
-    [5,6],[5,7],[7,9],[6,8],[8,10],
-    [5,11],[6,12],[11,12],
-    [11,13],[13,15],[12,14],[14,16]
-  ];
+      p.setup = function () {
+        const wrap = document.getElementById('cam-wrap');
+        const cnv = p.createCanvas(wrap.offsetWidth || 240, wrap.offsetHeight || 180);
+        cnv.parent('cam-wrap');
+        capture = p.createCapture(p.VIDEO);
+        capture.size(320, 240);
+        capture.hide();
+        bodyPose = ml5.bodyPose('MoveNet', { flipped: true }, () => {
+          bodyPose.detectStart(capture, r => { poses = r; });
+        });
+      };
 
-  p.setup = function() {
-    const wrap = document.getElementById('cam-wrap');
-    const cnv = p.createCanvas(wrap.offsetWidth || 240, wrap.offsetHeight || 180);
-    cnv.parent('cam-wrap');
-    capture = p.createCapture(p.VIDEO);
-    capture.size(320, 240);
-    capture.hide();
-    bodyPose = ml5.bodyPose('MoveNet', { flipped: true }, () => {
-      bodyPose.detectStart(capture, r => { poses = r; });
+      p.draw = function () {
+        p.background(0);
+
+        p.push();
+        p.translate(p.width, 0); p.scale(-1, 1);
+        p.filter(p.GRAY);
+        p.image(capture, 0, 0, p.width, p.height);
+        p.pop();
+
+        if (!poses.length) return;
+        const kps = poses[0].keypoints;
+        const sx = p.width / 320, sy = p.height / 240;
+        const sc = kp => ({ x: kp.x * sx, y: kp.y * sy });
+
+        p.stroke(255, 255, 255, 210); p.strokeWeight(1.5); p.noFill();
+        CONNECTIONS.forEach(([a, b]) => {
+          if (kps[a]?.confidence > 0.2 && kps[b]?.confidence > 0.2) {
+            const A = sc(kps[a]), B = sc(kps[b]);
+            p.line(A.x, A.y, B.x, B.y);
+          }
+        });
+
+        p.noStroke(); p.fill(255, 255, 255, 230);
+        [1, 2, 3, 4, 9, 10].forEach(i => {
+          if (kps[i]?.confidence > 0.25) {
+            const s = sc(kps[i]);
+            p.ellipse(s.x, s.y, 5, 5);
+          }
+        });
+      };
+
+      p.windowResized = function () {
+        const wrap = document.getElementById('cam-wrap');
+        p.resizeCanvas(wrap.offsetWidth, wrap.offsetHeight);
+      };
     });
-  };
-
-  p.draw = function() {
-    p.background(0);
-
-    p.push();
-    p.translate(p.width, 0); p.scale(-1, 1);
-    p.filter(p.GRAY);
-    p.image(capture, 0, 0, p.width, p.height);
-    p.pop();
-
-    if (!poses.length) return;
-    const kps = poses[0].keypoints;
-    const sx = p.width / 320, sy = p.height / 240;
-    const sc = kp => ({ x: kp.x * sx, y: kp.y * sy });
-
-    p.stroke(255, 255, 255, 210); p.strokeWeight(1.5); p.noFill();
-    CONNECTIONS.forEach(([a, b]) => {
-      if (kps[a]?.confidence > 0.2 && kps[b]?.confidence > 0.2) {
-        const A = sc(kps[a]), B = sc(kps[b]);
-        p.line(A.x, A.y, B.x, B.y);
-      }
-    });
-
-    p.noStroke(); p.fill(255, 255, 255, 230);
-    [1,2,3,4,9,10].forEach(i => {
-      if (kps[i]?.confidence > 0.25) {
-        const s = sc(kps[i]);
-        p.ellipse(s.x, s.y, 5, 5);
-      }
-    });
-  };
-
-  p.windowResized = function() {
-    const wrap = document.getElementById('cam-wrap');
-    p.resizeCanvas(wrap.offsetWidth, wrap.offsetHeight);
-  };
-});
-</script>
+  </script>
 </body>
+
 </html>
