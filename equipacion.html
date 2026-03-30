@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PARKUIR — Equipación</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;700&display=swap');
+
+:root {
+  --bg: #f0d5c8;
+  --ink: #ff6ae9;
+  --c1: #ef3773;
+  --c2: #ffd9ba;
+  --c3: #eed9d4;
+  --c4: #fd5e96;
+  --c5: #fd7145;
+  --c6: #ecb0ba;
+  --c7: #fd4543;
+  --black: #1a1a1a;
+  --white: #fefefe;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--black);
+  min-height: 100vh;
+  font-family: 'DM Sans', sans-serif;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.9rem 2rem;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* LAYOUT */
+.app {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  height: calc(100vh - 52px);
+}
+
+/* LEFT: editor */
+.editor {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  overflow-y: auto;
+  border-right: 1.5px solid var(--ink);
+}
+
+.editor-title {
+  font-size: 1.4rem;
+  letter-spacing: 0.08em;
+}
+
+/* CANVAS SHIRT */
+.shirt-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  min-height: 340px;
+}
+
+.shirt-svg-bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 320px;
+  height: 340px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+#paintCanvas {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 320px;
+  height: 340px;
+  z-index: 2;
+  cursor: crosshair;
+  clip-path: path('M 118 30 C 130 52, 190 52, 202 30 L 220 30 L 310 85 L 262 108 L 262 338 L 58 338 L 58 108 L 10 85 L 100 30 Z');
+}
+
+/* TOOLS */
+.tools {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.palette {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.color-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: transform 0.15s, border-color 0.15s;
+  flex-shrink: 0;
+}
+
+.tool-sep {
+  width: 1px;
+  height: 24px;
+  background: var(--ink);
+  opacity: 0.3;
+  flex-shrink: 0;
+}
+
+.size-btns {
+  display: flex;
+  gap: 0.3rem;
+  align-items: center;
+}
+
+.size-btn {
+  background: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+}
+.size-btn:hover, .size-btn.active { background: var(--ink); }
+.size-btn span {
+  display: block;
+  border-radius: 50%;
+  background: var(--black);
+  pointer-events: none;
+}
+.size-btn.active span { background: white; }
+.size-btn.s { width: 24px; height: 24px; }
+.size-btn.m { width: 28px; height: 28px; }
+.size-btn.l { width: 34px; height: 34px; }
+.size-btn.s span { width: 5px; height: 5px; }
+.size-btn.m span { width: 9px; height: 9px; }
+.size-btn.l span { width: 14px; height: 14px; }
+
+.action-btns {
+  display: flex;
+  gap: 0.4rem;
+  margin-left: auto;
+}
+
+.btn-ghost {
+  background: none;
+  padding: 0.3rem 0.8rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+/* FORM */
+.form-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.form-fields input,
+.form-fields textarea {
+  background: transparent;
+  border: none;
+  padding: 0.5rem 0;
+  font-size: 0.95rem;
+  outline: none;
+  width: 100%;
+  resize: none;
+  transition: border-color 0.15s;
+  font-family: 'DM Sans', sans-serif;
+}
+.form-fields input::placeholder,
+.form-fields textarea::placeholder {
+  font-weight: 300;
+}
+.form-fields textarea { height: 56px; }
+
+.btn-submit {
+  background: var(--ink);
+  border: none;
+  color: white;
+  padding: 0.75rem 2rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+  width: 100%;
+}
+
+/* RIGHT: gallery */
+.gallery {
+  padding: 1.5rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.gallery-title {
+  font-size: 1.2rem;
+  padding-bottom: 0.4rem;
+}
+
+.gallery-empty {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 1rem;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
+}
+
+.shirt-card {
+  background: var(--black);
+  padding: 0.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  color: white;
+  animation: fadeIn 0.3s ease;
+  cursor: pointer;
+  transition: border-color 0.2s, transform 0.15s;
+}
+
+.shirt-card:hover {
+  transform: translateY(-2px);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.shirt-card img {
+  width: 100%;
+  aspect-ratio: 320/340;
+  object-fit: contain;
+  display: block;
+  background: var(--bg);
+}
+
+.shirt-card .card-title {
+  font-size: 0.95rem;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  
+}
+
+.shirt-card .card-desc {
+  font-size: 0.7rem;
+  opacity: 0.6;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ── MODAL ─────────────────────────────────────────────── */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(26,26,26,0.75);
+  z-index: 100;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+  animation: overlayIn 0.2s ease;
+}
+
+.modal-overlay.open {
+  display: flex;
+}
+
+@keyframes overlayIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.modal-box {
+  background: var(--bg);
+  padding: 2rem;
+  max-width: 420px;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  position: relative;
+  animation: boxIn 0.2s ease;
+}
+
+@keyframes boxIn {
+  from { transform: translateY(16px); opacity: 0; }
+  to   { transform: translateY(0); opacity: 1; }
+}
+
+.modal-close {
+  position: absolute;
+  top: 0.7rem;
+  right: 0.9rem;
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  cursor: pointer;
+  line-height: 1;
+  transition: color 0.15s;
+}
+
+.modal-img {
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto;
+  display: block;
+}
+
+.modal-title {
+  font-size: 2rem;
+  letter-spacing: 0.08em;
+  line-height: 1;
+}
+
+.modal-desc {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  opacity: 0.75;
+}
+
+.modal-num {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+</style>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <a href="/">Parkuir</a>
+    <nav>
+      <a href="/about.html">Qué es Parkuir</a>
+      <a href="/cronograma.html">Línea del tiempo</a>
+      <a href="#">Reglamento</a>
+      <a href="#">Jugadorxs</a>
+      <a href="/equipacion.html">Equipación</a>
+      <a href="#">Archivo</a>
+    </nav>
+  </header>
+
+<div class="app">
+
+  <!-- EDITOR -->
+  <div class="editor">
+    <div class="shirt-container">
+      <!-- Silueta SVG — borde negro -->
+      <svg class="shirt-svg-bg" viewBox="0 0 320 340" xmlns="http://www.w3.org/2000/svg">
+        <!--
+          Camiseta: viewBox 320x340
+          Hombros: de x=100 a x=220, y=30 (línea de hombro)
+          Manga izq: baja desde (100,30) a (10,90), luego a (60,110)
+          Manga der: baja desde (220,30) a (310,90), luego a (260,110)
+          Cuerpo: de (60,110) baja a (60,340), cruza a (260,340), sube a (260,110)
+          Cuello: curva entre (118,30) y (202,30) bajando a (160,52)
+        -->
+        <path d="
+          M 118 30
+          C 130 52, 190 52, 202 30
+          L 220 30
+          L 310 85
+          L 262 108
+          L 262 338
+          L 58 338
+          L 58 108
+          L 10 85
+          L 100 30
+          Z
+        " fill="#fefefe" stroke="#1a1a1a" stroke-width="2" stroke-linejoin="round"/>
+
+      </svg>
+
+      <canvas id="paintCanvas" width="320" height="340"></canvas>
+    </div>
+
+    <!-- TOOLS -->
+    <div class="tools">
+      <div class="palette" id="palette"></div>
+      <div class="tool-sep"></div>
+      <div class="size-btns">
+        <button class="size-btn s active" data-size="4" title="fino"><span></span></button>
+        <button class="size-btn m" data-size="10" title="medio"><span></span></button>
+        <button class="size-btn l" data-size="20" title="grueso"><span></span></button>
+      </div>
+      <div class="action-btns">
+        <button class="btn-ghost" id="btnEraser">Borrar</button>
+        <button class="btn-ghost" id="btnClear">Limpiar</button>
+      </div>
+    </div>
+
+    <!-- FORM -->
+    <div class="form-fields">
+      <input type="text" id="shirtTitle" placeholder="Título de la camiseta" maxlength="60">
+      <textarea id="shirtDesc" placeholder="Descripción (opcional)"></textarea>
+    </div>
+
+    <button class="btn-submit" id="btnSubmit">AÑADIR AL ARCHIVO DE LA LIGA →</button>
+  </div>
+
+  <!-- GALLERY -->
+  <div class="gallery">
+    <div class="gallery-title">Liga Parkuir</div>
+    <div class="gallery-empty" id="galleryEmpty">Todavía no hay diseños.</div>
+    <div class="gallery-grid" id="galleryGrid"></div>
+  </div>
+
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal" role="dialog" aria-modal="true">
+  <div class="modal-box" id="modalBox">
+    <button class="modal-close" id="modalClose" aria-label="Cerrar">×</button>
+    <img class="modal-img" id="modalImg" src="" alt="">
+    <div>
+      <div class="modal-num" id="modalNum"></div>
+      <div class="modal-title" id="modalTitle"></div>
+    </div>
+    <div class="modal-desc" id="modalDesc"></div>
+  </div>
+</div>
+
+<script>
+// ── PALETTE ──────────────────────────────────────────────
+const colors = [
+  { hex: '#ef3773', name: 'c1' },
+  { hex: '#ffd9ba', name: 'c2' },
+  { hex: '#eed9d4', name: 'c3' },
+  { hex: '#fd5e96', name: 'c4' },
+  { hex: '#fd7145', name: 'c5' },
+  { hex: '#ecb0ba', name: 'c6' },
+  { hex: '#fd4543', name: 'c7' },
+  { hex: '#1a1a1a', name: 'negro' },
+];
+
+let currentColor = '#ef3773';
+let brushSize = 4;
+let erasing = false;
+
+const palette = document.getElementById('palette');
+colors.forEach((c, i) => {
+  const btn = document.createElement('button');
+  btn.className = 'color-btn' + (i === 0 ? ' active' : '');
+  btn.style.background = c.hex;
+  btn.title = c.name;
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.color-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentColor = c.hex;
+    erasing = false;
+    document.getElementById('btnEraser').textContent = 'Borrar';
+  });
+  palette.appendChild(btn);
+});
+
+// ── SIZE BUTTONS ─────────────────────────────────────────
+document.querySelectorAll('.size-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    brushSize = parseInt(btn.dataset.size);
+  });
+});
+
+// ── CANVAS PAINTING ──────────────────────────────────────
+const canvas = document.getElementById('paintCanvas');
+const ctx = canvas.getContext('2d');
+
+const shirtPath = new Path2D('M 118 30 C 130 52, 190 52, 202 30 L 220 30 L 310 85 L 262 108 L 262 338 L 58 338 L 58 108 L 10 85 L 100 30 Z');
+
+let painting = false;
+let lastX = null, lastY = null;
+
+function getPos(e) {
+  const rect = canvas.getBoundingClientRect();
+  const scaleX = canvas.width / rect.width;
+  const scaleY = canvas.height / rect.height;
+  if (e.touches) {
+    return {
+      x: (e.touches[0].clientX - rect.left) * scaleX,
+      y: (e.touches[0].clientY - rect.top) * scaleY
+    };
+  }
+  return {
+    x: (e.clientX - rect.left) * scaleX,
+    y: (e.clientY - rect.top) * scaleY
+  };
+}
+
+function draw(x, y) {
+  ctx.save();
+  ctx.clip(shirtPath);
+  ctx.globalCompositeOperation = erasing ? 'destination-out' : 'source-over';
+  ctx.strokeStyle = currentColor;
+  ctx.lineWidth = brushSize;
+  ctx.lineCap = 'round';
+  ctx.lineJoin = 'round';
+  ctx.beginPath();
+  if (lastX !== null) {
+    ctx.moveTo(lastX, lastY);
+    ctx.lineTo(x, y);
+  } else {
+    ctx.arc(x, y, brushSize / 2, 0, Math.PI * 2);
+    ctx.fillStyle = currentColor;
+    ctx.fill();
+  }
+  ctx.stroke();
+  ctx.restore();
+  lastX = x; lastY = y;
+}
+
+canvas.addEventListener('mousedown', e => { painting = true; lastX = null; lastY = null; const p = getPos(e); draw(p.x, p.y); });
+canvas.addEventListener('mousemove', e => { if (!painting) return; const p = getPos(e); draw(p.x, p.y); });
+canvas.addEventListener('mouseup', () => { painting = false; lastX = null; lastY = null; });
+canvas.addEventListener('mouseleave', () => { painting = false; lastX = null; lastY = null; });
+canvas.addEventListener('touchstart', e => { e.preventDefault(); painting = true; lastX = null; const p = getPos(e); draw(p.x, p.y); }, { passive: false });
+canvas.addEventListener('touchmove', e => { e.preventDefault(); if (!painting) return; const p = getPos(e); draw(p.x, p.y); }, { passive: false });
+canvas.addEventListener('touchend', () => { painting = false; });
+
+// ── ERASER + CLEAR ───────────────────────────────────────
+document.getElementById('btnEraser').addEventListener('click', function() {
+  erasing = !erasing;
+  this.textContent = erasing ? '✕ Borrador' : 'Borrador';
+});
+
+document.getElementById('btnClear').addEventListener('click', () => {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+});
+
+// ── MODAL ─────────────────────────────────────────────────
+const modal = document.getElementById('modal');
+const modalImg = document.getElementById('modalImg');
+const modalTitle = document.getElementById('modalTitle');
+const modalDesc = document.getElementById('modalDesc');
+const modalNum = document.getElementById('modalNum');
+
+function openModal(dataURL, title, desc, num) {
+  modalImg.src = dataURL;
+  modalImg.alt = title;
+  modalTitle.textContent = title;
+  modalDesc.textContent = desc || '';
+  modalDesc.style.display = desc ? 'block' : 'none';
+  modalNum.textContent = `Equipo #${num}`;
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  modal.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.getElementById('modalClose').addEventListener('click', closeModal);
+
+modal.addEventListener('click', e => {
+  if (e.target === modal) closeModal();
+});
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeModal();
+});
+
+// ── SUBMIT → GALLERY ─────────────────────────────────────
+const galleryGrid = document.getElementById('galleryGrid');
+const galleryEmpty = document.getElementById('galleryEmpty');
+let count = 0;
+
+document.getElementById('btnSubmit').addEventListener('click', () => {
+  const title = document.getElementById('shirtTitle').value.trim() || 'Sin título';
+  const desc = document.getElementById('shirtDesc').value.trim();
+
+  const exportCanvas = document.createElement('canvas');
+  exportCanvas.width = 320;
+  exportCanvas.height = 340;
+  const exCtx = exportCanvas.getContext('2d');
+
+  exCtx.fillStyle = '#fefefe';
+  exCtx.fill(shirtPath);
+  exCtx.drawImage(canvas, 0, 0);
+  exCtx.strokeStyle = '#1a1a1a';
+  exCtx.lineWidth = 2;
+  exCtx.stroke(shirtPath);
+
+  const dataURL = exportCanvas.toDataURL('image/png');
+
+  count++;
+  const cardNum = count;
+  galleryEmpty.style.display = 'none';
+
+  const card = document.createElement('div');
+  card.className = 'shirt-card';
+  card.innerHTML = `
+    <img src="${dataURL}" alt="${title}">
+    <div class="card-title">${title}</div>
+    ${desc ? `<div class="card-desc">${desc}</div>` : ''}
+  `;
+
+  card.addEventListener('click', () => openModal(dataURL, title, desc, cardNum));
+  galleryGrid.prepend(card);
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  document.getElementById('shirtTitle').value = '';
+  document.getElementById('shirtDesc').value = '';
+});
+</script>
+</body>
+</html>
