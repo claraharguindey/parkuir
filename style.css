@@ -30,7 +30,7 @@
 
 :root {
   --bg:    #f0d5c8;
-  --ink:   #292929;
+  --ink:   #000000;
   --pink:  #ff3773;
   --cream: #ffd9ba;
   --pad: 2rem;
@@ -116,7 +116,7 @@ nav {
 }
 nav a {
   font-family: "Outreque", sans-serif;
-  color: var(--cream);
+  color: var(--ink);
   text-decoration: none;
   letter-spacing: 0.03em;
 }
@@ -186,6 +186,8 @@ main {
 
 /* ── CÁMARA ── */
 #cam-wrap {
+  isolation: isolate;
+  z-index: 1;
   flex-shrink: 0;
   height: 100%;
   aspect-ratio: 4/3;
