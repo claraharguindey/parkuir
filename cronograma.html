@@ -7,468 +7,318 @@
 <link rel="stylesheet" href="style.css">
 <style>
 
-/* ── HEADER ── */
-#site-header {
-  border-bottom: 1.5px solid var(--ink);
+body {
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
-
-/* ── LANG ── */
-.lang-row {
-  display: flex; gap: 0.4rem; align-items: center;
-  font-size: 0.75rem; text-transform: uppercase; font-weight: 700; letter-spacing: 0.08em;
-}
-.lang-row span { opacity: 0.5; }
-.lang-row button {
-  background: none; border: 1.5px solid var(--ink); color: var(--ink);
-  font-weight: 700; font-size: 0.75rem; letter-spacing: 0.08em;
-  padding: 2px 9px; cursor: pointer; text-transform: uppercase; font-family: inherit;
-  line-height: 1.4;
-}
-.lang-row button:hover,
-.lang-row button.active { background: var(--ink); color: var(--bg); }
-
-/* ── INFO BOX — protagonista ── */
-#info-box {
-  position: fixed;
-  top: 50px;
-  left: 0; right: 0;
-  border-bottom: 1.5px solid var(--ink);
-  background: var(--bg);
-  padding: 1.4rem 2rem 1.2rem;
-  z-index: 40;
-  min-height: 110px;
-  display: grid;
-  grid-template-columns: 90px 1fr;
-  grid-template-rows: auto auto;
-  column-gap: 1.8rem;
-  row-gap: 0.3rem;
-  align-items: start;
-  transition: opacity 0.3s;
-}
-#info-box.empty { opacity: 0.2; }
-
-#info-year {
-  font-size: 2.2rem;
-  font-weight: 900;
-  letter-spacing: -0.02em;
-  line-height: 1;
-  grid-row: 1 / 3;
-  grid-column: 1;
-  align-self: center;
-  font-family: 'Bebas Neue', sans-serif;
-  color: var(--ink);
-}
-#info-title {
-  font-size: 1rem;
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: 0.02em;
-  line-height: 1.2;
-  grid-row: 1;
-  grid-column: 2;
-  align-self: end;
-}
-#info-body {
-  font-size: 0.85rem;
-  line-height: 1.65;
-  opacity: 0.75;
-  grid-row: 2;
-  grid-column: 2;
-}
-
-/* placeholder cuando no hay nada */
-#info-placeholder {
-  position: fixed;
-  top: 47px; left: 0; right: 0;
-  padding: 1.4rem 2rem 1.2rem;
-  min-height: 110px;
-  z-index: 39;
+/* ── BANDA CREMA CON TÍTULO ── */
+.crono-band {
+  flex-shrink: 0;
+  background: var(--cream);
   display: flex;
   align-items: center;
-  font-size: 0.75rem;
+  justify-content: center;
+  height: clamp(70px, 10vw, 140px);
+}
+.crono-band h1 {
+  font-family: "BebasNeue", sans-serif;
+  font-size: clamp(2.5rem, 8vw, 7rem);
+  color: var(--pink);
+  line-height: 1;
+  letter-spacing: 0.02em;
   text-transform: uppercase;
-  letter-spacing: 0.15em;
-  opacity: 0.35;
-  pointer-events: none;
 }
 
 /* ── MUNDO ── */
 #world-wrapper {
-  position: fixed;
-  top: 47px; bottom: 37px; left: 0; right: 0;
+  flex: 1;
+  position: relative;
   overflow: hidden;
 }
 #world {
-  position: absolute; width: 6000px; height: 100%;
+  position: absolute;
+  width: 6000px;
+  height: 100%;
   top: 0; left: 0;
 }
 
-/* offset dinámico — se ajusta por JS según altura del info-box */
-#world-inner {
-  position: absolute;
-  inset: 0;
-}
-
+/* edificios rellenos fucsia */
 .block {
   position: absolute;
-  border: 1.5px solid var(--ink);
-  border-bottom: none;
-  background: var(--bg);
+  background: var(--pink);
+  border: none;
+}
+
+/* año encima del edificio */
+.bld-year {
+  position: absolute;
+  font-family: "BebasNeue", sans-serif;
+  font-size: 1.3rem;
+  color: white;
+  pointer-events: none;
+  white-space: nowrap;
+  padding: 2px 6px;
+}
+
+/* el año del edificio activo se agranda */
+.bld-year.active {
+  font-size: 2rem;
 }
 
 .bld-text { display: none; }
 
-/* ── JUGADOR ── */
+/* ── PERSONAJE ── */
 #player {
   position: absolute;
-  width: 22px; height: 32px;
+  width: 90px;
+  pointer-events: none;
 }
+#player img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
 @keyframes squish {
-  0%   { transform: scaleX(1.5) scaleY(0.6); }
+  0%   { transform: scaleX(1.4) scaleY(0.7); }
   55%  { transform: scaleX(0.9) scaleY(1.1); }
-  100% { transform: scaleX(1)   scaleY(1);   }
+  100% { transform: scaleX(1) scaleY(1); }
 }
 #player.squish { animation: squish 0.2s ease-out forwards; }
 
 .particle {
-  position: absolute; width: 3px; height: 3px;
-  background: var(--ink); pointer-events: none;
-  animation: pf 0.45s ease-out forwards;
+  position: absolute; width: 4px; height: 4px;
+  background: var(--pink); pointer-events: none;
+  border-radius: 50%;
+  animation: pf 0.5s ease-out forwards;
 }
 @keyframes pf { to { opacity: 0; transform: translate(var(--dx), var(--dy)); } }
 
-/* ── FOOTER ── */
+/* línea de suelo */
+#ground-line {
+  position: absolute;
+  left: 0; right: 0;
+  height: 2px;
+  background: rgba(255,55,115,0.2);
+}
+
+/* ── CARD INFO FLOTANTE ── */
+#info-card {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.9);
+  width: clamp(260px, 30vw, 360px);
+  background: var(--cream);
+  border-radius: 16px;
+  overflow: hidden;
+  z-index: 100;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.18);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+#info-card.visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+#info-card-close {
+  position: absolute;
+  top: 10px; right: 10px;
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.15);
+  border: none;
+  cursor: pointer;
+  font-size: 0.7rem;
+  color: white;
+  font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  line-height: 1;
+  z-index: 2;
+}
+#info-card-close:hover { background: rgba(0,0,0,0.3); }
+
+#info-card-img {
+  width: 100%;
+  height: 160px;
+  background: var(--pink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+#info-card-img-el {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: none;
+}
+
+#info-card-body {
+  padding: 1rem 1.2rem 1.4rem;
+}
+#info-card-year {
+  font-family: "BebasNeue", sans-serif;
+  font-size: 1rem;
+  color: var(--pink);
+  letter-spacing: 0.1em;
+  margin-bottom: 0.3rem;
+}
+#info-card-title {
+  font-size: 1rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+  line-height: 1.2;
+  margin-bottom: 0.6rem;
+}
+#info-card-text {
+  font-size: 0.82rem;
+  line-height: 1.65;
+  color: var(--ink);
+  opacity: 0.75;
+}
+
+/* ── CONTROLES ── */
 #site-footer {
-  position: fixed; bottom: 0; left: 0; right: 0; z-index: 50;
-  border-top: 1.5px solid var(--ink); padding: 0.5rem 2rem;
-  background: var(--bg);
-  display: flex; justify-content: space-between; align-items: center;
-  font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.12em; font-weight: 700;
+  position: fixed;
+  bottom: 1.5rem;
+  left: 2rem;
+  z-index: 50;
+  display: flex;
+  gap: 0.5rem;
+  background: var(--cream);
+  border-radius: 999px;
+  padding: 0.45rem 1rem;
+  align-items: center;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.12);
 }
-#site-footer .controls { display: flex; gap: 0.5rem; }
 #site-footer button {
-  background: none; border: 1.5px solid var(--ink); color: var(--ink);
-  font-family: inherit; font-weight: 900; font-size: 0.85rem;
-  padding: 3px 10px; cursor: pointer;
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  cursor: pointer;
+  color: var(--ink);
+  padding: 2px 6px;
+  line-height: 1;
+  font-family: inherit;
+  font-weight: 700;
 }
-#site-footer button:hover,
-#site-footer button:active { background: var(--ink); color: var(--bg); }
+#site-footer button:hover { color: var(--pink); }
+
+#footer-hint {
+  position: fixed;
+  bottom: 1.9rem;
+  right: 2rem;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--cream);
+  opacity: 0.7;
+  z-index: 50;
+}
 </style>
 </head>
 <body>
 
-  <header id="site-header">
-    <a href="/">Parkuir</a>
-    <nav>
-      <a href="/about.html">Qué es Parkuir</a>
-      <a href="/cronograma.html">Línea del tiempo</a>
-      <a href="#">Reglamento</a>
-      <a href="#">Jugadorxs</a>
-      <a href="/equipacion.html">Equipación</a>
-      <a href="#">Archivo</a>
-    </nav>
-  </header>
+<header>
+  <a href="/">parkuir</a>
+  <nav>
+    <a href="/about.html">qué es parkuir</a>
+    <a href="/cronograma.html" style="color:var(--pink)">línea del tiempo</a>
+    <a href="#">reglamento</a>
+    <a href="#">jugadorxs</a>
+    <a href="/equipacion.html">equipación</a>
+    <a href="#">archivo</a>
+  </nav>
+</header>
 
-
-<!-- INFO BOX -->
-<div id="info-box" class="empty">
-  <span id="info-year"></span>
-  <span id="info-title"></span>
-  <span id="info-body"></span>
+<div class="crono-band">
+  <h1>Línea del tiempo</h1>
 </div>
-<div id="info-placeholder">← → moverse · ↑ saltar</div>
+
+<!-- CARD INFO -->
+<div id="info-card">
+  <button id="info-card-close" onclick="closeCard()">✕</button>
+  <div id="info-card-img">
+    <img id="info-card-img-el" alt="">
+  </div>
+  <div id="info-card-body">
+    <div id="info-card-year"></div>
+    <div id="info-card-title"></div>
+    <div id="info-card-text"></div>
+  </div>
+</div>
 
 <!-- MUNDO -->
 <div id="world-wrapper">
   <div id="world">
-    <div id="ground-line" style="position:absolute;left:0;right:0;height:1.5px;background:var(--ink);"></div>
+    <div id="ground-line"></div>
 
-    <div class="bld" data-left="150" data-w="100" data-h="220">
-      <div class="block"></div>
-      <div class="bld-text">
-        <div class="bt-year">388 a.C.</div>
-        <div class="bt-title" data-es="Primeras trampas del deporte" data-va="Primeres trampes de l'esport">Primeras trampas del deporte</div>
-        <div class="bt-body" data-es="Eufolio, boxeador, pagó a tres oponentes para que se dejaran caer y asegurar así su victoria en los juegos del 388 a.C." data-va="Eufolio, boxejador, va pagar tres oponents perquè es deixaren caure i assegurar la seua victòria als jocs del 388 a.C."></div>
-      </div>
-    </div>
+    <div class="bld" data-left="150"  data-w="100" data-h="220" data-year="388 a.C." data-es="Primeras trampas del deporte"          data-body="Eufolio, boxeador, pagó a tres oponentes para que se dejaran caer y asegurar así su victoria en los juegos del 388 a.C."><div class="block"></div><div class="bld-year"></div></div>
+    <div class="bld" data-left="340"  data-w="160" data-h="80"  data-year="1540"     data-es="Vallvidrera Curling Club"               data-body="Un año antes de que el curling naciera en Escocia, un club se adelantaba en Collserola. Jamás han jugado un partido: el pantano nunca se hiela lo suficiente."><div class="block"></div><div class="bld-year"></div></div>
+    <div class="bld" data-left="560"  data-w="55"  data-h="300" data-year="1884"     data-es="Katie Sandwina"                         data-body="Artista de circo y sufragista. Considerada hasta 1986 «la mujer más fuerte del mundo»."><div class="block"></div><div class="bld-year"></div></div>
+    <div class="bld" data-left="680"  data-w="180" data-h="55"  data-year="1903"     data-es="El farolillo rojo"                      data-body="Premio al último del Tour. Tuvo muchos adeptes que luchaban por ser les más lentes."><div class="block"></div><div class="bld-year"></div></div>
+    <div class="bld" data-left="940"  data-w="130" data-h="120" data-year="1904"     data-es="Fred Lorz gana la maratón en coche"     data-body="Tras correr 14 km, subió al coche de su entrenador. Se bajó poco antes de la meta y entró como ganador."><div class="block"></div><div class="bld-year"></div></div>
+    <div class="bld" data-left="1140" data-w="65"  data-h="340" data-year="1935"     data-es="Primera competición de Roller Derby"    data-body="El 13 de agosto de 1935, en el Chicago Coliseum. Carrera de resistencia de larga distancia con equipos mixtos."><div class="block"></div><div class="bld-year"></div></div>
+    <div class="bld" data-left="1270" data-w="220" data-h="60"  data-year="1936"     data-es="Jesse Owens · Olimpiades Populars"      data-body="Jesse Owens ganó cuatro oros en Berlín. Las Olimpiades Populars de Barcelona no llegaron a inaugurarse: el golpe de Estado lo impidió el día antes."><div class="block"></div><div class="bld-year"></div></div>
+    <div class="bld" data-left="1560" data-w="90"  data-h="180" data-year="1960"     data-es="Creación de los paralímpicos"           data-body="El Dr. Guttmann organizó los primeros Juegos de Stoke Mandeville en 1948. Los primeros paralímpicos: Roma 1960."><div class="block"></div><div class="bld-year"></div></div>
+    <div class="bld" data-left="1730" data-w="310" data-h="90"  data-year="1968"     data-es="Las Gardenias de Tepito"                data-body="Equipo de fútbol de travestis y transexuales que lleva 50 años jugando maquilladas y con lentejuelas en El Maracaná de Tepito."><div class="block"></div><div class="bld-year"></div></div>
+    <div class="bld" data-left="1790" data-w="55"  data-h="200" data-wb="90" data-year="1969" data-es="Stop the Seventy Tour"         data-body="Sabotajes creativos a la gira de los Springboks en pleno Apartheid: zanjas nocturnas, miles de chinchetas, encadenamientos."><div class="block"></div><div class="bld-year"></div></div>
+    <div class="bld" data-left="2120" data-w="110" data-h="140" data-year="1973"     data-es="Grupo Passion — Deporte de Ideas"       data-body="«El dogma competitivo nos parece repugnante». Arte conceptual desde dentro del deporte."><div class="block"></div><div class="bld-year"></div></div>
+    <div class="bld" data-left="2300" data-w="190" data-h="50"  data-year="1974"     data-es="Nace la lucha de dedos de los pies"     data-body="Conocido como Toe Wrestling, este deporte fue inventado por unos ingleses en un bar."><div class="block"></div><div class="bld-year"></div></div>
+    <div class="bld" data-left="2560" data-w="50"  data-h="290" data-year="1982"     data-es="Creación de los Gay Games"              data-body="Creados en San Francisco por Tom Waddell, decatleta olímpico, para promover la inclusión de la comunidad gay y lesbiana."><div class="block"></div><div class="bld-year"></div></div>
+    <div class="bld" data-left="2690" data-w="150" data-h="100" data-year="1984"     data-es="Nado sincronizado individual"           data-body="Deporte olímpico olvidado presente en tres olimpiadas: 1984, 1988 y 1992. Sincronizarse con une misme no siempre fue sencillo."><div class="block"></div><div class="bld-year"></div></div>
+    <div class="bld" data-left="2920" data-w="230" data-h="75"  data-year="1988"     data-es="Florence Griffith · Ballet de esquí"   data-body="Campaña de acoso a Flo-Jo. Batió el récord y le dijeron que el velocímetro estaba roto. El ballet de esquí compite por primera vez en Calgary 88."><div class="block"></div><div class="bld-year"></div></div>
+    <div class="bld" data-left="3220" data-w="80"  data-h="240" data-year="1992"     data-es="Petra, inspirada en Lorenza Böttner"   data-body="Mascota paralímpica Barcelona 92, diseñada por Mariscal. Inspirada en Lorenza Böttner: pintora, performer, activista trans y anticapacitista."><div class="block"></div><div class="bld-year"></div></div>
+    <div class="bld" data-left="3370" data-w="160" data-h="65"  data-year="2000"     data-es="Eric Moussambani"                      data-body="Sidney 2000. Completó los 100m en 1:52.72, más del doble del tiempo ganador. Aprendió a nadar 8 meses antes en una piscina de hotel de 12 metros."><div class="block"></div><div class="bld-year"></div></div>
+    <div class="bld" data-left="3600" data-w="100" data-h="230" data-year="2004"     data-es="Nace Samarucs València"                data-body="Primer club polideportivo LGTBIQ+ de la Comunitat Valenciana. De aquí nace Parkuir."><div class="block"></div><div class="bld-year"></div></div>
+    <div class="bld" data-left="3780" data-w="140" data-h="105" data-year="2005"     data-es="Nace el Quadball"                      data-body="Antes Quidditch. En 2022 cambió su nombre para desvincularse de J.K. Rowling tras sus declaraciones tránsfobas."><div class="block"></div><div class="bld-year"></div></div>
+    <div class="bld" data-left="4000" data-w="200" data-h="70"  data-year="2009"     data-es="Caster Semenya vs World Athletics"     data-body="Activista y atleta intersex. Rechaza medicarse para competir. Ha llevado su caso hasta el Tribunal Europeo de Derechos Humanos."><div class="block"></div><div class="bld-year"></div></div>
+    <div class="bld" data-left="4270" data-w="75"  data-h="250" data-year="2014"     data-es="Space-out Competition"                 data-body="Competición que premia a quien no haga nada durante 90 minutos manteniendo el ritmo cardíaco estable. Fundada por Woopsyang en Corea del Sur."><div class="block"></div><div class="bld-year"></div></div>
+    <div class="bld" data-left="4430" data-w="160" data-h="80"  data-year="2021"     data-es="Simone Biles · salud mental"           data-body="Se retira de Tokio por salud mental, abriendo el debate sobre la presión psicológica en el deporte de élite."><div class="block"></div><div class="bld-year"></div></div>
+    <div class="bld" data-left="4670" data-w="110" data-h="160" data-year="2023"     data-es="Activistas plantan cebollas en campos de golf" data-body="XR y otros grupos siembran hortalizas en diez campos de golf para denunciar el despilfarro de agua en plena sequía."><div class="block"></div><div class="bld-year"></div></div>
+    <div class="bld" data-left="4870" data-w="250" data-h="55"  data-year="2024"     data-es="Imane Khelif · Paris 2024"             data-body="Boxeadora argelina, oro en París. Recibió una campaña de odio transfóbica siendo mujer cis. Entre los atacantes: Elon Musk y J.K. Rowling."><div class="block"></div><div class="bld-year"></div></div>
+    <div class="bld" data-left="5100" data-w="150" data-h="120" data-year="2024"     data-es="Gay Games Valencia"                    data-body="Evento LGTB+ cuya financiación incluye donaciones de General Electric, fabricante de componentes militares utilizados en conflictos activos."><div class="block"></div><div class="bld-year"></div></div>
+    <div class="bld" data-left="5380" data-w="130" data-h="340" data-year="2026"     data-es="Primera Copa Mundial de Sperm Racing"  data-body="La machosfera convierte la carrera de esperma en deporte mundial. Podría haber sido una broma irónica de Parkuir, pero ellos llegaron más lejos."><div class="block"></div><div class="bld-year"></div></div>
 
-    <div class="bld" data-left="340" data-w="160" data-h="80">
-      <div class="block"></div>
-      <div class="bld-text">
-        <div class="bt-year">1540</div>
-        <div class="bt-title" data-es="Vallvidrera Curling Club" data-va="Vallvidrera Curling Club"></div>
-        <div class="bt-body" data-es="Un año antes de que el curling naciera oficialmente en Escocia, un club se adelantaba en Collserola. En su medio milenio de historia jamás han jugado un partido: el pantano nunca se hiela lo suficiente." data-va="Un any abans que el curling nasquera oficialment a Escòcia, un club s'avançava a Collserola. En el seu mig mil·lenni d'història mai han jugat un partit: l'embassament mai es glaça prou."></div>
-      </div>
-    </div>
-
-    <div class="bld" data-left="560" data-w="55" data-h="300">
-      <div class="block"></div>
-      <div class="bld-text">
-        <div class="bt-year">1884</div>
-        <div class="bt-title" data-es="Katie Sandwina" data-va="Katie Sandwina"></div>
-        <div class="bt-body" data-es="Artista de circo especializada en lucha y atletismo de fuerza. La Sufragista. Considerada hasta 1986 «la mujer más fuerte del mundo»." data-va="Artista de circ especialitzada en lluita i atletisme de força. La Sufragista. Considerada fins a 1986 «la dona més forta del món»."></div>
-      </div>
-    </div>
-
-    <div class="bld" data-left="680" data-w="180" data-h="55">
-      <div class="block"></div>
-      <div class="bld-text">
-        <div class="bt-year">1903</div>
-        <div class="bt-title" data-es="El farolillo rojo" data-va="El farolet roig"></div>
-        <div class="bt-body" data-es="Premio al último del Tour. Tuvo muchos adeptes que luchaban por ser les más lentes. La vuelta ciclista acabó convirtiendo este premio en un símbolo competitivo." data-va="Premi a l'últim del Tour. Va tindre molts adeptes que lluitaven per ser els més lents."></div>
-      </div>
-    </div>
-
-    <div class="bld" data-left="940" data-w="130" data-h="120">
-      <div class="block"></div>
-      <div class="bld-text">
-        <div class="bt-year">1904</div>
-        <div class="bt-title" data-es="Fred Lorz gana la maratón en coche" data-va="Fred Lorz guanya el marató en cotxe"></div>
-        <div class="bt-body" data-es="Tras correr 14 km, se cansó y subió al coche de su entrenador para completar el recorrido. Se bajó poco antes de la meta y entró como ganador. Estuvo a punto de recibir el oro." data-va="Després de córrer 14 km, es va cansar i va pujar al cotxe del seu entrenador. Es va baixar poc abans de la meta i va entrar com a guanyador."></div>
-      </div>
-    </div>
-
-    <div class="bld" data-left="1140" data-w="65" data-h="340">
-      <div class="block"></div>
-      <div class="bld-text">
-        <div class="bt-year">1935</div>
-        <div class="bt-title" data-es="Primera competición de Roller Derby" data-va="Primera competició de Roller Derby"></div>
-        <div class="bt-body" data-es="El 13 de agosto de 1935, en el Chicago Coliseum. Inicialmente se concibió como una carrera de resistencia de larga distancia formada por equipos mixtos." data-va="El 13 d'agost de 1935, al Chicago Coliseum. Inicialment es va concebre com una cursa de resistència de llarga distància formada per equips mixts."></div>
-      </div>
-    </div>
-
-    <div class="bld" data-left="1270" data-w="220" data-h="60">
-      <div class="block"></div>
-      <div class="bld-text">
-        <div class="bt-year">1936</div>
-        <div class="bt-title" data-es="Jesse Owens · Olimpiades Populars" data-va="Jesse Owens · Olimpíades Populars"></div>
-        <div class="bt-body" data-es="Jesse Owens ganó cuatro oros en Berlín 1936. Las Olimpiades Populars de Barcelona se concibieron como protesta antifascista: el día antes de inaugurarse, el golpe de Estado militar lo impidió." data-va="Jesse Owens va guanyar quatre ors a Berlín 1936. Les Olimpíades Populars de Barcelona es van concebre com a protesta antifeixista: el dia d'abans, el cop d'estat militar ho va impedir."></div>
-      </div>
-    </div>
-
-    <div class="bld" data-left="1560" data-w="90" data-h="180">
-      <div class="block"></div>
-      <div class="bld-text">
-        <div class="bt-year">1960</div>
-        <div class="bt-title" data-es="Creación de los paralímpicos" data-va="Creació dels paralímpics"></div>
-        <div class="bt-body" data-es="El Dr. Guttmann organizó los primeros Juegos de Stoke Mandeville en 1948. El deporte de rehabilitación evolucionó a deporte recreativo y luego competitivo. Los primeros paralímpicos: Roma 1960." data-va="El Dr. Guttmann va organitzar els primers Jocs de Stoke Mandeville el 1948. L'esport de rehabilitació va evolucionar fins a competitiu. Primers paralímpics: Roma 1960."></div>
-      </div>
-    </div>
-
-    <div class="bld" data-left="1730" data-w="310" data-h="90">
-      <div class="block"></div>
-      <div class="bld-text">
-        <div class="bt-year">1968</div>
-        <div class="bt-title" data-es="Las Gardenias de Tepito" data-va="Les Gardenies de Tepito"></div>
-        <div class="bt-body" data-es="Equipo de fútbol integrado por travestis y transexuales que desde hace 50 años juega en El Maracaná, una cancha en el corazón del barrio bravo, maquilladas y con blusa de lentejuelas." data-va="Equip de futbol integrat per travestis i transsexuals que des de fa 50 anys juga al Maracaná, una canxa al cor del barri, maquillades i amb brusa de lluentons."></div>
-      </div>
-    </div>
-
-    <div class="bld" data-left="1790" data-w="55" data-h="200" data-wb="90">
-      <div class="block"></div>
-      <div class="bld-text">
-        <div class="bt-year">1969</div>
-        <div class="bt-title" data-es="Stop the Seventy Tour" data-va="Stop the Seventy Tour"></div>
-        <div class="bt-body" data-es="Sabotajes creativos a la gira de los Springboks sudafricanos en pleno Apartheid: zanjas cavadas de noche, miles de chinchetas lanzadas al campo, encadenamientos." data-va="Sabotatges creatius a la gira dels Springboks sudafricans en ple Apartheid: rases cavades de nit, milers de xinxetes llançades al camp, encadenaments."></div>
-      </div>
-    </div>
-
-    <div class="bld" data-left="2120" data-w="110" data-h="140">
-      <div class="block"></div>
-      <div class="bld-text">
-        <div class="bt-year">1973</div>
-        <div class="bt-title" data-es="Grupo Passion — Deporte de Ideas" data-va="Grup Passion — Esport d'Idees"></div>
-        <div class="bt-body" data-es="«El dogma competitivo nos parece repugnante». Un equipo revolucionario que practicaba arte conceptual desde dentro del deporte. Empezaron en baloncesto." data-va="«El dogma competitiu ens sembla repugnant». Un equip revolucionari que practicava art conceptual des de dins de l'esport."></div>
-      </div>
-    </div>
-
-    <div class="bld" data-left="2300" data-w="190" data-h="50">
-      <div class="block"></div>
-      <div class="bld-text">
-        <div class="bt-year">1982</div>
-        <div class="bt-title" data-es="Creación de los Gay Games" data-va="Creació dels Gay Games"></div>
-        <div class="bt-body" data-es="Creados en San Francisco por el Dr. Tom Waddell, decatleta olímpico, para promover la inclusión de la comunidad gay y lesbiana." data-va="Creats a San Francisco pel Dr. Tom Waddell, decatletista olímpic, per promoure la inclusió de la comunitat gai i lesbiana."></div>
-      </div>
-    </div>
-
-    <div class="bld" data-left="2560" data-w="50" data-h="290">
-      <div class="block"></div>
-      <div class="bld-text">
-        <div class="bt-year">1984</div>
-        <div class="bt-title" data-es="Nado sincronizado individual" data-va="Natació sincronitzada individual"></div>
-        <div class="bt-body" data-es="Deporte olímpico olvidado presente en tres olimpiadas: 1984, 1988 y 1992. Sincronizarse con une misme no siempre fue sencillo." data-va="Esport olímpic oblidat present en tres olimpíades: 1984, 1988 i 1992. Sincronitzar-se amb una mateixa no sempre va ser senzill."></div>
-      </div>
-    </div>
-
-    <div class="bld" data-left="2690" data-w="150" data-h="100">
-      <div class="block"></div>
-      <div class="bld-text">
-        <div class="bt-year">1988</div>
-        <div class="bt-title" data-es="Florence Griffith · Ballet de esquí" data-va="Florence Griffith · Ballet d'esquí"></div>
-        <div class="bt-body" data-es="Campaña de acoso a Flo-Jo por su estética poco convencional y por ser mujer racializada. El velocímetro roto, dicen. El ballet de esquí, deporte queer, compite por primera vez en Calgary 88." data-va="Campanya d'assetjament a Flo-Jo per la seua estètica poc convencional. El ballet d'esquí, esport queer, competeix per primera vegada a Calgary 88."></div>
-      </div>
-    </div>
-
-    <div class="bld" data-left="2920" data-w="230" data-h="75">
-      <div class="block"></div>
-      <div class="bld-text">
-        <div class="bt-year">1992</div>
-        <div class="bt-title" data-es="Petra, inspirada en Lorenza Böttner" data-va="Petra, inspirada en Lorenza Böttner"></div>
-        <div class="bt-body" data-es="Mascota de los Juegos Paralímpicos de Barcelona 1992, diseñada por Mariscal inspirándose en Lorenza Böttner: pintora, performer, activista trans y anticapacitista." data-va="Mascota dels Jocs Paralímpics de Barcelona 1992, dissenyada per Mariscal inspirant-se en Lorenza Böttner: pintora, performer, activista trans i anticapacitista."></div>
-      </div>
-    </div>
-
-    <div class="bld" data-left="3220" data-w="80" data-h="240">
-      <div class="block"></div>
-      <div class="bld-text">
-        <div class="bt-year">2000</div>
-        <div class="bt-title" data-es="Eric Moussambani" data-va="Eric Moussambani"></div>
-        <div class="bt-body" data-es="El nadador de Guinea Ecuatorial completó los 100 metros en 1:52.72, más del doble del tiempo ganador. Aprendió a nadar 8 meses antes en una piscina de hotel de 12 metros." data-va="El nedador de Guinea Equatorial va completar els 100 metres en 1:52.72, més del doble del temps guanyador. Va aprendre a nadar 8 mesos abans en una piscina d'hotel de 12 metres."></div>
-      </div>
-    </div>
-
-    <div class="bld" data-left="3370" data-w="160" data-h="65">
-      <div class="block"></div>
-      <div class="bld-text">
-        <div class="bt-year">2004</div>
-        <div class="bt-title" data-es="Nace Samarucs València" data-va="Naix Samarucs València"></div>
-        <div class="bt-body" data-es="Primer club polideportivo dirigido a la comunidad LGTBIQ+ de la Comunidad Valenciana. De aquí nace Parkuir." data-va="Primer club poliesportiu dirigit a la comunitat LGTBIQ+ de la Comunitat Valenciana. D'ací naix Parkuir."></div>
-      </div>
-    </div>
-
-    <div class="bld" data-left="3600" data-w="100" data-h="230">
-      <div class="block"></div>
-      <div class="bld-text">
-        <div class="bt-year">2005</div>
-        <div class="bt-title" data-es="Nace el Quadball" data-va="Naix el Quadball"></div>
-        <div class="bt-body" data-es="Antes Quidditch. En 2022 cambió su nombre para desvincularse de J.K. Rowling tras sus declaraciones tránsfobas, reafirmando su identidad como espacio deportivo políticamente activo." data-va="Abans Quidditch. El 2022 va canviar el nom per desvincularse de J.K. Rowling, reafirmant la seua identitat com a espai esportiu políticament actiu."></div>
-      </div>
-    </div>
-
-    <div class="bld" data-left="3780" data-w="140" data-h="105">
-      <div class="block"></div>
-      <div class="bld-text">
-        <div class="bt-year">2009</div>
-        <div class="bt-title" data-es="Caster Semenya vs World Athletics" data-va="Caster Semenya vs World Athletics"></div>
-        <div class="bt-body" data-es="Activista y atleta intersex. Rechaza tratamientos hormonales para reducir su testosterona natural. Ha llevado su caso hasta el Tribunal Europeo de Derechos Humanos." data-va="Activista i atleta intersex. Rebutja tractaments hormonals per reduir la seua testosterona natural. Ha portat el seu cas al Tribunal Europeu de Drets Humans."></div>
-      </div>
-    </div>
-
-    <div class="bld" data-left="4000" data-w="200" data-h="70">
-      <div class="block"></div>
-      <div class="bld-text">
-        <div class="bt-year">2014</div>
-        <div class="bt-title" data-es="Space-out Competition" data-va="Space-out Competition"></div>
-        <div class="bt-body" data-es="La artista Woopsyang funda en Corea del Sur una competición que premia a quien sea capaz de no hacer nada durante 90 minutos manteniendo el ritmo cardíaco estable." data-va="L'artista Woopsyang funda a Corea del Sud una competició que premia qui siga capaç de no fer res durant 90 minuts mantenint el ritme cardíac estable."></div>
-      </div>
-    </div>
-
-    <div class="bld" data-left="4270" data-w="75" data-h="250">
-      <div class="block"></div>
-      <div class="bld-text">
-        <div class="bt-year">2021</div>
-        <div class="bt-title" data-es="Simone Biles · salud mental" data-va="Simone Biles · salut mental"></div>
-        <div class="bt-body" data-es="Se retira de los Juegos Olímpicos de Tokio por salud mental. Un acto que abre el debate sobre la presión psicológica en el deporte de élite." data-va="Es retira dels Jocs Olímpics de Tòquio per salut mental. Un acte que obre el debat sobre la pressió psicològica en l'esport d'elit."></div>
-      </div>
-    </div>
-
-    <div class="bld" data-left="4430" data-w="160" data-h="80">
-      <div class="block"></div>
-      <div class="bld-text">
-        <div class="bt-year">2023</div>
-        <div class="bt-title" data-es="Activistas plantan cebollas en campos de golf" data-va="Activistes planten cebes en camps de golf"></div>
-        <div class="bt-body" data-es="XR, Futuro Vegetal y Jauzi Ekosoziala siembran hortalizas en diez campos de golf de España para denunciar el despilfarro de agua en plena sequía. También bloquean los hoyos con cemento." data-va="XR, Futuro Vegetal i Jauzi Ekosoziala sembren hortalisses en deu camps de golf d'Espanya per denunciar el malbaratament d'aigua enmig de la sequera."></div>
-      </div>
-    </div>
-
-    <div class="bld" data-left="4670" data-w="110" data-h="160">
-      <div class="block"></div>
-      <div class="bld-text">
-        <div class="bt-year">2024</div>
-        <div class="bt-title" data-es="Imane Khelif · Paris 2024" data-va="Imane Khelif · París 2024"></div>
-        <div class="bt-body" data-es="Boxeadora argelina y medallista de oro. Recibió una campaña de odio transfóbica siendo mujer cis. Entre los atacantes: Elon Musk y J.K. Rowling." data-va="Boxejadora algeriana i medallista d'or. Va rebre una campanya d'odi transfòbica sent dona cis. Entre els atacants: Elon Musk i J.K. Rowling."></div>
-      </div>
-    </div>
-
-    <div class="bld" data-left="4870" data-w="250" data-h="55">
-      <div class="block"></div>
-      <div class="bld-text">
-        <div class="bt-year">2024</div>
-        <div class="bt-title" data-es="Gay Games Valencia" data-va="Gay Games València"></div>
-        <div class="bt-body" data-es="Evento vinculado a la industria turística LGTB+ y al capitalismo rosa. Su financiación incluye donaciones de General Electric, empresa fabricante de componentes militares utilizados por estados que cometen genocidio." data-va="Esdeveniment vinculat a la indústria turística LGBT+ i al capitalisme rosa. El seu finançament inclou donacions de General Electric, empresa fabricant de components militars utilitzats per estats que cometen genocidi."></div>
-      </div>
-    </div>
-
-    <div class="bld" data-left="5200" data-w="130" data-h="340">
-      <div class="block"></div>
-      <div class="bld-text">
-        <div class="bt-year">2026</div>
-        <div class="bt-title" data-es="Primera Copa Mundial de Sperm Racing" data-va="Primera Copa Mundial de Sperm Racing"></div>
-        <div class="bt-body" data-es="La machosfera convierte la carrera de esperma en deporte mundial. «Convertir la salud en un deporte». Podría haber sido una broma irónica de Parkuir, pero ellos llegaron aún más lejos." data-va="La machosfera converteix la cursa d'esperma en esport mundial. Podria haver sigut una broma irònica de Parkuir, però ells van arribar encara més lluny."></div>
-      </div>
-    </div>
-
-    <!-- jugador -->
+    <!-- PERSONAJE -->
     <div id="player">
-      <svg id="player-svg" viewBox="0 0 22 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="11" cy="5" r="3.5" stroke="var(--ink)" stroke-width="1.5" fill="var(--bg)"/>
-        <line x1="11" y1="8.5" x2="11" y2="20" stroke="var(--ink)" stroke-width="1.5"/>
-        <line id="p-arm-l" x1="11" y1="12" x2="4"  y2="17" stroke="var(--ink)" stroke-width="1.5" stroke-linecap="round"/>
-        <line id="p-arm-r" x1="11" y1="12" x2="18" y2="14" stroke="var(--ink)" stroke-width="1.5" stroke-linecap="round"/>
-        <line id="p-leg-l" x1="11" y1="20" x2="5"  y2="30" stroke="var(--ink)" stroke-width="1.5" stroke-linecap="round"/>
-        <line id="p-leg-r" x1="11" y1="20" x2="17" y2="30" stroke="var(--ink)" stroke-width="1.5" stroke-linecap="round"/>
-      </svg>
+      <img id="player-img" src="./images/idle.png" alt="">
     </div>
   </div>
 </div>
 
-<!-- FOOTER -->
+<!-- CONTROLES -->
 <div id="site-footer">
-  <div class="controls">
-    <button id="btn-left">←</button>
-    <button id="btn-jump">↑</button>
-    <button id="btn-right">→</button>
-  </div>
-  <span id="footer-hint">← → moverse · ↑ saltar</span>
+  <button id="btn-left">←</button>
+  <button id="btn-jump">↑</button>
+  <button id="btn-right">→</button>
 </div>
+<div id="footer-hint">← → moverse · ↑ saltar</div>
 
 <script>
-let lang = 'es';
-
-function setLang(l, btn) {
-  lang = l;
-  document.querySelectorAll('.lang-row button').forEach(b => b.classList.remove('active'));
-  if (btn) btn.classList.add('active');
-  if (lastActive) renderInfo(lastActive);
-}
-
 // ── LAYOUT ────────────────────────────────────────────────
 let PLATFORMS = [];
 
-function infoBoxHeight() {
-  return document.getElementById('info-box').offsetHeight;
-}
-
-function headerHeight() {
-  return document.getElementById('site-header').offsetHeight;
-}
-
 function groundY() {
-  const wrapperH = document.getElementById('world-wrapper').clientHeight;
-  return wrapperH - 60;
-}
-
-function worldTop() {
-  // cuánto espacio ocupa el info-box dentro del world-wrapper
-  return infoBoxHeight();
+  return document.getElementById('world-wrapper').clientHeight - 50;
 }
 
 function layoutWorld() {
   const gY = groundY();
   document.getElementById('ground-line').style.top = gY + 'px';
-
   PLATFORMS = [];
+
   document.querySelectorAll('.bld').forEach(bld => {
     const left = parseInt(bld.dataset.left);
     const w    = parseInt(bld.dataset.w);
@@ -481,6 +331,11 @@ function layoutWorld() {
     block.style.width  = w + 'px';
     block.style.height = h + 'px';
 
+    const yearEl = bld.querySelector('.bld-year');
+    yearEl.style.left = left + 'px';
+    yearEl.style.top  = (gY - wb - h - 32) + 'px';
+    yearEl.textContent = bld.dataset.year;
+
     PLATFORMS.push({ left, w, h, wb, el: bld });
   });
 }
@@ -489,9 +344,11 @@ function layoutWorld() {
 let playerX = 80, playerY = 0, velX = 0, velY = 0;
 let onGround = true, worldOffset = 0;
 let stepPhase = 0, jumpConsumed = false;
-const WORLD_W = 6000, GRAVITY = 0.55, JUMP_F = -13;
-const ACCEL = 0.55, FRICTION = 0.80, MAX_SPD = 7, PLAYER_H = 32;
-const PROX = 160;
+let activeCard = null;
+
+const WORLD_W = 5700, GRAVITY = 0.55, JUMP_F = -13;
+const ACCEL = 0.55, FRICTION = 0.80, MAX_SPD = 7, PLAYER_H = 95;
+const PROX = 120;
 const keys = { left: false, right: false };
 
 function getFloor(x) {
@@ -512,10 +369,10 @@ function tryJump() {
 function spawnParticles() {
   const world = document.getElementById('world');
   const gY = groundY();
-  for (let i = 0; i < 5; i++) {
+  for (let i = 0; i < 6; i++) {
     const p = document.createElement('div');
     p.className = 'particle';
-    const a = Math.PI + Math.random() * Math.PI, d = 15 + Math.random() * 25;
+    const a = Math.PI + Math.random() * Math.PI, d = 15 + Math.random() * 30;
     p.style.setProperty('--dx', Math.cos(a) * d + 'px');
     p.style.setProperty('--dy', Math.sin(a) * d + 'px');
     p.style.left = playerX + 'px';
@@ -525,20 +382,32 @@ function spawnParticles() {
   }
 }
 
-// ── INFO ──────────────────────────────────────────────────
-let lastActive = null;
-
-function renderInfo(p) {
-  const bt = p.el.querySelector('.bld-text');
-  const yearEl  = bt.querySelector('.bt-year');
-  const titleEl = bt.querySelector('.bt-title');
-  const bodyEl  = bt.querySelector('.bt-body');
-  document.getElementById('info-year').textContent  = yearEl  ? yearEl.textContent : '';
-  document.getElementById('info-title').textContent = titleEl ? (titleEl.dataset[lang] || titleEl.dataset.es || titleEl.textContent) : '';
-  document.getElementById('info-body').textContent  = bodyEl  ? (bodyEl.dataset[lang]  || bodyEl.dataset.es  || bodyEl.textContent)  : '';
-  document.getElementById('info-box').classList.remove('empty');
-  document.getElementById('info-placeholder').style.display = 'none';
+// ── CARD ──────────────────────────────────────────────────
+function openCard(p) {
+  const d = p.el.dataset;
+  document.getElementById('info-card-year').textContent  = d.year;
+  document.getElementById('info-card-title').textContent = d.es;
+  document.getElementById('info-card-text').textContent  = d.body || '';
+  // imagen opcional
+  const imgEl = document.getElementById('info-card-img-el');
+  if (d.img) { imgEl.src = d.img; imgEl.style.display = 'block'; }
+  else        { imgEl.style.display = 'none'; }
+  document.getElementById('info-card').classList.add('visible');
+  // resaltar año
+  document.querySelectorAll('.bld-year').forEach(y => y.classList.remove('active'));
+  p.el.querySelector('.bld-year').classList.add('active');
+  activeCard = p;
 }
+
+function closeCard() {
+  document.getElementById('info-card').classList.remove('visible');
+  document.querySelectorAll('.bld-year').forEach(y => y.classList.remove('active'));
+  activeCard = null;
+  lastActive = null;
+}
+
+// ── PROXIMITY ─────────────────────────────────────────────
+let lastActive = null;
 
 function checkProximity() {
   let closest = null, closestDist = Infinity;
@@ -550,14 +419,9 @@ function checkProximity() {
 
   if (closest && closest !== lastActive) {
     lastActive = closest;
-    renderInfo(closest);
+    openCard(closest);
   } else if (!closest && lastActive) {
-    lastActive = null;
-    document.getElementById('info-year').textContent  = '';
-    document.getElementById('info-title').textContent = '';
-    document.getElementById('info-body').textContent  = '';
-    document.getElementById('info-box').classList.add('empty');
-    document.getElementById('info-placeholder').style.display = 'flex';
+    closeCard();
   }
 }
 
@@ -566,6 +430,7 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowLeft'  || e.key === 'a') keys.left  = true;
   if (e.key === 'ArrowRight' || e.key === 'd') keys.right = true;
   if ((e.key === ' ' || e.key === 'ArrowUp' || e.key === 'w') && !e.repeat) { e.preventDefault(); tryJump(); }
+  if (e.key === 'Escape') closeCard();
 });
 document.addEventListener('keyup', e => {
   if (e.key === 'ArrowLeft'  || e.key === 'a') keys.left  = false;
@@ -590,41 +455,38 @@ btnR.addEventListener('touchend',   () => keys.right = false);
 btnJ.addEventListener('touchstart', e => { e.preventDefault(); tryJump(); });
 
 // ── POSE ──────────────────────────────────────────────────
-function updatePose(vx, vy, g) {
-  const svg = document.getElementById('player-svg');
-  if (!svg) return;
-  const aL = document.getElementById('p-arm-l'), aR = document.getElementById('p-arm-r');
-  const lL = document.getElementById('p-leg-l'), lR = document.getElementById('p-leg-r');
-  if (!g && vy < -2) {
-    aL.setAttribute('x2','3');  aL.setAttribute('y2','10'); aR.setAttribute('x2','19'); aR.setAttribute('y2','10');
-    lL.setAttribute('x2','7');  lL.setAttribute('y2','25'); lR.setAttribute('x2','15'); lR.setAttribute('y2','25');
-  } else if (!g && vy > 2) {
-    aL.setAttribute('x2','2');  aL.setAttribute('y2','16'); aR.setAttribute('x2','20'); aR.setAttribute('y2','16');
-    lL.setAttribute('x2','3');  lL.setAttribute('y2','30'); lR.setAttribute('x2','19'); lR.setAttribute('y2','30');
-  } else if (g && Math.abs(vx) > 0.8) {
-    stepPhase += Math.abs(vx) * 0.15;
-    const s = Math.sin(stepPhase);
-    lL.setAttribute('x2', 11 + s * 8); lL.setAttribute('y2', 22 + Math.abs(s) * 6);
-    lR.setAttribute('x2', 11 - s * 8); lR.setAttribute('y2', 22 + Math.abs(s) * 6);
-    aL.setAttribute('x2', 11 - s * 5); aL.setAttribute('y2','15');
-    aR.setAttribute('x2', 11 + s * 5); aR.setAttribute('y2','15');
+const RUN_FRAMES = ['./images/run1.png', './images/run2.png', './images/run3.png', './images/run2.png'];
+let runFrameIdx = 0, lastFrameTime = 0;
+const FRAME_MS = 110;
+
+function updatePose(vx, vy, g, now) {
+  const img = document.getElementById('player-img');
+  if (!img) return;
+  if (!g) {
+    img.src = './images/jump.png';
+  } else if (Math.abs(vx) > 0.5) {
+    if (now - lastFrameTime > FRAME_MS) {
+      runFrameIdx = (runFrameIdx + 1) % RUN_FRAMES.length;
+      img.src = RUN_FRAMES[runFrameIdx];
+      lastFrameTime = now;
+    }
   } else {
-    aL.setAttribute('x2','4');  aL.setAttribute('y2','17'); aR.setAttribute('x2','18'); aR.setAttribute('y2','14');
-    lL.setAttribute('x2','5');  lL.setAttribute('y2','30'); lR.setAttribute('x2','17'); lR.setAttribute('y2','30');
+    img.src = './images/idle.png';
   }
-  if (vx > 0.3)       svg.style.transform = 'scaleX(1)';
-  else if (vx < -0.3) svg.style.transform = 'scaleX(-1)';
+  img.style.transform = vx < -0.3 ? 'scaleX(-1)' : 'scaleX(1)';
 }
 
 // ── GAME LOOP ─────────────────────────────────────────────
-function gameLoop() {
+(function gameLoop() {
   const playerEl = document.getElementById('player');
   const world    = document.getElementById('world');
 
   function tick() {
-    if (keys.right)      velX = Math.min(velX + ACCEL, MAX_SPD);
-    else if (keys.left)  velX = Math.max(velX - ACCEL, -MAX_SPD);
-    else                 velX *= FRICTION;
+    const now = performance.now();
+
+    if (keys.right)     velX = Math.min(velX + ACCEL, MAX_SPD);
+    else if (keys.left) velX = Math.max(velX - ACCEL, -MAX_SPD);
+    else                velX *= FRICTION;
     if (Math.abs(velX) < 0.05) velX = 0;
 
     playerX = Math.max(20, Math.min(WORLD_W - 20, playerX + velX));
@@ -648,20 +510,18 @@ function gameLoop() {
     world.style.transform = `translateX(${-worldOffset}px)`;
 
     const gY = groundY();
-    playerEl.style.left = playerX + 'px';
+    playerEl.style.left = (playerX - 45) + 'px';
     playerEl.style.top  = (gY - playerY - PLAYER_H) + 'px';
 
-    updatePose(velX, velY, onGround);
+    updatePose(velX, velY, onGround, now);
     checkProximity();
     requestAnimationFrame(tick);
   }
   tick();
-}
+})();
 
-// ── INIT ──────────────────────────────────────────────────
 layoutWorld();
 window.addEventListener('resize', layoutWorld);
-gameLoop();
 </script>
 </body>
 </html>
