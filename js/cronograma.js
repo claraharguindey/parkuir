@@ -35,23 +35,13 @@ function layoutWorld() {
 }
 
 // ── GAME STATE ────────────────────────────────────────────
-let playerX = 80,
-  playerY = 0,
-  velX = 0,
-  velY = 0;
-let onGround = true,
-  worldOffset = 0;
-let stepPhase = 0,
-  jumpConsumed = false;
-let activeCard = null;
+let playerX = 80, playerY = 0, velX = 0, velY = 0;
+let onGround = true, worldOffset = 0;
+let stepPhase = 0, jumpConsumed = false;
+let activeCard = null, lastActive = null;
 
-const WORLD_W = 5700,
-  GRAVITY = 0.55,
-  JUMP_F = -13;
-const ACCEL = 0.55,
-  FRICTION = 0.8,
-  MAX_SPD = 7,
-  PLAYER_H = 100;
+const WORLD_W = 5700, GRAVITY = 0.55, JUMP_F = -13;
+const ACCEL = 0.55, FRICTION = 0.8, MAX_SPD = 7, PLAYER_H = 100;
 const PROX = 120;
 const keys = { left: false, right: false };
 
@@ -78,8 +68,7 @@ function spawnParticles() {
   for (let i = 0; i < 6; i++) {
     const p = document.createElement("div");
     p.className = "particle";
-    const a = Math.PI + Math.random() * Math.PI,
-      d = 15 + Math.random() * 30;
+    const a = Math.PI + Math.random() * Math.PI, d = 15 + Math.random() * 30;
     p.style.setProperty("--dx", Math.cos(a) * d + "px");
     p.style.setProperty("--dy", Math.sin(a) * d + "px");
     p.style.left = playerX + "px";
@@ -90,13 +79,11 @@ function spawnParticles() {
 }
 
 // ── CARD ──────────────────────────────────────────────────
-
 function openCard(p) {
   const d = p.el.dataset;
   document.getElementById("info-card-year").textContent = d.year;
   document.getElementById("info-card-title").textContent = d.es;
   document.getElementById("info-card-text").textContent = d.body || "";
-  // imagen opcional
   const imgEl = document.getElementById("info-card-img-el");
   if (d.img) {
     imgEl.src = d.img;
@@ -105,46 +92,28 @@ function openCard(p) {
     imgEl.style.display = "none";
   }
   document.getElementById("info-card").classList.add("visible");
-  // resaltar año
-  document
-    .querySelectorAll(".bld-year")
-    .forEach((y) => y.classList.remove("active"));
+  document.querySelectorAll(".bld-year").forEach((y) => y.classList.remove("active"));
   p.el.querySelector(".bld-year").classList.add("active");
   activeCard = p;
 }
 
-const closeBtn = document.getElementById("info-card-close");
-closeBtn.addEventListener("click", closeCard);
-
 function closeCard() {
   document.getElementById("info-card").classList.remove("visible");
-
-  document
-    .querySelectorAll(".bld-year")
-    .forEach((y) => y.classList.remove("active"));
-
+  document.querySelectorAll(".bld-year").forEach((y) => y.classList.remove("active"));
   activeCard = null;
   lastActive = null;
 }
 
+document.getElementById("info-card-close").addEventListener("click", closeCard);
 
 // ── PROXIMITY ─────────────────────────────────────────────
-let lastActive = null;
-
 function checkProximity() {
-  let closest = null;
-  let closestDist = Infinity;
-
+  let closest = null, closestDist = Infinity;
   PLATFORMS.forEach((p) => {
     const center = p.left + p.w / 2;
     const dist = Math.abs(playerX - center);
-
-    if (dist < PROX && dist < closestDist) {
-      closestDist = dist;
-      closest = p;
-    }
+    if (dist < PROX && dist < closestDist) { closestDist = dist; closest = p; }
   });
-
   if (closest && closest !== lastActive) {
     lastActive = closest;
     openCard(closest);
@@ -155,48 +124,34 @@ function checkProximity() {
 
 // ── INPUT ─────────────────────────────────────────────────
 document.addEventListener("keydown", (e) => {
-  if (e.key === "ArrowLeft" || e.key === "a") keys.left = true;
+  if (e.key === "ArrowLeft"  || e.key === "a") keys.left  = true;
   if (e.key === "ArrowRight" || e.key === "d") keys.right = true;
   if ((e.key === " " || e.key === "ArrowUp" || e.key === "w") && !e.repeat) {
-    e.preventDefault();
-    tryJump();
+    e.preventDefault(); tryJump();
   }
   if (e.key === "Escape") closeCard();
 });
 document.addEventListener("keyup", (e) => {
-  if (e.key === "ArrowLeft" || e.key === "a") keys.left = false;
+  if (e.key === "ArrowLeft"  || e.key === "a") keys.left  = false;
   if (e.key === "ArrowRight" || e.key === "d") keys.right = false;
-  if (e.key === " " || e.key === "ArrowUp" || e.key === "w")
-    jumpConsumed = false;
+  if (e.key === " " || e.key === "ArrowUp" || e.key === "w") jumpConsumed = false;
 });
 
 const btnL = document.getElementById("btn-left");
 const btnR = document.getElementById("btn-right");
 const btnJ = document.getElementById("btn-jump");
-btnL.addEventListener("mousedown", () => (keys.left = true));
-btnL.addEventListener("mouseup", () => (keys.left = false));
-btnL.addEventListener("mouseleave", () => (keys.left = false));
-btnR.addEventListener("mousedown", () => (keys.right = true));
-btnR.addEventListener("mouseup", () => (keys.right = false));
-btnR.addEventListener("mouseleave", () => (keys.right = false));
-btnJ.addEventListener("mousedown", (e) => {
-  e.preventDefault();
-  tryJump();
-});
-btnL.addEventListener("touchstart", (e) => {
-  e.preventDefault();
-  keys.left = true;
-});
-btnL.addEventListener("touchend", () => (keys.left = false));
-btnR.addEventListener("touchstart", (e) => {
-  e.preventDefault();
-  keys.right = true;
-});
-btnR.addEventListener("touchend", () => (keys.right = false));
-btnJ.addEventListener("touchstart", (e) => {
-  e.preventDefault();
-  tryJump();
-});
+btnL.addEventListener("mousedown",  () => keys.left  = true);
+btnL.addEventListener("mouseup",    () => keys.left  = false);
+btnL.addEventListener("mouseleave", () => keys.left  = false);
+btnR.addEventListener("mousedown",  () => keys.right = true);
+btnR.addEventListener("mouseup",    () => keys.right = false);
+btnR.addEventListener("mouseleave", () => keys.right = false);
+btnJ.addEventListener("mousedown",  (e) => { e.preventDefault(); tryJump(); });
+btnL.addEventListener("touchstart", (e) => { e.preventDefault(); keys.left  = true; });
+btnL.addEventListener("touchend",   () => keys.left  = false);
+btnR.addEventListener("touchstart", (e) => { e.preventDefault(); keys.right = true; });
+btnR.addEventListener("touchend",   () => keys.right = false);
+btnJ.addEventListener("touchstart", (e) => { e.preventDefault(); tryJump(); });
 
 // ── POSE ──────────────────────────────────────────────────
 const RUN_FRAMES = [
@@ -205,8 +160,7 @@ const RUN_FRAMES = [
   "./images/run3.png",
   "./images/run2.png",
 ];
-let runFrameIdx = 0,
-  lastFrameTime = 0;
+let runFrameIdx = 0, lastFrameTime = 0;
 const FRAME_MS = 110;
 
 function updatePose(vx, vy, g, now) {
@@ -229,14 +183,14 @@ function updatePose(vx, vy, g, now) {
 // ── GAME LOOP ─────────────────────────────────────────────
 (function gameLoop() {
   const playerEl = document.getElementById("player");
-  const world = document.getElementById("world");
+  const world    = document.getElementById("world");
 
   function tick() {
     const now = performance.now();
 
-    if (keys.right) velX = Math.min(velX + ACCEL, MAX_SPD);
-    else if (keys.left) velX = Math.max(velX - ACCEL, -MAX_SPD);
-    else velX *= FRICTION;
+    if (keys.right)      velX = Math.min(velX + ACCEL, MAX_SPD);
+    else if (keys.left)  velX = Math.max(velX - ACCEL, -MAX_SPD);
+    else                 velX *= FRICTION;
     if (Math.abs(velX) < 0.05) velX = 0;
 
     playerX = Math.max(20, Math.min(WORLD_W - 20, playerX + velX));
@@ -246,10 +200,7 @@ function updatePose(vx, vy, g, now) {
     const floor = getFloor(playerX);
     if (playerY <= floor) {
       const wasAir = !onGround;
-      playerY = floor;
-      velY = 0;
-      onGround = true;
-      jumpConsumed = false;
+      playerY = floor; velY = 0; onGround = true; jumpConsumed = false;
       if (wasAir) {
         playerEl.classList.remove("squish");
         void playerEl.offsetWidth;
@@ -264,7 +215,7 @@ function updatePose(vx, vy, g, now) {
 
     const gY = groundY();
     playerEl.style.left = playerX - 45 + "px";
-    playerEl.style.top = gY - playerY - PLAYER_H + "px";
+    playerEl.style.top  = gY - playerY - PLAYER_H + "px";
 
     updatePose(velX, velY, onGround, now);
     checkProximity();
@@ -274,5 +225,4 @@ function updatePose(vx, vy, g, now) {
 })();
 
 layoutWorld();
-
 window.addEventListener("resize", layoutWorld);

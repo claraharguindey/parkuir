@@ -1,379 +1,86 @@
 <!doctype html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PARKUIR — Línea del tiempo</title>
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="css/cronograma.css" />
-  </head>
-  <body>
-    <header>
-      <a href="/">parkuir</a>
-      <button id="menu-toggle" aria-label="Abrir menú">☰</button>
-      <nav id="main-nav">
-        <a href="/about.html">qué es parkuir</a>
-        <a href="/cronograma.html">línea del tiempo</a>
-        <a href="/reglamento.html">reglamento</a>
-        <a href="/jugadorxs.html">jugadorxs</a>
-        <a href="/equipacion.html">equipación</a>
-        <a href="#">archivo</a>
-      </nav>
-    </header>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PARKUIR — Línea del tiempo</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="css/cronograma.css" />
+</head>
+<body>
+  <header>
+    <a href="/">parkuir</a>
+    <button id="menu-toggle" aria-label="Abrir menú">☰</button>
+    <nav id="main-nav">
+      <a href="/about.html">qué es parkuir</a>
+      <a href="/cronograma.html">línea del tiempo</a>
+      <a href="/reglamento.html">reglamento</a>
+      <a href="/jugadorxs.html">jugadorxs</a>
+      <a href="/equipacion.html">equipación</a>
+      <a href="#">archivo</a>
+    </nav>
+  </header>
 
-    <div class="crono-band">
-      <h1>Línea del tiempo</h1>
+  <div class="crono-band">
+    <h1>Línea del tiempo</h1>
+  </div>
+
+  <div id="info-card">
+    <button id="info-card-close">✕</button>
+    <div id="info-card-img">
+      <img id="info-card-img-el" alt="" />
+      <div id="info-card-year"></div>
     </div>
-
-    <div id="info-card">
-      <button id="info-card-close" onclick="closeCard()">✕</button>
-
-      <div id="info-card-img">
-        <img id="info-card-img-el" alt="" />
-        <div id="info-card-year"></div>
-      </div>
-
-      <div id="info-card-content">
-        <div id="info-card-title"></div>
-        <div id="info-card-text"></div>
-      </div>
+    <div id="info-card-content">
+      <div id="info-card-title"></div>
+      <div id="info-card-text"></div>
     </div>
+  </div>
 
-    <!-- MUNDO -->
-    <div id="world-wrapper">
-      <div id="world">
-        <div id="ground-line"></div>
-
-        <div
-          class="bld"
-          data-left="150"
-          data-w="100"
-          data-h="220"
-          data-year="388 a.C."
-          data-es="Primeras trampas del deporte"
-          data-body="Eufolio, boxeador, pagó a tres oponentes para que se dejaran caer y asegurar así su victoria en los juegos del 388 a.C."
-        >
-          <div class="block"></div>
-          <div class="bld-year"></div>
-        </div>
-        <div
-          class="bld"
-          data-left="340"
-          data-w="160"
-          data-h="80"
-          data-year="1540"
-          data-es="Vallvidrera Curling Club"
-          data-body="Un año antes de que el curling naciera en Escocia, un club se adelantaba en Collserola. Jamás han jugado un partido: el pantano nunca se hiela lo suficiente."
-        >
-          <div class="block"></div>
-          <div class="bld-year"></div>
-        </div>
-        <div
-          class="bld"
-          data-left="560"
-          data-w="55"
-          data-h="300"
-          data-year="1884"
-          data-es="Katie Sandwina"
-          data-body="Artista de circo y sufragista. Considerada hasta 1986 «la mujer más fuerte del mundo»."
-        >
-          <div class="block"></div>
-          <div class="bld-year"></div>
-        </div>
-        <div
-          class="bld"
-          data-left="680"
-          data-w="180"
-          data-h="55"
-          data-year="1903"
-          data-es="El farolillo rojo"
-          data-body="Premio al último del Tour. Tuvo muchos adeptes que luchaban por ser les más lentes."
-        >
-          <div class="block"></div>
-          <div class="bld-year"></div>
-        </div>
-        <div
-          class="bld"
-          data-left="940"
-          data-w="130"
-          data-h="120"
-          data-year="1904"
-          data-es="Fred Lorz gana la maratón en coche"
-          data-body="Tras correr 14 km, subió al coche de su entrenador. Se bajó poco antes de la meta y entró como ganador."
-        >
-          <div class="block"></div>
-          <div class="bld-year"></div>
-        </div>
-        <div
-          class="bld"
-          data-left="1140"
-          data-w="65"
-          data-h="340"
-          data-year="1935"
-          data-es="Primera competición de Roller Derby"
-          data-body="El 13 de agosto de 1935, en el Chicago Coliseum. Carrera de resistencia de larga distancia con equipos mixtos."
-        >
-          <div class="block"></div>
-          <div class="bld-year"></div>
-        </div>
-        <div
-          class="bld"
-          data-left="1270"
-          data-w="220"
-          data-h="60"
-          data-year="1936"
-          data-es="Jesse Owens · Olimpiades Populars"
-          data-body="Jesse Owens ganó cuatro oros en Berlín. Las Olimpiades Populars de Barcelona no llegaron a inaugurarse: el golpe de Estado lo impidió el día antes."
-        >
-          <div class="block"></div>
-          <div class="bld-year"></div>
-        </div>
-        <div
-          class="bld"
-          data-left="1560"
-          data-w="90"
-          data-h="180"
-          data-year="1960"
-          data-es="Creación de los paralímpicos"
-          data-body="El Dr. Guttmann organizó los primeros Juegos de Stoke Mandeville en 1948. Los primeros paralímpicos: Roma 1960."
-        >
-          <div class="block"></div>
-          <div class="bld-year"></div>
-        </div>
-        <div
-          class="bld"
-          data-left="1730"
-          data-w="310"
-          data-h="90"
-          data-year="1968"
-          data-es="Las Gardenias de Tepito"
-          data-body="Equipo de fútbol de travestis y transexuales que lleva 50 años jugando maquilladas y con lentejuelas en El Maracaná de Tepito."
-        >
-          <div class="block"></div>
-          <div class="bld-year"></div>
-        </div>
-        <div
-          class="bld"
-          data-left="1790"
-          data-w="55"
-          data-h="200"
-          data-wb="90"
-          data-year="1969"
-          data-es="Stop the Seventy Tour"
-          data-body="Sabotajes creativos a la gira de los Springboks en pleno Apartheid: zanjas nocturnas, miles de chinchetas, encadenamientos."
-        >
-          <div class="block"></div>
-          <div class="bld-year"></div>
-        </div>
-        <div
-          class="bld"
-          data-left="2120"
-          data-w="110"
-          data-h="140"
-          data-year="1973"
-          data-es="Grupo Passion — Deporte de Ideas"
-          data-body="«El dogma competitivo nos parece repugnante». Arte conceptual desde dentro del deporte."
-        >
-          <div class="block"></div>
-          <div class="bld-year"></div>
-        </div>
-        <div
-          class="bld"
-          data-left="2300"
-          data-w="190"
-          data-h="50"
-          data-year="1974"
-          data-es="Nace la lucha de dedos de los pies"
-          data-body="Conocido como Toe Wrestling, este deporte fue inventado por unos ingleses en un bar."
-        >
-          <div class="block"></div>
-          <div class="bld-year"></div>
-        </div>
-        <div
-          class="bld"
-          data-left="2560"
-          data-w="50"
-          data-h="290"
-          data-year="1982"
-          data-es="Creación de los Gay Games"
-          data-body="Creados en San Francisco por Tom Waddell, decatleta olímpico, para promover la inclusión de la comunidad gay y lesbiana."
-        >
-          <div class="block"></div>
-          <div class="bld-year"></div>
-        </div>
-        <div
-          class="bld"
-          data-left="2690"
-          data-w="150"
-          data-h="100"
-          data-year="1984"
-          data-es="Nado sincronizado individual"
-          data-body="Deporte olímpico olvidado presente en tres olimpiadas: 1984, 1988 y 1992. Sincronizarse con une misme no siempre fue sencillo."
-        >
-          <div class="block"></div>
-          <div class="bld-year"></div>
-        </div>
-        <div
-          class="bld"
-          data-left="2920"
-          data-w="230"
-          data-h="75"
-          data-year="1988"
-          data-es="Florence Griffith · Ballet de esquí"
-          data-body="Campaña de acoso a Flo-Jo. Batió el récord y le dijeron que el velocímetro estaba roto. El ballet de esquí compite por primera vez en Calgary 88."
-        >
-          <div class="block"></div>
-          <div class="bld-year"></div>
-        </div>
-        <div
-          class="bld"
-          data-left="3220"
-          data-w="80"
-          data-h="240"
-          data-year="1992"
-          data-es="Petra, inspirada en Lorenza Böttner"
-          data-body="Mascota paralímpica Barcelona 92, diseñada por Mariscal. Inspirada en Lorenza Böttner: pintora, performer, activista trans y anticapacitista."
-        >
-          <div class="block"></div>
-          <div class="bld-year"></div>
-        </div>
-        <div
-          class="bld"
-          data-left="3370"
-          data-w="160"
-          data-h="65"
-          data-year="2000"
-          data-es="Eric Moussambani"
-          data-body="Sidney 2000. Completó los 100m en 1:52.72, más del doble del tiempo ganador. Aprendió a nadar 8 meses antes en una piscina de hotel de 12 metros."
-        >
-          <div class="block"></div>
-          <div class="bld-year"></div>
-        </div>
-        <div
-          class="bld"
-          data-left="3600"
-          data-w="100"
-          data-h="230"
-          data-year="2004"
-          data-es="Nace Samarucs València"
-          data-body="Primer club polideportivo LGTBIQ+ de la Comunitat Valenciana. De aquí nace Parkuir."
-        >
-          <div class="block"></div>
-          <div class="bld-year"></div>
-        </div>
-        <div
-          class="bld"
-          data-left="3780"
-          data-w="140"
-          data-h="105"
-          data-year="2005"
-          data-es="Nace el Quadball"
-          data-body="Antes Quidditch. En 2022 cambió su nombre para desvincularse de J.K. Rowling tras sus declaraciones tránsfobas."
-        >
-          <div class="block"></div>
-          <div class="bld-year"></div>
-        </div>
-        <div
-          class="bld"
-          data-left="4000"
-          data-w="200"
-          data-h="70"
-          data-year="2009"
-          data-es="Caster Semenya vs World Athletics"
-          data-body="Activista y atleta intersex. Rechaza medicarse para competir. Ha llevado su caso hasta el Tribunal Europeo de Derechos Humanos."
-        >
-          <div class="block"></div>
-          <div class="bld-year"></div>
-        </div>
-        <div
-          class="bld"
-          data-left="4270"
-          data-w="75"
-          data-h="250"
-          data-year="2014"
-          data-es="Space-out Competition"
-          data-body="Competición que premia a quien no haga nada durante 90 minutos manteniendo el ritmo cardíaco estable. Fundada por Woopsyang en Corea del Sur."
-        >
-          <div class="block"></div>
-          <div class="bld-year"></div>
-        </div>
-        <div
-          class="bld"
-          data-left="4430"
-          data-w="160"
-          data-h="80"
-          data-year="2021"
-          data-es="Simone Biles · salud mental"
-          data-body="Se retira de Tokio por salud mental, abriendo el debate sobre la presión psicológica en el deporte de élite."
-        >
-          <div class="block"></div>
-          <div class="bld-year"></div>
-        </div>
-        <div
-          class="bld"
-          data-left="4670"
-          data-w="110"
-          data-h="160"
-          data-year="2023"
-          data-es="Activistas plantan cebollas en campos de golf"
-          data-body="XR y otros grupos siembran hortalizas en diez campos de golf para denunciar el despilfarro de agua en plena sequía."
-        >
-          <div class="block"></div>
-          <div class="bld-year"></div>
-        </div>
-        <div
-          class="bld"
-          data-left="4870"
-          data-w="250"
-          data-h="55"
-          data-year="2024"
-          data-es="Imane Khelif · Paris 2024"
-          data-body="Boxeadora argelina, oro en París. Recibió una campaña de odio transfóbica siendo mujer cis. Entre los atacantes: Elon Musk y J.K. Rowling."
-        >
-          <div class="block"></div>
-          <div class="bld-year"></div>
-        </div>
-        <div
-          class="bld"
-          data-left="5100"
-          data-w="150"
-          data-h="120"
-          data-year="2024"
-          data-es="Gay Games Valencia"
-          data-body="Evento LGTB+ cuya financiación incluye donaciones de General Electric, fabricante de componentes militares utilizados en conflictos activos."
-        >
-          <div class="block"></div>
-          <div class="bld-year"></div>
-        </div>
-        <div
-          class="bld"
-          data-left="5380"
-          data-w="130"
-          data-h="340"
-          data-year="2026"
-          data-es="Primera Copa Mundial de Sperm Racing"
-          data-body="La machosfera convierte la carrera de esperma en deporte mundial. Podría haber sido una broma irónica de Parkuir, pero ellos llegaron más lejos."
-        >
-          <div class="block"></div>
-          <div class="bld-year"></div>
-        </div>
-
-        <!-- PERSONAJE -->
-        <div id="player">
-          <img id="player-img" src="./images/idle.png" alt="" />
-        </div>
+  <div id="world-wrapper">
+    <div id="world">
+      <div id="ground-line"></div>
+      <!-- edificios generados por JS desde CRONOGRAMA -->
+      <div id="player">
+        <img id="player-img" src="./images/idle.png" alt="" />
       </div>
     </div>
+  </div>
 
-    <!-- CONTROLES -->
-    <div id="site-footer">
-      <button id="btn-left">←</button>
-      <button id="btn-jump">↑</button>
-      <button id="btn-right">→</button>
-    </div>
-    <div id="footer-hint">← → moverse · ↑ saltar</div>
-    <script src="js/cronograma.js"></script>
-    <script src="js/menu.js"></script>
+  <div id="site-footer">
+    <button id="btn-left">←</button>
+    <button id="btn-jump">↑</button>
+    <button id="btn-right">→</button>
+  </div>
+  <div id="footer-hint">← → moverse · ↑ saltar</div>
 
-  </body>
+  <!-- 1. datos -->
+  <script src="js/cronograma-data.js"></script>
+
+  <!-- 2. generar edificios desde datos -->
+  <script>
+    (function () {
+      const world  = document.getElementById('world');
+      const player = document.getElementById('player');
+      CRONOGRAMA.forEach(d => {
+        const bld = document.createElement('div');
+        bld.className    = 'bld';
+        bld.dataset.left = d.left;
+        bld.dataset.w    = d.w;
+        bld.dataset.h    = d.h;
+        if (d.wb)  bld.dataset.wb   = d.wb;
+        bld.dataset.year = d.year;
+        bld.dataset.es   = d.es;
+        bld.dataset.body = d.body;
+        if (d.img) bld.dataset.img  = d.img;
+        bld.innerHTML = '<div class="block"></div><div class="bld-year"></div>';
+        world.insertBefore(bld, player);
+      });
+    })();
+  </script>
+
+  <!-- 3. lógica -->
+  <script src="js/cronograma.js"></script>
+  <script src="js/menu.js"></script>
+</body>
 </html>
