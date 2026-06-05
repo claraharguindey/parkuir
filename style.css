@@ -287,7 +287,6 @@ footer {
   pointer-events: none;
 }
 
-/* ── PÁGINAS INTERIORES ── */
 .interior body {
   height: auto;
   overflow: auto;
@@ -295,7 +294,6 @@ footer {
   color: var(--ink);
 }
 
-/* ── RESPONSIVE INDEX ── */
 @media (max-width: 768px) {
   body { height: 100dvh; }
 
@@ -348,7 +346,6 @@ footer {
   .img-wrap, #cam-wrap { height: 75%; }
 }
 
-/* ── RESPONSIVE MOBILE ── */
 @media (max-width: 768px) {
   body { height: auto; overflow-y: auto; overflow-x: hidden; }
 

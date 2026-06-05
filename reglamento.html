@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PARKUIR — Reglamento</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      body {
+        height: 100vh;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* ── BANDA TÍTULO ── */
+      .reglamento-band {
+        flex-shrink: 0;
+        background: var(--cream);
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        padding: 0.4rem 2rem 1rem;
+        height: clamp(80px, 12vw, 160px);
+      }
+      .reglamento-band h1 {
+        font-family: "BebasNeue", sans-serif;
+        font-size: clamp(2.5rem, 9vw, 8rem);
+        color: var(--pink);
+        line-height: 1;
+        letter-spacing: 0.01em;
+        text-transform: uppercase;
+      }
+
+      /* ── GRID 2 COLUMNAS ── */
+      #reglamento-grid {
+        flex: 1;
+        display: grid;
+        grid-template-columns: 280px 1fr;
+        overflow: hidden;
+        min-height: 0;
+      }
+
+      /* ── COL IZQUIERDA — botones ── */
+      #reglamento-nav {
+        padding: 2rem 1.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.8rem;
+        overflow-y: auto;
+      }
+
+      .reg-btn {
+        display: block;
+        font-family: "BebasNeue", sans-serif;
+        font-size: clamp(1.3rem, 2vw, 1.8rem);
+        color: white;
+        background: var(--pink);
+        border: none;
+        border-radius: 999px;
+        padding: 0.5rem 1.4rem;
+        cursor: pointer;
+        text-align: left;
+        letter-spacing: 0.01em;
+        transition:
+          background 0.15s,
+          transform 0.1s;
+        white-space: nowrap;
+      }
+      .reg-btn:hover {
+        transform: scale(1.02);
+      }
+      .reg-btn.active {
+        background: var(--orange, #fd7145);
+      }
+
+      /* ── COL DERECHA — texto ── */
+      #reglamento-text {
+        padding: 2rem 2.5rem 2rem 1.5rem;
+        overflow-y: auto;
+      }
+
+      .reg-section {
+        display: none;
+      }
+      .reg-section.active {
+        display: block;
+      }
+
+      .reg-section h2 {
+        font-family: "Outreque", sans-serif;
+        font-size: 0.65rem;
+        text-transform: uppercase;
+        letter-spacing: 0.18em;
+        opacity: 0.45;
+        margin-bottom: 1.2rem;
+        color: var(--ink);
+      }
+
+      .reg-section p {
+        font-family: "Outreque", sans-serif;
+        font-size: 0.9rem;
+        line-height: 1.8;
+        color: var(--ink);
+        margin-bottom: 1rem;
+      }
+      .reg-section p:last-child {
+        margin-bottom: 0;
+      }
+
+      /* ── BOTÓN PUBLICACIÓN ── */
+      #btn-publicacion {
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        font-family: "BebasNeue", sans-serif;
+        font-size: clamp(1.2rem, 2vw, 1.8rem);
+        color: white;
+        background: var(--pink);
+        border: none;
+        border-radius: 999px;
+        padding: 0.6rem 1.8rem;
+        cursor: pointer;
+        letter-spacing: 0.02em;
+        z-index: 20;
+        transition:
+          background 0.15s,
+          transform 0.1s;
+      }
+      #btn-publicacion:hover {
+        background: var(--orange, #fd7145);
+        transform: scale(1.03);
+      }
+
+      /* ── MOBILE ── */
+      @media (max-width: 768px) {
+        body {
+          height: auto;
+          overflow-y: auto;
+        }
+        #reglamento-grid {
+          grid-template-columns: 1fr;
+          overflow: visible;
+          height: auto;
+        }
+        #reglamento-nav {
+          padding: 1.2rem 1rem 0;
+          flex-direction: row;
+          flex-wrap: wrap;
+          gap: 0.5rem;
+        }
+        .reg-btn {
+          font-size: 1rem;
+          padding: 0.35rem 0.9rem;
+        }
+        #reglamento-text {
+          padding: 1.2rem 1rem 5rem;
+        }
+        #btn-publicacion {
+          bottom: 1rem;
+          right: 1rem;
+          font-size: 1.1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <a href="/">parkuir</a>
+      <button id="menu-toggle" aria-label="Abrir menú">☰</button>
+      <nav id="main-nav">
+        <a href="/about.html">qué es parkuir</a>
+        <a href="/cronograma.html">línea del tiempo</a>
+        <a href="/reglamento.html">reglamento</a>
+        <a href="/jugadorxs.html">jugadorxs</a>
+        <a href="/equipacion.html">equipación</a>
+        <a href="#">archivo</a>
+      </nav>
+    </header>
+    <div class="reglamento-band">
+      <h1>Reglamento</h1>
+    </div>
+
+    <div id="reglamento-grid">
+      <!-- COLUMNA IZQUIERDA — índice -->
+      <nav id="reglamento-nav">
+        <button class="reg-btn active" onclick="showSection('deporte', this)">
+          A. deporte
+        </button>
+        <button class="reg-btn" onclick="showSection('cuir', this)">
+          B. lo Cuir
+        </button>
+        <button class="reg-btn" onclick="showSection('gordo', this)">
+          D. gordo
+        </button>
+        <button class="reg-btn" onclick="showSection('crip', this)">
+          E. tullido/Crip
+        </button>
+      </nav>
+
+      <!-- COLUMNA DERECHA — contenido -->
+      <div id="reglamento-text">
+        <div class="reg-section active" id="sec-deporte">
+          <h2>A. Deporte</h2>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat.
+          </p>
+          <p>
+            Duis aute irure dolor in reprehenderit in voluptate velit esse
+            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+            cupidatat non proident, sunt in culpa qui officia deserunt mollit
+            anim id est laborum.
+          </p>
+          <p>
+            Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+            accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
+            quae ab illo inventore veritatis et quasi architecto beatae vitae
+            dicta sunt explicabo.
+          </p>
+          <p>
+            Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut
+            fugit, sed quia consequuntur magni dolores eos qui ratione
+            voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem
+            ipsum quia dolor sit amet.
+          </p>
+        </div>
+
+        <div class="reg-section" id="sec-cuir">
+          <h2>B. Lo Cuir</h2>
+          <p>
+            At vero eos et accusamus et iusto odio dignissimos ducimus qui
+            blanditiis praesentium voluptatum deleniti atque corrupti quos
+            dolores et quas molestias excepturi sint occaecati cupiditate non
+            provident.
+          </p>
+          <p>
+            Similique sunt in culpa qui officia deserunt mollitia animi, id est
+            laborum et dolorum fuga. Et harum quidem rerum facilis est et
+            expedita distinctio. Nam libero tempore, cum soluta nobis est
+            eligendi optio cumque nihil impedit quo minus.
+          </p>
+          <p>
+            Temporibus autem quibusdam et aut officiis debitis aut rerum
+            necessitatibus saepe eveniet ut et voluptates repudiandae sint et
+            molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente
+            delectus.
+          </p>
+        </div>
+
+        <div class="reg-section" id="sec-gordo">
+          <h2>D. Gordo</h2>
+          <p>
+            Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse
+            quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat
+            quo voluptas nulla pariatur? Lorem ipsum dolor sit amet consectetur.
+          </p>
+          <p>
+            Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis
+            suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis
+            autem vel eum iure reprehenderit qui in ea voluptate velit.
+          </p>
+          <p>
+            Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil
+            impedit quo minus id quod maxime placeat facere possimus, omnis
+            voluptas assumenda est, omnis dolor repellendus.
+          </p>
+          <p>
+            Temporibus autem quibusdam et aut officiis debitis aut rerum
+            necessitatibus saepe eveniet ut et voluptates repudiandae sint et
+            molestiae non recusandae itaque earum rerum.
+          </p>
+        </div>
+
+        <div class="reg-section" id="sec-crip">
+          <h2>E. Tullido/Crip</h2>
+          <p>
+            Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+            accusantium doloremque laudantium. Totam rem aperiam eaque ipsa quae
+            ab illo inventore veritatis et quasi architecto beatae vitae dicta
+            sunt explicabo nemo.
+          </p>
+          <p>
+            Enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut
+            fugit, sed quia consequuntur magni dolores eos qui ratione
+            voluptatem sequi nesciunt. Ut labore et dolore magnam aliquam
+            quaerat voluptatem.
+          </p>
+          <p>
+            Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis
+            suscipit laboriosam nisi ut aliquid ex ea commodi consequatur vel
+            illum dolorem eum fugiat quo voluptas.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <button id="btn-publicacion">publicación</button>
+
+    <script>
+      function showSection(id, btn) {
+        document
+          .querySelectorAll(".reg-section")
+          .forEach((s) => s.classList.remove("active"));
+        document.getElementById("sec-" + id).classList.add("active");
+        document
+          .querySelectorAll(".reg-btn")
+          .forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+      }
+    </script>
+    <script src="js/menu.js"></script>
+
+  </body>
+</html>

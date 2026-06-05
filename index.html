@@ -1,129 +1,136 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PARKUIR</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+    <script src="https://unpkg.com/ml5@1/dist/ml5.min.js"></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PARKUIR</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
-  <script src="https://unpkg.com/ml5@1/dist/ml5.min.js"></script>
-  <link rel="stylesheet" href="style.css">
-</head>
+  <body>
+    <header>
+      <a href="/">parkuir</a>
+      <button id="menu-toggle" aria-label="Abrir menú">☰</button>
+      <nav id="main-nav">
+        <a href="/about.html">qué es parkuir</a>
+        <a href="/cronograma.html">línea del tiempo</a>
+        <a href="/reglamento.html">reglamento</a>
+        <a href="/jugadorxs.html">jugadorxs</a>
+        <a href="/equipacion.html">equipación</a>
+        <a href="#">archivo</a>
+      </nav>
+    </header>
 
-<body>
+    <div class="top-band"></div>
 
-  <header>
-    <a href="/">parkuir</a>
-    <button id="menu-toggle" aria-label="Abrir menú">☰</button>
-    <nav id="main-nav">
-      <a href="/about.html">qué es parkuir</a>
-      <a href="/cronograma.html">línea del tiempo</a>
-      <a href="#">reglamento</a>
-      <a href="#">jugadorxs</a>
-      <a href="/equipacion.html">equipación</a>
-      <a href="#">archivo</a>
-    </nav>
-  </header>
+    <main>
+      <!-- fila 1: PAR [foto] KUIR [foto] -->
+      <div class="row">
+        <span>PAR</span>
+        <div class="img-wrap"><img src="./images/parkuir-2.jpg" alt="" /></div>
+        <span>KUIR</span>
+        <div class="img-wrap"><img src="./images/parkuir-3.jpg" alt="" /></div>
+      </div>
 
-  <div class="top-band"></div>
+      <!-- fila 2: DEPOR [cam] TE -->
+      <div class="row">
+        <span>DEPOR</span>
+        <div id="cam-wrap"></div>
+        <span>TE</span>
+      </div>
 
-  <main>
+      <!-- fila 3: SUB [foto] VERSIVO -->
+      <div class="row">
+        <span>SUB</span>
+        <div class="img-wrap"><img src="./images/parkuir-4.png" alt="" /></div>
+        <span>VERSIVO</span>
+      </div>
+    </main>
 
-    <!-- fila 1: PAR [foto] KUIR [foto] -->
-    <div class="row">
-      <span>PAR</span>
-      <div class="img-wrap"><img src="./images/parkuir-2.jpg" alt=""></div>
-      <span>KUIR</span>
-      <div class="img-wrap"><img src="./images/parkuir-3.jpg" alt=""></div>
-    </div>
+    <script>
+      new p5(function (p) {
+        let capture,
+          bodyPose,
+          poses = [];
 
-    <!-- fila 2: DEPOR [cam] TE -->
-    <div class="row">
-      <span>DEPOR</span>
-      <div id="cam-wrap"></div>
-      <span>TE</span>
-    </div>
+        const CONNECTIONS = [
+          [5, 6],
+          [5, 7],
+          [7, 9],
+          [6, 8],
+          [8, 10],
+          [5, 11],
+          [6, 12],
+          [11, 12],
+          [11, 13],
+          [13, 15],
+          [12, 14],
+          [14, 16],
+        ];
 
-    <!-- fila 3: SUB [foto] VERSIVO -->
-    <div class="row">
-      <span>SUB</span>
-      <div class="img-wrap"><img src="./images/parkuir-4.png" alt=""></div>
-      <span>VERSIVO</span>
-    </div>
+        p.setup = function () {
+          const wrap = document.getElementById("cam-wrap");
+          const cnv = p.createCanvas(
+            wrap.offsetWidth || 240,
+            wrap.offsetHeight || 180,
+          );
+          cnv.parent("cam-wrap");
+          capture = p.createCapture(p.VIDEO);
+          capture.size(320, 240);
+          capture.hide();
+          bodyPose = ml5.bodyPose("MoveNet", { flipped: true }, () => {
+            bodyPose.detectStart(capture, (r) => {
+              poses = r;
+            });
+          });
+        };
 
-  </main>
+        p.draw = function () {
+          p.background(0);
 
+          p.push();
+          p.translate(p.width, 0);
+          p.scale(-1, 1);
+          p.filter(p.GRAY);
+          p.image(capture, 0, 0, p.width, p.height);
+          p.pop();
 
-  <script>
-    new p5(function (p) {
-      let capture, bodyPose, poses = [];
+          if (!poses.length) return;
+          const kps = poses[0].keypoints;
+          const sx = p.width / 320,
+            sy = p.height / 240;
+          const sc = (kp) => ({ x: kp.x * sx, y: kp.y * sy });
 
-      const CONNECTIONS = [
-        [5, 6], [5, 7], [7, 9], [6, 8], [8, 10],
-        [5, 11], [6, 12], [11, 12],
-        [11, 13], [13, 15], [12, 14], [14, 16]
-      ];
+          p.stroke(255, 255, 255, 210);
+          p.strokeWeight(1.5);
+          p.noFill();
+          CONNECTIONS.forEach(([a, b]) => {
+            if (kps[a]?.confidence > 0.2 && kps[b]?.confidence > 0.2) {
+              const A = sc(kps[a]),
+                B = sc(kps[b]);
+              p.line(A.x, A.y, B.x, B.y);
+            }
+          });
 
-      p.setup = function () {
-        const wrap = document.getElementById('cam-wrap');
-        const cnv = p.createCanvas(wrap.offsetWidth || 240, wrap.offsetHeight || 180);
-        cnv.parent('cam-wrap');
-        capture = p.createCapture(p.VIDEO);
-        capture.size(320, 240);
-        capture.hide();
-        bodyPose = ml5.bodyPose('MoveNet', { flipped: true }, () => {
-          bodyPose.detectStart(capture, r => { poses = r; });
-        });
-      };
+          p.noStroke();
+          p.fill(255, 255, 255, 230);
+          [1, 2, 3, 4, 9, 10].forEach((i) => {
+            if (kps[i]?.confidence > 0.25) {
+              const s = sc(kps[i]);
+              p.ellipse(s.x, s.y, 5, 5);
+            }
+          });
+        };
 
-      p.draw = function () {
-        p.background(0);
-
-        p.push();
-        p.translate(p.width, 0); p.scale(-1, 1);
-        p.filter(p.GRAY);
-        p.image(capture, 0, 0, p.width, p.height);
-        p.pop();
-
-        if (!poses.length) return;
-        const kps = poses[0].keypoints;
-        const sx = p.width / 320, sy = p.height / 240;
-        const sc = kp => ({ x: kp.x * sx, y: kp.y * sy });
-
-        p.stroke(255, 255, 255, 210); p.strokeWeight(1.5); p.noFill();
-        CONNECTIONS.forEach(([a, b]) => {
-          if (kps[a]?.confidence > 0.2 && kps[b]?.confidence > 0.2) {
-            const A = sc(kps[a]), B = sc(kps[b]);
-            p.line(A.x, A.y, B.x, B.y);
-          }
-        });
-
-        p.noStroke(); p.fill(255, 255, 255, 230);
-        [1, 2, 3, 4, 9, 10].forEach(i => {
-          if (kps[i]?.confidence > 0.25) {
-            const s = sc(kps[i]);
-            p.ellipse(s.x, s.y, 5, 5);
-          }
-        });
-      };
-
-      p.windowResized = function () {
-        const wrap = document.getElementById('cam-wrap');
-        p.resizeCanvas(wrap.offsetWidth, wrap.offsetHeight);
-      };
-    });
-  </script>
-
-  <script>
-    const menuBtn = document.getElementById('menu-toggle');
-    const nav = document.getElementById('main-nav');
-    if (menuBtn && nav) {
-      menuBtn.addEventListener('click', () => nav.classList.toggle('open'));
-      document.addEventListener('click', e => {
-        if (!nav.contains(e.target) && !menuBtn.contains(e.target)) nav.classList.remove('open');
+        p.windowResized = function () {
+          const wrap = document.getElementById("cam-wrap");
+          p.resizeCanvas(wrap.offsetWidth, wrap.offsetHeight);
+        };
       });
-    }
-  </script>
-</body>
+    </script>
 
+    <script src="js/menu.js"></script>
+  </body>
 </html>
