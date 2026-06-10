@@ -1,703 +1,932 @@
 <!doctype html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PARKUIR — Equipación</title>
-  <link rel="stylesheet" href="style.css" />
-  <style>
-  body {
-    height: auto;
-    overflow-y: auto;
-    overflow-x: hidden;
-    display: flex;
-    flex-direction: column;
-  }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PARKUIR — Equipación</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      body {
+        height: auto;
+        overflow-y: auto;
+        overflow-x: hidden;
+        display: flex;
+        flex-direction: column;
+      }
 
-  /* ── BANDA ── */
-  .equip-band {
-    flex-shrink: 0;
-    background: var(--cream);
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    padding: 0.4rem 2rem 1rem;
-    height: clamp(80px, 12vw, 160px);
-  }
-  .equip-band h1 {
-    font-family: "BebasNeue", sans-serif;
-    font-size: clamp(2.5rem, 9vw, 8rem);
-    color: var(--pink);
-    line-height: 1;
-    text-transform: uppercase;
-  }
+      /* ── BANDA ── */
+      .equip-band {
+        flex-shrink: 0;
+        background: var(--cream);
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        padding: 0.4rem 2rem 1rem;
+        height: clamp(80px, 12vw, 160px);
+      }
+      .equip-band h1 {
+        font-family: "BebasNeue", sans-serif;
+        font-size: clamp(2.5rem, 9vw, 8rem);
+        color: var(--pink);
+        line-height: 1;
+        text-transform: uppercase;
+      }
 
-  /* ── LAYOUT ── */
-  .equip-main {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-    padding: 2rem 2.5rem 3rem;
-    max-width: 1100px;
-    margin: 0 auto;
-    width: 100%;
-    align-items: start;
-  }
+      /* ── LAYOUT ── */
+      .equip-main {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        padding: 2rem 2.5rem 3rem;
+        max-width: 1100px;
+        margin: 0 auto;
+        width: 100%;
+        align-items: start;
+      }
 
-  /* ── PANEL IZQUIERDO ── */
-  .left-panel {
-    display: grid;
-    grid-template-columns: 52px 1fr;
-    gap: 1rem;
-    align-items: start;
-  }
+      /* ── PANEL IZQUIERDO ── */
+      .left-panel {
+        display: grid;
+        grid-template-columns: 52px 1fr;
+        gap: 1rem;
+        align-items: start;
+      }
 
-  .tools-sidebar {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.3rem;
-  }
-  .tools-label {
-    font-family: "BebasNeue", sans-serif;
-    font-size: 0.65rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--ink);
-    margin-bottom: 0.2rem;
-    align-self: flex-start;
-  }
-  .tool-btn {
-    width: 38px; height: 38px;
-    border-radius: 50%;
-    border: none;
-    background: none;
-    cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    transition: background 0.15s;
-    color: var(--ink);
-    font-size: 1.1rem;
-  }
-  .tool-btn:hover  { background: rgba(255,255,255,0.3); }
-  .tool-btn.active { background: rgba(255,255,255,0.5); }
-  .dot { display: block; border-radius: 50%; background: var(--ink); pointer-events: none; }
+      .tools-sidebar {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.3rem;
+      }
+      .tools-label {
+        font-family: "BebasNeue", sans-serif;
+        font-size: 0.65rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--ink);
+        margin-bottom: 0.2rem;
+        align-self: flex-start;
+      }
+      .tool-btn {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        border: none;
+        background: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.15s;
+        color: var(--ink);
+        font-size: 1.1rem;
+      }
+      .tool-btn:hover {
+        background: rgba(255, 255, 255, 0.3);
+      }
+      .tool-btn.active {
+        background: rgba(255, 255, 255, 0.5);
+      }
+      .dot {
+        display: block;
+        border-radius: 50%;
+        background: var(--ink);
+        pointer-events: none;
+      }
 
-  /* ── CAMISETA ── */
-  .shirt-area {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-  .shirt-container {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 1;
-  }
-  /* PNG de la camiseta encima del canvas */
-  .shirt-img {
-    position: absolute;
-    inset: 0;
-    width: 100%; height: 100%;
-    object-fit: contain;
-    pointer-events: none;
-    z-index: 1;
-  }
-  #paintCanvas {
-    position: absolute;
-    inset: 0;
-    width: 100%; height: 100%;
-    z-index: 2;
-    cursor: crosshair;
-    /* fondo transparente — la camiseta se ve debajo */
-  }
+      /* ── CAMISETA ── */
+      .shirt-area {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .shirt-container {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 1;
+      }
+      /* PNG de la camiseta encima del canvas */
+      .shirt-img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        pointer-events: none;
+        z-index: 1;
+      }
+      #paintCanvas {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 2;
+        cursor: crosshair;
+        /* fondo transparente — la camiseta se ve debajo */
+      }
 
-  /* ── PALETA ── */
-  .palette-area { display: flex; flex-direction: column; gap: 0.4rem; }
-  .colors-label {
-    font-family: "BebasNeue", sans-serif;
-    font-size: 0.65rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--ink);
-  }
-  .palette-rows { display: flex; flex-direction: column; gap: 0.4rem; }
-  .palette-row  { display: flex; gap: 0.45rem; align-items: center; flex-wrap: wrap; }
-  .color-btn {
-    width: 40px; height: 40px;
-    border-radius: 50%;
-    border: 2.5px solid transparent;
-    cursor: pointer;
-    transition: transform 0.15s, border-color 0.15s;
-    flex-shrink: 0;
-  }
-  .color-btn:hover  { transform: scale(1.1); }
-  .color-btn.active { border-color: var(--ink); transform: scale(1.08); }
+      /* ── PALETA ── */
+      .palette-area {
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+      }
+      .colors-label {
+        font-family: "BebasNeue", sans-serif;
+        font-size: 0.65rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--ink);
+      }
+      .palette-rows {
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+      }
+      .palette-row {
+        display: flex;
+        gap: 0.45rem;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      .color-btn {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: 2.5px solid transparent;
+        cursor: pointer;
+        transition:
+          transform 0.15s,
+          border-color 0.15s;
+        flex-shrink: 0;
+      }
+      .color-btn:hover {
+        transform: scale(1.1);
+      }
+      .color-btn.active {
+        border-color: var(--ink);
+        transform: scale(1.08);
+      }
 
-  .action-col {
-    display: flex; flex-direction: column; gap: 0.35rem; margin-left: 0.3rem;
-  }
-  .btn-action {
-    font-family: "BebasNeue", sans-serif;
-    font-size: 0.8rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    background: rgba(255,255,255,0.5);
-    border: 1.5px solid rgba(0,0,0,0.1);
-    border-radius: 999px;
-    padding: 0.28rem 0.9rem;
-    cursor: pointer;
-    transition: background 0.15s;
-    white-space: nowrap;
-    color: var(--ink);
-  }
-  .btn-action:hover { background: rgba(255,255,255,0.8); }
+      .action-col {
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
+        margin-left: 0.3rem;
+      }
+      .btn-action {
+        font-family: "BebasNeue", sans-serif;
+        font-size: 0.8rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        background: rgba(255, 255, 255, 0.5);
+        border: 1.5px solid rgba(0, 0, 0, 0.1);
+        border-radius: 999px;
+        padding: 0.28rem 0.9rem;
+        cursor: pointer;
+        transition: background 0.15s;
+        white-space: nowrap;
+        color: var(--ink);
+      }
+      .btn-action:hover {
+        background: rgba(255, 255, 255, 0.8);
+      }
 
-  /* ── PANEL DERECHO ── */
-  .right-panel {
-    background: var(--pink);
-    border-radius: 18px;
-    padding: 1.2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.9rem;
-  }
-  .field-nombre {
-    background: var(--pink);
-    border: 2px solid rgba(255,255,255,0.45);
-    border-radius: 12px;
-    padding: 0.85rem 1.2rem;
-  }
-  .field-nombre input {
-    width: 100%; background: transparent; border: none; outline: none;
-    font-family: "BebasNeue", sans-serif;
-    font-size: 1rem; letter-spacing: 0.12em; text-transform: uppercase;
-    color: rgba(255,255,255,0.65);
-  }
-  .field-nombre input::placeholder { color: rgba(255,255,255,0.45); }
+      /* ── PANEL DERECHO ── */
+      .right-panel {
+        background: var(--pink);
+        border-radius: 18px;
+        padding: 1.2rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.9rem;
+      }
+      .field-nombre {
+        background: var(--pink);
+        border: 2px solid rgba(255, 255, 255, 0.45);
+        border-radius: 12px;
+        padding: 0.85rem 1.2rem;
+      }
+      .field-nombre input {
+        width: 100%;
+        background: transparent;
+        border: none;
+        outline: none;
+        font-family: "BebasNeue", sans-serif;
+        font-size: 1rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.65);
+      }
+      .field-nombre input::placeholder {
+        color: rgba(255, 255, 255, 0.45);
+      }
 
-  .field-desc {
-    background: var(--cream);
-    border-radius: 12px;
-    padding: 0.9rem 1.2rem;
-    flex: 1;
-  }
-  .field-desc-label {
-    font-family: "BebasNeue", sans-serif;
-    font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase;
-    color: var(--pink); margin-bottom: 0.4rem;
-  }
-  .field-desc textarea {
-    width: 100%; min-height: 200px;
-    background: transparent; border: none; outline: none; resize: none;
-    font-family: "Outreque", sans-serif;
-    font-size: 0.9rem; color: var(--ink);
-  }
-  .field-desc textarea::placeholder { color: rgba(0,0,0,0.3); }
+      .field-desc {
+        background: var(--cream);
+        border-radius: 12px;
+        padding: 0.9rem 1.2rem;
+        flex: 1;
+      }
+      .field-desc-label {
+        font-family: "BebasNeue", sans-serif;
+        font-size: 0.7rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--pink);
+        margin-bottom: 0.4rem;
+      }
+      .field-desc textarea {
+        width: 100%;
+        min-height: 200px;
+        background: transparent;
+        border: none;
+        outline: none;
+        resize: none;
+        font-family: "Outreque", sans-serif;
+        font-size: 0.9rem;
+        color: var(--ink);
+      }
+      .field-desc textarea::placeholder {
+        color: rgba(0, 0, 0, 0.3);
+      }
 
-  .submit-row { display: flex; gap: 0.6rem; align-items: center; }
-  .btn-x {
-    width: 48px; height: 48px; border-radius: 50%;
-    background: var(--orange, #fd7145);
-    border: none; color: white;
-    font-family: "BebasNeue", sans-serif;
-    font-size: 1.1rem; cursor: pointer; flex-shrink: 0;
-    transition: opacity 0.15s;
-  }
-  .btn-x:hover { opacity: 0.85; }
-  .btn-submit {
-    flex: 1; background: #ffb0d0; border: none; border-radius: 12px;
-    padding: 0.85rem 1.5rem;
-    font-family: "BebasNeue", sans-serif;
-    font-size: 1.1rem; letter-spacing: 0.04em; text-transform: lowercase;
-    color: var(--ink); cursor: pointer; transition: background 0.15s;
-  }
-  .btn-submit:hover { background: #ff90c0; }
+      .submit-row {
+        display: flex;
+        gap: 0.6rem;
+        align-items: center;
+      }
+      .btn-x {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background: var(--orange, #fd7145);
+        border: none;
+        color: white;
+        font-family: "BebasNeue", sans-serif;
+        font-size: 1.1rem;
+        cursor: pointer;
+        flex-shrink: 0;
+        transition: opacity 0.15s;
+      }
+      .btn-x:hover {
+        opacity: 0.85;
+      }
+      .btn-submit {
+        flex: 1;
+        background: #ffb0d0;
+        border: none;
+        border-radius: 12px;
+        padding: 0.85rem 1.5rem;
+        font-family: "BebasNeue", sans-serif;
+        font-size: 1.1rem;
+        letter-spacing: 0.04em;
+        text-transform: lowercase;
+        color: var(--ink);
+        cursor: pointer;
+        transition: background 0.15s;
+      }
+      .btn-submit:hover {
+        background: #ff90c0;
+      }
 
-  /* ── GALERÍA ── */
-  .gallery-section {
-    padding: 0 2.5rem 3rem;
-    max-width: 1100px; margin: 0 auto; width: 100%;
-  }
-  .gallery-container {
-    background: var(--pink);
-    border-radius: 18px;
-    padding: 2rem;
-  }
-  .gallery-empty {
-    font-family: "Outreque", sans-serif;
-    font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em;
-    color: rgba(255,255,255,0.5);
-    padding: 1rem 0;
-  }
-  .gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1.5rem;
-  }
-  .shirt-card {
-    cursor: pointer;
-    transition: transform 0.15s;
-  }
-  .shirt-card:hover { transform: translateY(-3px); }
-  .shirt-card img {
-    width: 100%; aspect-ratio: 1;
-    object-fit: contain; display: block;
-  }
-  .shirt-card .card-title {
-    font-family: "Outreque", sans-serif;
-    font-size: 0.85rem; font-weight: 700;
-    margin-top: 0.7rem;
-    color: var(--cream);
-  }
-  .shirt-card .card-desc {
-    font-family: "Outreque", sans-serif;
-    font-size: 0.78rem; line-height: 1.5;
-    color: rgba(255,255,255,0.8);
-    margin-top: 0.3rem;
-    display: -webkit-box;
-    -webkit-line-clamp: 5;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
+      /* ── GALERÍA ── */
+      .gallery-section {
+        padding: 0 2.5rem 3rem;
+        max-width: 1100px;
+        margin: 0 auto;
+        width: 100%;
+      }
+      .gallery-container {
+        background: var(--pink);
+        border-radius: 18px;
+        padding: 2rem;
+      }
+      .gallery-empty {
+        font-family: "Outreque", sans-serif;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: rgba(255, 255, 255, 0.5);
+        padding: 1rem 0;
+      }
+      .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.5rem;
+      }
+      .shirt-card {
+        cursor: pointer;
+        transition: transform 0.15s;
+      }
+      .shirt-card:hover {
+        transform: translateY(-3px);
+      }
+      .shirt-card img {
+        width: 100%;
+        aspect-ratio: 1;
+        object-fit: contain;
+        display: block;
+      }
+      .shirt-card .card-title {
+        font-family: "Outreque", sans-serif;
+        font-size: 0.85rem;
+        font-weight: 700;
+        margin-top: 0.7rem;
+        color: var(--cream);
+      }
+      .shirt-card .card-desc {
+        font-family: "Outreque", sans-serif;
+        font-size: 0.78rem;
+        line-height: 1.5;
+        color: rgba(255, 255, 255, 0.8);
+        margin-top: 0.3rem;
+        display: -webkit-box;
+        -webkit-line-clamp: 5;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
 
-  @media (max-width: 900px) {
-    .gallery-grid { grid-template-columns: repeat(2,1fr); }
-  }
-  @media (max-width: 480px) {
-    .gallery-grid { grid-template-columns: 1fr; }
-    .gallery-container { padding: 1.2rem; }
-  }
+      @media (max-width: 900px) {
+        .gallery-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 480px) {
+        .gallery-grid {
+          grid-template-columns: 1fr;
+        }
+        .gallery-container {
+          padding: 1.2rem;
+        }
+      }
 
-  /* ── MODAL ── */
-  .modal-overlay {
-    display: none; position: fixed; inset: 0;
-    background: rgba(26,26,26,0.7); z-index: 100;
-    align-items: center; justify-content: center; backdrop-filter: blur(6px);
-  }
-  .modal-overlay.open { display: flex; }
-  .modal-box {
-    background: var(--cream); border-radius: 18px; padding: 2rem;
-    max-width: 360px; width: 90%; position: relative;
-  }
-  .modal-close {
-    position: absolute; top: 0.8rem; right: 1rem;
-    background: none; border: none; font-size: 1.4rem; cursor: pointer; color: var(--ink);
-  }
-  .modal-img { width: 100%; display: block; margin-bottom: 1rem; }
-  .modal-num {
-    font-family: "BebasNeue", sans-serif;
-    font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase;
-    opacity: 0.4; margin-bottom: 0.2rem;
-  }
-  .modal-title {
-    font-family: "BebasNeue", sans-serif;
-    font-size: 2rem; letter-spacing: 0.05em; color: var(--pink);
-  }
-  .modal-desc {
-    font-family: "Outreque", sans-serif;
-    font-size: 0.9rem; opacity: 0.7; margin-top: 0.5rem; line-height: 1.6; color: var(--ink);
-  }
+      /* ── MODAL ── */
+      .modal-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(26, 26, 26, 0.7);
+        z-index: 100;
+        align-items: center;
+        justify-content: center;
+        backdrop-filter: blur(6px);
+      }
+      .modal-overlay.open {
+        display: flex;
+      }
+      .modal-box {
+        background: var(--cream);
+        border-radius: 18px;
+        padding: 2rem;
+        max-width: 360px;
+        width: 90%;
+        position: relative;
+      }
+      .modal-close {
+        position: absolute;
+        top: 0.8rem;
+        right: 1rem;
+        background: none;
+        border: none;
+        font-size: 1.4rem;
+        cursor: pointer;
+        color: var(--ink);
+      }
+      .modal-img {
+        width: 100%;
+        display: block;
+        margin-bottom: 1rem;
+      }
+      .modal-num {
+        font-family: "BebasNeue", sans-serif;
+        font-size: 0.65rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        opacity: 0.4;
+        margin-bottom: 0.2rem;
+      }
+      .modal-title {
+        font-family: "BebasNeue", sans-serif;
+        font-size: 2rem;
+        letter-spacing: 0.05em;
+        color: var(--pink);
+      }
+      .modal-desc {
+        font-family: "Outreque", sans-serif;
+        font-size: 0.9rem;
+        opacity: 0.7;
+        margin-top: 0.5rem;
+        line-height: 1.6;
+        color: var(--ink);
+      }
 
-  @media (max-width: 768px) {
-    .equip-main { grid-template-columns: 1fr; padding: 1.2rem; }
-    .left-panel { grid-template-columns: 44px 1fr; }
-  }
-  </style>
-</head>
-<body>
+      @media (max-width: 768px) {
+        .equip-main {
+          grid-template-columns: 1fr;
+          padding: 1.2rem;
+        }
+        .left-panel {
+          grid-template-columns: 44px 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <a href="/">parkuir</a>
+      <button id="menu-toggle" aria-label="Abrir menú">☰</button>
+      <nav id="main-nav">
+        <a href="/about.html">qué es parkuir</a>
+        <a href="/cronograma.html">línea del tiempo</a>
+        <a href="/reglamento.html">reglamento</a>
+        <a href="/jugadorxs.html">jugadorxs</a>
+        <a href="/equipacion.html" style="color: var(--pink)">equipación</a>
+        <a href="#">archivo</a>
+      </nav>
+    </header>
 
-<header>
-  <a href="/">parkuir</a>
-  <button id="menu-toggle" aria-label="Abrir menú">☰</button>
-  <nav id="main-nav">
-    <a href="/about.html">qué es parkuir</a>
-    <a href="/cronograma.html">línea del tiempo</a>
-    <a href="/reglamento.html">reglamento</a>
-    <a href="/jugadorxs.html">jugadorxs</a>
-    <a href="/equipacion.html" style="color:var(--pink)">equipación</a>
-    <a href="#">archivo</a>
-  </nav>
-</header>
+    <div class="equip-band"><h1>Equipacion</h1></div>
 
-<div class="equip-band"><h1>Equipacion</h1></div>
+    <div class="equip-main">
+      <!-- IZQUIERDA -->
+      <div class="left-panel">
+        <div class="tools-sidebar">
+          <div class="tools-label">Pinceles</div>
+          <button class="tool-btn active" data-size="5" data-shape="round">
+            <span class="dot" style="width: 8px; height: 8px"></span>
+          </button>
+          <button class="tool-btn" data-size="12" data-shape="round">
+            <span class="dot" style="width: 14px; height: 14px"></span>
+          </button>
+          <button class="tool-btn" data-size="22" data-shape="round">
+            <span class="dot" style="width: 20px; height: 20px"></span>
+          </button>
+          <button class="tool-btn" data-size="16" data-shape="triangle">
+            ▼
+          </button>
+          <button class="tool-btn" data-size="16" data-shape="star">✦</button>
+        </div>
 
-<div class="equip-main">
+        <div class="shirt-area">
+          <div class="shirt-container">
+            <!-- PNG camiseta de fondo (z-index 1) -->
+            <img class="shirt-img" src="./images/camiseta.png" alt="camiseta" />
+            <!-- canvas de dibujo encima (z-index 2) -->
+            <canvas id="paintCanvas"></canvas>
+          </div>
 
-  <!-- IZQUIERDA -->
-  <div class="left-panel">
-    <div class="tools-sidebar">
-      <div class="tools-label">Pinceles</div>
-      <button class="tool-btn active" data-size="5"  data-shape="round"><span class="dot" style="width:8px;height:8px"></span></button>
-      <button class="tool-btn"        data-size="12" data-shape="round"><span class="dot" style="width:14px;height:14px"></span></button>
-      <button class="tool-btn"        data-size="22" data-shape="round"><span class="dot" style="width:20px;height:20px"></span></button>
-      <button class="tool-btn"        data-size="16" data-shape="triangle">▼</button>
-      <button class="tool-btn"        data-size="16" data-shape="star">✦</button>
-    </div>
-
-    <div class="shirt-area">
-      <div class="shirt-container">
-        <!-- PNG camiseta de fondo (z-index 1) -->
-        <img class="shirt-img" src="./images/camiseta.png" alt="camiseta">
-        <!-- canvas de dibujo encima (z-index 2) -->
-        <canvas id="paintCanvas"></canvas>
-      </div>
-
-      <div class="palette-area">
-        <div class="colors-label">Colores</div>
-        <div class="palette-rows">
-          <div class="palette-row" id="paletteRow1"></div>
-          <div style="display:flex;gap:0.5rem;align-items:flex-start">
-            <div class="palette-row" id="paletteRow2"></div>
-            <div class="action-col">
-              <button class="btn-action" id="btnEraser">Borrar</button>
-              <button class="btn-action" id="btnClear">Limpiar</button>
-              <button class="btn-action" id="btnSave">Guardar</button>
+          <div class="palette-area">
+            <div class="colors-label">Colores</div>
+            <div class="palette-rows">
+              <div class="palette-row" id="paletteRow1"></div>
+              <div style="display: flex; gap: 0.5rem; align-items: flex-start">
+                <div class="palette-row" id="paletteRow2"></div>
+                <div class="action-col">
+                  <button class="btn-action" id="btnEraser">Borrar</button>
+                  <button class="btn-action" id="btnClear">Limpiar</button>
+                  <button class="btn-action" id="btnSave">Guardar</button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
+
+      <!-- DERECHA -->
+      <div class="right-panel">
+        <div class="field-nombre">
+          <input
+            type="text"
+            id="shirtTitle"
+            placeholder="NOMBRE"
+            maxlength="60"
+          />
+        </div>
+        <div class="field-desc">
+          <div class="field-desc-label">Descripción</div>
+          <textarea
+            id="shirtDesc"
+            placeholder="Cuéntanos algo sobre tu equipación..."
+          ></textarea>
+        </div>
+        <div class="submit-row">
+          <button class="btn-x" id="btnX">✕</button>
+          <button class="btn-submit" id="btnSubmit">añadir a la liga</button>
+        </div>
+      </div>
     </div>
-  </div>
 
-  <!-- DERECHA -->
-  <div class="right-panel">
-    <div class="field-nombre">
-      <input type="text" id="shirtTitle" placeholder="NOMBRE" maxlength="60">
+    <div class="gallery-section">
+      <div class="gallery-title">Liga Parkuir</div>
+      <div class="gallery-empty" id="galleryEmpty">Todavía no hay diseños.</div>
+      <div class="gallery-grid" id="galleryGrid"></div>
     </div>
-    <div class="field-desc">
-      <div class="field-desc-label">Descripción</div>
-      <textarea id="shirtDesc" placeholder="Cuéntanos algo sobre tu equipación..."></textarea>
+
+    <div class="modal-overlay" id="modal">
+      <div class="modal-box">
+        <button class="modal-close" id="modalClose">×</button>
+        <img class="modal-img" id="modalImg" src="" alt="" />
+        <div class="modal-num" id="modalNum"></div>
+        <div class="modal-title" id="modalTitle"></div>
+        <div class="modal-desc" id="modalDesc"></div>
+        <button
+          class="btn-action"
+          id="modalId"
+          style="
+            margin-top: 1rem;
+            background: rgba(255, 55, 115, 0.15);
+            color: var(--pink);
+            border-color: var(--pink);
+          "
+        >
+          Eliminar
+        </button>
+      </div>
     </div>
-    <div class="submit-row">
-      <button class="btn-x" id="btnX">✕</button>
-      <button class="btn-submit" id="btnSubmit">añadir a la liga</button>
-    </div>
-  </div>
 
-</div>
+    <script>
+      // ── PALETA ──────────────────────────────────────────────
+      const COLORS_R1 = ["#ff3773", "#ffcce0", "#ff6ab0", "#ff88c8", "#dd44ff"];
+      const COLORS_R2 = ["#5566ff", "#ffdd44", "#44ee44", "#1a1a1a", "#882244"];
 
-<div class="gallery-section">
-  <div class="gallery-title">Liga Parkuir</div>
-  <div class="gallery-empty" id="galleryEmpty">Todavía no hay diseños.</div>
-  <div class="gallery-grid" id="galleryGrid"></div>
-</div>
+      let currentColor = "#ff3773";
+      let brushSize = 5;
+      let currentShape = "round";
+      let erasing = false;
 
-<div class="modal-overlay" id="modal">
-  <div class="modal-box">
-    <button class="modal-close" id="modalClose">×</button>
-    <img class="modal-img" id="modalImg" src="" alt="">
-    <div class="modal-num"   id="modalNum"></div>
-    <div class="modal-title" id="modalTitle"></div>
-    <div class="modal-desc"  id="modalDesc"></div>
-    <button class="btn-action" id="modalId" style="margin-top:1rem;background:rgba(255,55,115,0.15);color:var(--pink);border-color:var(--pink)">Eliminar</button>
-  </div>
-</div>
+      function buildPalette(id, colors) {
+        const el = document.getElementById(id);
+        colors.forEach((hex, i) => {
+          const btn = document.createElement("button");
+          btn.className =
+            "color-btn" + (id === "paletteRow1" && i === 0 ? " active" : "");
+          btn.style.background = hex;
+          btn.addEventListener("click", () => {
+            document
+              .querySelectorAll(".color-btn")
+              .forEach((b) => b.classList.remove("active"));
+            btn.classList.add("active");
+            currentColor = hex;
+            erasing = false;
+            document.getElementById("btnEraser").textContent = "Borrar";
+          });
+          el.appendChild(btn);
+        });
+      }
+      buildPalette("paletteRow1", COLORS_R1);
+      buildPalette("paletteRow2", COLORS_R2);
 
-<script>
-// ── PALETA ──────────────────────────────────────────────
-const COLORS_R1 = ['#ff3773','#ffcce0','#ff6ab0','#ff88c8','#dd44ff'];
-const COLORS_R2 = ['#5566ff','#ffdd44','#44ee44','#1a1a1a','#882244'];
+      // ── HERRAMIENTAS ────────────────────────────────────────
+      document.querySelectorAll(".tool-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          document
+            .querySelectorAll(".tool-btn")
+            .forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+          brushSize = parseInt(btn.dataset.size);
+          currentShape = btn.dataset.shape || "round";
+          erasing = false;
+          document.getElementById("btnEraser").textContent = "Borrar";
+        });
+      });
 
-let currentColor = '#ff3773';
-let brushSize = 5;
-let currentShape = 'round';
-let erasing = false;
+      // ── CANVAS + MÁSCARA ────────────────────────────────────
+      const canvas = document.getElementById("paintCanvas");
+      const ctx = canvas.getContext("2d");
 
-function buildPalette(id, colors) {
-  const el = document.getElementById(id);
-  colors.forEach((hex, i) => {
-    const btn = document.createElement('button');
-    btn.className = 'color-btn' + (id === 'paletteRow1' && i === 0 ? ' active' : '');
-    btn.style.background = hex;
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.color-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      currentColor = hex;
-      erasing = false;
-      document.getElementById('btnEraser').textContent = 'Borrar';
-    });
-    el.appendChild(btn);
-  });
-}
-buildPalette('paletteRow1', COLORS_R1);
-buildPalette('paletteRow2', COLORS_R2);
+      // Imagen de la camiseta para usar como máscara
+      const shirtImg = new Image();
+      shirtImg.src = "./images/camiseta.png";
 
-// ── HERRAMIENTAS ────────────────────────────────────────
-document.querySelectorAll('.tool-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.tool-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    brushSize    = parseInt(btn.dataset.size);
-    currentShape = btn.dataset.shape || 'round';
-    erasing = false;
-    document.getElementById('btnEraser').textContent = 'Borrar';
-  });
-});
+      // Offscreen canvas de máscara — solo píxeles no transparentes de la camiseta
+      let maskCanvas = null;
 
-// ── CANVAS + MÁSCARA ────────────────────────────────────
-const canvas = document.getElementById('paintCanvas');
-const ctx    = canvas.getContext('2d');
+      shirtImg.onload = () => {
+        initCanvas();
+      };
 
-// Imagen de la camiseta para usar como máscara
-const shirtImg = new Image();
-shirtImg.src = './images/camiseta.png';
+      function initCanvas() {
+        const container = canvas.parentElement;
+        const size = container.offsetWidth;
+        canvas.width = size;
+        canvas.height = size;
 
-// Offscreen canvas de máscara — solo píxeles no transparentes de la camiseta
-let maskCanvas = null;
+        // Crear máscara desde el PNG
+        maskCanvas = document.createElement("canvas");
+        maskCanvas.width = size;
+        maskCanvas.height = size;
+        const mc = maskCanvas.getContext("2d");
+        mc.drawImage(shirtImg, 0, 0, size, size);
+      }
 
-shirtImg.onload = () => {
-  initCanvas();
-};
+      window.addEventListener("resize", () => {
+        // Guardar dibujo actual
+        const tmp = document.createElement("canvas");
+        tmp.width = canvas.width;
+        tmp.height = canvas.height;
+        tmp.getContext("2d").drawImage(canvas, 0, 0);
 
-function initCanvas() {
-  const container = canvas.parentElement;
-  const size = container.offsetWidth;
-  canvas.width  = size;
-  canvas.height = size;
+        const container = canvas.parentElement;
+        const size = container.offsetWidth;
+        canvas.width = size;
+        canvas.height = size;
+        ctx.drawImage(tmp, 0, 0, size, size);
 
-  // Crear máscara desde el PNG
-  maskCanvas = document.createElement('canvas');
-  maskCanvas.width  = size;
-  maskCanvas.height = size;
-  const mc = maskCanvas.getContext('2d');
-  mc.drawImage(shirtImg, 0, 0, size, size);
-}
+        if (shirtImg.complete) {
+          maskCanvas = document.createElement("canvas");
+          maskCanvas.width = size;
+          maskCanvas.height = size;
+          maskCanvas.getContext("2d").drawImage(shirtImg, 0, 0, size, size);
+        }
+      });
 
-window.addEventListener('resize', () => {
-  // Guardar dibujo actual
-  const tmp = document.createElement('canvas');
-  tmp.width = canvas.width; tmp.height = canvas.height;
-  tmp.getContext('2d').drawImage(canvas, 0, 0);
+      // Inicializar en caso de que la imagen ya esté en caché
+      setTimeout(() => {
+        if (!maskCanvas && shirtImg.complete) initCanvas();
+      }, 200);
 
-  const container = canvas.parentElement;
-  const size = container.offsetWidth;
-  canvas.width  = size;
-  canvas.height = size;
-  ctx.drawImage(tmp, 0, 0, size, size);
+      function getPos(e) {
+        const rect = canvas.getBoundingClientRect();
+        const sx = canvas.width / rect.width;
+        const sy = canvas.height / rect.height;
+        if (e.touches)
+          return {
+            x: (e.touches[0].clientX - rect.left) * sx,
+            y: (e.touches[0].clientY - rect.top) * sy,
+          };
+        return {
+          x: (e.clientX - rect.left) * sx,
+          y: (e.clientY - rect.top) * sy,
+        };
+      }
 
-  if (shirtImg.complete) {
-    maskCanvas = document.createElement('canvas');
-    maskCanvas.width  = size;
-    maskCanvas.height = size;
-    maskCanvas.getContext('2d').drawImage(shirtImg, 0, 0, size, size);
-  }
-});
+      // Dibujar usando la máscara de la silueta de la camiseta
+      function drawMark(x, y) {
+        if (!maskCanvas) return;
 
-// Inicializar en caso de que la imagen ya esté en caché
-setTimeout(() => { if (!maskCanvas && shirtImg.complete) initCanvas(); }, 200);
+        // Crear offscreen con el trazo
+        const tmp = document.createElement("canvas");
+        tmp.width = canvas.width;
+        tmp.height = canvas.height;
+        const tc = tmp.getContext("2d");
 
-function getPos(e) {
-  const rect = canvas.getBoundingClientRect();
-  const sx = canvas.width  / rect.width;
-  const sy = canvas.height / rect.height;
-  if (e.touches) return {
-    x: (e.touches[0].clientX - rect.left) * sx,
-    y: (e.touches[0].clientY - rect.top)  * sy,
-  };
-  return {
-    x: (e.clientX - rect.left) * sx,
-    y: (e.clientY - rect.top)  * sy,
-  };
-}
+        tc.fillStyle = currentColor;
+        tc.strokeStyle = currentColor;
 
-// Dibujar usando la máscara de la silueta de la camiseta
-function drawMark(x, y) {
-  if (!maskCanvas) return;
+        if (currentShape === "triangle") {
+          const s = brushSize * 2.5;
+          tc.beginPath();
+          tc.moveTo(x, y - s);
+          tc.lineTo(x + s, y + s);
+          tc.lineTo(x - s, y + s);
+          tc.closePath();
+          tc.fill();
+        } else if (currentShape === "star") {
+          const s = brushSize * 2.5;
+          tc.beginPath();
+          for (let i = 0; i < 8; i++) {
+            const r = i % 2 === 0 ? s : s * 0.42;
+            const a = (i * Math.PI) / 4 - Math.PI / 2;
+            i === 0
+              ? tc.moveTo(x + r * Math.cos(a), y + r * Math.sin(a))
+              : tc.lineTo(x + r * Math.cos(a), y + r * Math.sin(a));
+          }
+          tc.closePath();
+          tc.fill();
+        } else {
+          tc.lineWidth = brushSize;
+          tc.lineCap = "round";
+          tc.lineJoin = "round";
+          tc.beginPath();
+          if (lastX !== null) {
+            tc.moveTo(lastX, lastY);
+            tc.lineTo(x, y);
+          } else {
+            tc.arc(x, y, brushSize / 2, 0, Math.PI * 2);
+            tc.fill();
+          }
+          tc.stroke();
+        }
 
-  // Crear offscreen con el trazo
-  const tmp = document.createElement('canvas');
-  tmp.width = canvas.width; tmp.height = canvas.height;
-  const tc = tmp.getContext('2d');
+        // Recortar por la silueta de la camiseta
+        tc.globalCompositeOperation = "destination-in";
+        tc.drawImage(maskCanvas, 0, 0);
 
-  tc.fillStyle   = currentColor;
-  tc.strokeStyle = currentColor;
+        // Pintar sobre el canvas principal
+        ctx.globalCompositeOperation = erasing
+          ? "destination-out"
+          : "source-over";
+        ctx.drawImage(tmp, 0, 0);
+        ctx.globalCompositeOperation = "source-over";
 
-  if (currentShape === 'triangle') {
-    const s = brushSize * 2.5;
-    tc.beginPath();
-    tc.moveTo(x, y - s);
-    tc.lineTo(x + s, y + s);
-    tc.lineTo(x - s, y + s);
-    tc.closePath();
-    tc.fill();
-  } else if (currentShape === 'star') {
-    const s = brushSize * 2.5;
-    tc.beginPath();
-    for (let i = 0; i < 8; i++) {
-      const r = i % 2 === 0 ? s : s * 0.42;
-      const a = (i * Math.PI) / 4 - Math.PI / 2;
-      i === 0 ? tc.moveTo(x + r*Math.cos(a), y + r*Math.sin(a))
-              : tc.lineTo(x + r*Math.cos(a), y + r*Math.sin(a));
-    }
-    tc.closePath();
-    tc.fill();
-  } else {
-    tc.lineWidth  = brushSize;
-    tc.lineCap    = 'round';
-    tc.lineJoin   = 'round';
-    tc.beginPath();
-    if (lastX !== null) {
-      tc.moveTo(lastX, lastY);
-      tc.lineTo(x, y);
-    } else {
-      tc.arc(x, y, brushSize / 2, 0, Math.PI * 2);
-      tc.fill();
-    }
-    tc.stroke();
-  }
+        lastX = x;
+        lastY = y;
+      }
 
-  // Recortar por la silueta de la camiseta
-  tc.globalCompositeOperation = 'destination-in';
-  tc.drawImage(maskCanvas, 0, 0);
+      let painting = false,
+        lastX = null,
+        lastY = null;
 
-  // Pintar sobre el canvas principal
-  ctx.globalCompositeOperation = erasing ? 'destination-out' : 'source-over';
-  ctx.drawImage(tmp, 0, 0);
-  ctx.globalCompositeOperation = 'source-over';
+      canvas.addEventListener("mousedown", (e) => {
+        painting = true;
+        lastX = null;
+        drawMark(...Object.values(getPos(e)));
+      });
+      canvas.addEventListener("mousemove", (e) => {
+        if (!painting) return;
+        drawMark(...Object.values(getPos(e)));
+      });
+      canvas.addEventListener("mouseup", () => {
+        painting = false;
+        lastX = null;
+      });
+      canvas.addEventListener("mouseleave", () => {
+        painting = false;
+        lastX = null;
+      });
+      canvas.addEventListener(
+        "touchstart",
+        (e) => {
+          e.preventDefault();
+          painting = true;
+          lastX = null;
+          drawMark(...Object.values(getPos(e)));
+        },
+        { passive: false },
+      );
+      canvas.addEventListener(
+        "touchmove",
+        (e) => {
+          e.preventDefault();
+          if (!painting) return;
+          drawMark(...Object.values(getPos(e)));
+        },
+        { passive: false },
+      );
+      canvas.addEventListener("touchend", () => {
+        painting = false;
+      });
 
-  lastX = x; lastY = y;
-}
+      // ── ACCIONES ────────────────────────────────────────────
+      document
+        .getElementById("btnEraser")
+        .addEventListener("click", function () {
+          erasing = !erasing;
+          this.textContent = erasing ? "✕ Borrando" : "Borrar";
+        });
+      document.getElementById("btnClear").addEventListener("click", () => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      });
+      document.getElementById("btnSave").addEventListener("click", () => {
+        const exp = document.createElement("canvas");
+        exp.width = canvas.width;
+        exp.height = canvas.height;
+        const ec = exp.getContext("2d");
+        ec.drawImage(shirtImg, 0, 0, exp.width, exp.height);
+        ec.drawImage(canvas, 0, 0);
+        const link = document.createElement("a");
+        link.download = "equipacion-parkuir.png";
+        link.href = exp.toDataURL();
+        link.click();
+      });
+      document.getElementById("btnX").addEventListener("click", () => {
+        document.getElementById("shirtTitle").value = "";
+        document.getElementById("shirtDesc").value = "";
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      });
 
-let painting = false, lastX = null, lastY = null;
+      // ── GALERÍA ──────────────────────────────────────────────
+      const galleryGrid = document.getElementById("galleryGrid");
+      const galleryEmpty = document.getElementById("galleryEmpty");
+      const API = "/api/liga";
 
-canvas.addEventListener('mousedown', e => { painting = true; lastX = null; drawMark(...Object.values(getPos(e))); });
-canvas.addEventListener('mousemove', e => { if (!painting) return; drawMark(...Object.values(getPos(e))); });
-canvas.addEventListener('mouseup',    () => { painting = false; lastX = null; });
-canvas.addEventListener('mouseleave', () => { painting = false; lastX = null; });
-canvas.addEventListener('touchstart', e => { e.preventDefault(); painting = true; lastX = null; drawMark(...Object.values(getPos(e))); }, {passive:false});
-canvas.addEventListener('touchmove',  e => { e.preventDefault(); if (!painting) return; drawMark(...Object.values(getPos(e))); }, {passive:false});
-canvas.addEventListener('touchend',   () => { painting = false; });
-
-// ── ACCIONES ────────────────────────────────────────────
-document.getElementById('btnEraser').addEventListener('click', function() {
-  erasing = !erasing;
-  this.textContent = erasing ? '✕ Borrando' : 'Borrar';
-});
-document.getElementById('btnClear').addEventListener('click', () => {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-});
-document.getElementById('btnSave').addEventListener('click', () => {
-  const exp = document.createElement('canvas');
-  exp.width = canvas.width; exp.height = canvas.height;
-  const ec = exp.getContext('2d');
-  ec.drawImage(shirtImg, 0, 0, exp.width, exp.height);
-  ec.drawImage(canvas, 0, 0);
-  const link = document.createElement('a');
-  link.download = 'equipacion-parkuir.png';
-  link.href = exp.toDataURL();
-  link.click();
-});
-document.getElementById('btnX').addEventListener('click', () => {
-  document.getElementById('shirtTitle').value = '';
-  document.getElementById('shirtDesc').value  = '';
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-});
-
-// ── GALERÍA ──────────────────────────────────────────────
-const galleryGrid  = document.getElementById('galleryGrid');
-const galleryEmpty = document.getElementById('galleryEmpty');
-const API = '/api/liga';
-
-function renderCard(entry) {
-  const card = document.createElement('div');
-  card.className = 'shirt-card';
-  card.dataset.id = entry.id;
-  card.innerHTML = `
+      function renderCard(entry) {
+        const card = document.createElement("div");
+        card.className = "shirt-card";
+        card.dataset.id = entry.id;
+        card.innerHTML = `
     <img src="${entry.img}" alt="${entry.title}">
     <div class="card-title">${entry.title}</div>
-    <div class="card-desc">${entry.desc || ''}</div>
+    <div class="card-desc">${entry.desc || ""}</div>
   `;
-  card.addEventListener('click', () => {
-    document.getElementById('modalImg').src           = entry.img;
-    document.getElementById('modalTitle').textContent = entry.title;
-    document.getElementById('modalDesc').textContent  = entry.desc;
-    document.getElementById('modalNum').textContent   = new Date(entry.date).toLocaleDateString('es-ES');
-    document.getElementById('modalId').dataset.id     = entry.id;
-    document.getElementById('modal').classList.add('open');
-  });
-  galleryGrid.appendChild(card);
-}
+        card.addEventListener("click", () => {
+          document.getElementById("modalImg").src = entry.img;
+          document.getElementById("modalTitle").textContent = entry.title;
+          document.getElementById("modalDesc").textContent = entry.desc;
+          document.getElementById("modalNum").textContent = new Date(
+            entry.date,
+          ).toLocaleDateString("es-ES");
+          document.getElementById("modalId").dataset.id = entry.id;
+          document.getElementById("modal").classList.add("open");
+        });
+        galleryGrid.appendChild(card);
+      }
 
-async function loadGallery() {
-  try {
-    const res  = await fetch(API);
-    const data = await res.json();
-    galleryGrid.innerHTML = '';
-    if (data.length === 0) {
-      galleryEmpty.style.display = 'block';
-    } else {
-      galleryEmpty.style.display = 'none';
-      data.forEach(renderCard);
-    }
-  } catch(e) {
-    console.warn('Sin servidor, modo local');
-  }
-}
+      async function loadGallery() {
+        try {
+          const res = await fetch(API);
+          const data = await res.json();
+          galleryGrid.innerHTML = "";
+          if (data.length === 0) {
+            galleryEmpty.style.display = "block";
+          } else {
+            galleryEmpty.style.display = "none";
+            data.forEach(renderCard);
+          }
+        } catch (e) {
+          console.warn("Sin servidor, modo local");
+        }
+      }
 
-loadGallery();
+      loadGallery();
 
-document.getElementById('btnSubmit').addEventListener('click', async () => {
-  const title = document.getElementById('shirtTitle').value.trim() || 'Sin título';
-  const desc  = document.getElementById('shirtDesc').value.trim();
+      document
+        .getElementById("btnSubmit")
+        .addEventListener("click", async () => {
+          const title =
+            document.getElementById("shirtTitle").value.trim() || "Sin título";
+          const desc = document.getElementById("shirtDesc").value.trim();
 
-  const exp = document.createElement('canvas');
-  exp.width = canvas.width; exp.height = canvas.height;
-  const ec = exp.getContext('2d');
-  ec.drawImage(shirtImg, 0, 0, exp.width, exp.height);
-  ec.drawImage(canvas, 0, 0);
-  const img = exp.toDataURL('image/png');
+          const exp = document.createElement("canvas");
+          exp.width = canvas.width;
+          exp.height = canvas.height;
+          const ec = exp.getContext("2d");
+          ec.drawImage(shirtImg, 0, 0, exp.width, exp.height);
+          ec.drawImage(canvas, 0, 0);
+          const img = exp.toDataURL("image/png");
 
-  try {
-    const res = await fetch(API, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ title, desc, img }),
-    });
-    if (res.ok) {
-      const entry = await res.json();
-      galleryEmpty.style.display = 'none';
-      // insertar al principio
-      const tmp = document.createElement('div');
-      galleryGrid.insertBefore(tmp, galleryGrid.firstChild);
-      galleryGrid.removeChild(tmp);
-      renderCard(entry);
-      galleryGrid.insertBefore(galleryGrid.lastChild, galleryGrid.firstChild);
-    }
-  } catch(e) {
-    // fallback sin servidor
-    galleryEmpty.style.display = 'none';
-    const entry = { id: Date.now(), title, desc, img, date: new Date().toISOString() };
-    renderCard(entry);
-    galleryGrid.insertBefore(galleryGrid.lastChild, galleryGrid.firstChild);
-  }
+          try {
+            const res = await fetch(API, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ title, desc, img }),
+            });
+            if (res.ok) {
+              const entry = await res.json();
+              galleryEmpty.style.display = "none";
+              // insertar al principio
+              const tmp = document.createElement("div");
+              galleryGrid.insertBefore(tmp, galleryGrid.firstChild);
+              galleryGrid.removeChild(tmp);
+              renderCard(entry);
+              galleryGrid.insertBefore(
+                galleryGrid.lastChild,
+                galleryGrid.firstChild,
+              );
+            }
+          } catch (e) {
+            // fallback sin servidor
+            galleryEmpty.style.display = "none";
+            const entry = {
+              id: Date.now(),
+              title,
+              desc,
+              img,
+              date: new Date().toISOString(),
+            };
+            renderCard(entry);
+            galleryGrid.insertBefore(
+              galleryGrid.lastChild,
+              galleryGrid.firstChild,
+            );
+          }
 
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  document.getElementById('shirtTitle').value = '';
-  document.getElementById('shirtDesc').value  = '';
-  // scroll suave a la galería
-  document.querySelector('.gallery-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
-});
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          document.getElementById("shirtTitle").value = "";
+          document.getElementById("shirtDesc").value = "";
+          document
+            .querySelector(".gallery-section")
+            .scrollIntoView({ behavior: "smooth", block: "start" });
+        });
 
-// ── MODAL ───────────────────────────────────────────────
-function closeModal() { document.getElementById('modal').classList.remove('open'); }
-document.getElementById('modalClose').addEventListener('click', closeModal);
-document.getElementById('modal').addEventListener('click', e => {
-  if (e.target === document.getElementById('modal')) closeModal();
-});
-document.getElementById('modalId').addEventListener('click', async function() {
-  const id = parseInt(this.dataset.id);
-  if (!id) return;
-  try { await fetch(`${API}/${id}`, { method: 'DELETE' }); } catch(e) {}
-  // eliminar card del DOM
-  const card = galleryGrid.querySelector(`[data-id="${id}"]`);
-  if (card) card.remove();
-  if (!galleryGrid.children.length) galleryEmpty.style.display = 'block';
-  closeModal();
-});
-</script>
+      // ── MODAL ───────────────────────────────────────────────
+      function closeModal() {
+        document.getElementById("modal").classList.remove("open");
+      }
+      document
+        .getElementById("modalClose")
+        .addEventListener("click", closeModal);
+      document.getElementById("modal").addEventListener("click", (e) => {
+        if (e.target === document.getElementById("modal")) closeModal();
+      });
+      document
+        .getElementById("modalId")
+        .addEventListener("click", async function () {
+          const id = parseInt(this.dataset.id);
+          if (!id) return;
+          try {
+            await fetch(`${API}/${id}`, { method: "DELETE" });
+          } catch (e) {}
+          // eliminar card del DOM
+          const card = galleryGrid.querySelector(`[data-id="${id}"]`);
+          if (card) card.remove();
+          if (!galleryGrid.children.length)
+            galleryEmpty.style.display = "block";
+          closeModal();
+        });
+    </script>
 
-<script src="js/menu.js">
-
-</script>
-</body>
+    <script src="js/menu.js"></script>
+  </body>
 </html>
