@@ -675,7 +675,7 @@ document.getElementById('btnSubmit').addEventListener('click', async () => {
   document.getElementById('shirtTitle').value = '';
   document.getElementById('shirtDesc').value  = '';
   // scroll suave a la galería
-  document.getElementById('gallerySection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  document.querySelector('.gallery-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
 });
 
 // ── MODAL ───────────────────────────────────────────────
@@ -696,6 +696,8 @@ document.getElementById('modalId').addEventListener('click', async function() {
 });
 </script>
 
-<script src="js/menu.js"></script>
+<script src="js/menu.js">
+
+</script>
 </body>
 </html>
