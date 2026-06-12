@@ -94,6 +94,36 @@
         pointer-events: none;
       }
 
+      /* ── TAMAÑO DE PINCEL ── */
+      .size-control {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        margin-top: 0.2rem;
+      }
+      .size-dot-max,
+      .size-dot-min {
+        display: block;
+        border-radius: 50%;
+        background: var(--ink);
+        flex-shrink: 0;
+      }
+      .size-dot-min {
+        width: 6px;
+        height: 6px;
+      }
+      .size-dot-max {
+        width: 18px;
+        height: 18px;
+      }
+      .size-slider {
+        flex: 1;
+        height: 4px;
+        cursor: pointer;
+        accent-color: var(--pink);
+        background: transparent;
+      }
+
       /* ── CAMISETA ── */
       .shirt-area {
         display: flex;
@@ -477,6 +507,22 @@
           </div>
 
           <div class="palette-area">
+            <div class="colors-label">Tamaño</div>
+            <div class="size-control">
+              <span class="size-dot-min"></span>
+              <input
+                type="range"
+                id="brushSizeSlider"
+                class="size-slider"
+                min="2"
+                max="40"
+                step="1"
+                value="5"
+                aria-label="Tamaño del pincel"
+              />
+              <span class="size-dot-max"></span>
+            </div>
+
             <div class="colors-label">Colores</div>
             <div class="palette-rows">
               <div class="palette-row" id="paletteRow1"></div>
@@ -584,11 +630,23 @@
             .querySelectorAll(".tool-btn")
             .forEach((b) => b.classList.remove("active"));
           btn.classList.add("active");
-          brushSize = parseInt(btn.dataset.size);
           currentShape = btn.dataset.shape || "round";
+          // Los botones redondos actúan como presets rápidos de tamaño.
+          // Las formas (triángulo/estrella) no tocan el tamaño actual,
+          // así se mantiene el valor elegido con el slider.
+          if (currentShape === "round") {
+            brushSize = parseInt(btn.dataset.size);
+            document.getElementById("brushSizeSlider").value = brushSize;
+          }
           erasing = false;
           document.getElementById("btnEraser").textContent = "Borrar";
         });
+      });
+
+      // ── TAMAÑO DE PINCEL (slider) ───────────────────────────
+      const sizeSlider = document.getElementById("brushSizeSlider");
+      sizeSlider.addEventListener("input", () => {
+        brushSize = parseInt(sizeSlider.value);
       });
 
       // ── CANVAS + MÁSCARA ────────────────────────────────────
@@ -702,11 +760,11 @@
           if (lastX !== null) {
             tc.moveTo(lastX, lastY);
             tc.lineTo(x, y);
+            tc.stroke();
           } else {
             tc.arc(x, y, brushSize / 2, 0, Math.PI * 2);
             tc.fill();
           }
-          tc.stroke();
         }
 
         // Recortar por la silueta de la camiseta
