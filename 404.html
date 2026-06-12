@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PARKUIR · 404</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      main.error-404 {
+        min-height: 60vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        gap: 1.5rem;
+        padding: 2rem;
+      }
+      main.error-404 h1 {
+        margin: 0;
+      }
+      main.error-404 a {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <a href="/">parkuir</a>
+      <button id="menu-toggle" aria-label="Abrir menú">☰</button>
+      <nav id="main-nav">
+        <a href="/about.html">qué es parkuir</a>
+        <a href="/cronograma.html">línea del tiempo</a>
+        <a href="/reglamento.html">reglamento</a>
+        <a href="/jugadorxs.html">jugadorxs</a>
+        <a href="/equipacion.html">equipación</a>
+        <a href="#">archivo</a>
+      </nav>
+    </header>
+
+    <div class="top-band"></div>
+
+    <main class="error-404">
+      <h1>¡Aquí no hay nada!</h1>
+      <a href="/">volver</a>
+    </main>
+
+    <script src="js/menu.js"></script>
+  </body>
+</html>

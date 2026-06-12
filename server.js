@@ -45,8 +45,11 @@ function serveFile(res, filePath) {
 
   fs.readFile(filePath, (err, data) => {
     if (err) {
-      res.writeHead(404);
-      res.end("Not found");
+      // archivo no encontrado → servir pantalla 404 propia
+      fs.readFile(path.join(__dirname, "404.html"), (err2, page404) => {
+        res.writeHead(404, { "Content-Type": "text/html" });
+        res.end(err2 ? "Not found" : page404);
+      });
       return;
     }
     res.writeHead(200, { "Content-Type": mime });
