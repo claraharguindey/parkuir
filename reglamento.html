@@ -299,7 +299,19 @@
 
     <button id="btn-publicacion">publicación</button>
 
+
     <script>
+      document
+        .getElementById("btn-publicacion")
+        .addEventListener("click", () => {
+          const enlace = document.createElement("a");
+          enlace.href = "/assets/parkuir.pdf";
+          enlace.download = "texto.pdf";
+          document.body.appendChild(enlace);
+          enlace.click();
+          document.body.removeChild(enlace);
+        });
+
       function showSection(id, btn) {
         document
           .querySelectorAll(".reg-section")
@@ -312,6 +324,5 @@
       }
     </script>
     <script src="js/menu.js"></script>
-
   </body>
 </html>

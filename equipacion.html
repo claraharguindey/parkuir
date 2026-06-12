@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="es">
+<html lang="es" class="interior">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -12,6 +12,19 @@
         overflow-x: hidden;
         display: flex;
         flex-direction: column;
+      }
+
+      /* el grano global (body::after) es position:fixed con z-index:0 y se
+         pinta encima del contenido no posicionado, aclarando los colores.
+         Subimos el contenido por encima de esa capa. */
+      header,
+      .top-band,
+      .equip-band,
+      .equip-main,
+      .gallery-section,
+      .modal-overlay {
+        position: relative;
+        z-index: 1;
       }
 
       /* ── BANDA ── */
@@ -41,13 +54,13 @@
         max-width: 1100px;
         margin: 0 auto;
         width: 100%;
-        align-items: start;
+        align-items: stretch;
       }
 
       /* ── PANEL IZQUIERDO ── */
       .left-panel {
         display: grid;
-        grid-template-columns: 52px 1fr;
+        grid-template-columns: 60px 1fr;
         gap: 1rem;
         align-items: start;
       }
@@ -56,7 +69,8 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 0.3rem;
+        gap: 0.7rem;
+        padding-top: 0.3rem;
       }
       .tools-label {
         font-family: "BebasNeue", sans-serif;
@@ -68,24 +82,25 @@
         align-self: flex-start;
       }
       .tool-btn {
-        width: 38px;
-        height: 38px;
-        border-radius: 50%;
+        width: 100%;
         border: none;
         background: none;
         cursor: pointer;
         display: flex;
         align-items: center;
         justify-content: center;
-        transition: background 0.15s;
+        padding: 0.15rem 0;
         color: var(--ink);
-        font-size: 1.1rem;
+        font-size: 2rem;
+        line-height: 1;
+        opacity: 0.35;
+        transition: opacity 0.15s;
       }
       .tool-btn:hover {
-        background: rgba(255, 255, 255, 0.3);
+        opacity: 0.6;
       }
       .tool-btn.active {
-        background: rgba(255, 255, 255, 0.5);
+        opacity: 1;
       }
       .dot {
         display: block;
@@ -172,6 +187,7 @@
         display: flex;
         flex-direction: column;
         gap: 0.4rem;
+        flex: 1;
       }
       .palette-row {
         display: flex;
@@ -179,30 +195,35 @@
         align-items: center;
         flex-wrap: wrap;
       }
+      .colors-block {
+        display: flex;
+        align-items: stretch;
+        gap: 0.6rem;
+      }
       .color-btn {
         width: 40px;
         height: 40px;
         border-radius: 50%;
-        border: 2.5px solid transparent;
+        border: 2.5px solid var(--ink);
         cursor: pointer;
         transition:
           transform 0.15s,
-          border-color 0.15s;
+          box-shadow 0.15s;
         flex-shrink: 0;
       }
       .color-btn:hover {
         transform: scale(1.1);
       }
       .color-btn.active {
-        border-color: var(--ink);
+        box-shadow: 0 0 0 3px var(--pink);
         transform: scale(1.08);
       }
 
       .action-col {
         display: flex;
         flex-direction: column;
+        justify-content: space-between;
         gap: 0.35rem;
-        margin-left: 0.3rem;
       }
       .btn-action {
         font-family: "BebasNeue", sans-serif;
@@ -230,6 +251,8 @@
         display: flex;
         flex-direction: column;
         gap: 0.9rem;
+        height: 100%;
+        min-width: 0;
       }
       .field-nombre {
         background: var(--pink);
@@ -257,6 +280,7 @@
         border-radius: 12px;
         padding: 0.9rem 1.2rem;
         flex: 1;
+        min-width: 0;
       }
       .field-desc-label {
         font-family: "BebasNeue", sans-serif;
@@ -268,6 +292,7 @@
       }
       .field-desc textarea {
         width: 100%;
+        max-width: 100%;
         min-height: 200px;
         background: transparent;
         border: none;
@@ -459,6 +484,26 @@
         .left-panel {
           grid-template-columns: 44px 1fr;
         }
+        .shirt-area {
+          display: contents;
+        }
+        .palette-area {
+          grid-column: 1 / -1;
+          width: 100vw;
+          margin-left: -1.2rem;
+          padding: 0 1.2rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .colors-block {
+          flex-direction: column;
+        }
+        .action-col {
+          flex-direction: row;
+          justify-content: flex-start;
+          flex-wrap: wrap;
+        }
       }
     </style>
   </head>
@@ -484,18 +529,18 @@
         <div class="tools-sidebar">
           <div class="tools-label">Pinceles</div>
           <button class="tool-btn active" data-size="5" data-shape="round">
-            <span class="dot" style="width: 8px; height: 8px"></span>
+            <span class="dot" style="width: 46px; height: 46px"></span>
           </button>
           <button class="tool-btn" data-size="12" data-shape="round">
-            <span class="dot" style="width: 14px; height: 14px"></span>
+            <span class="dot" style="width: 36px; height: 36px"></span>
           </button>
           <button class="tool-btn" data-size="22" data-shape="round">
-            <span class="dot" style="width: 20px; height: 20px"></span>
+            <span class="dot" style="width: 24px; height: 24px"></span>
           </button>
           <button class="tool-btn" data-size="16" data-shape="triangle">
             ▼
           </button>
-          <button class="tool-btn" data-size="16" data-shape="star">✦</button>
+          <button class="tool-btn" data-size="16" data-shape="star">✳</button>
         </div>
 
         <div class="shirt-area">
@@ -524,15 +569,15 @@
             </div>
 
             <div class="colors-label">Colores</div>
-            <div class="palette-rows">
-              <div class="palette-row" id="paletteRow1"></div>
-              <div style="display: flex; gap: 0.5rem; align-items: flex-start">
+            <div class="colors-block">
+              <div class="palette-rows">
+                <div class="palette-row" id="paletteRow1"></div>
                 <div class="palette-row" id="paletteRow2"></div>
-                <div class="action-col">
-                  <button class="btn-action" id="btnEraser">Borrar</button>
-                  <button class="btn-action" id="btnClear">Limpiar</button>
-                  <button class="btn-action" id="btnSave">Guardar</button>
-                </div>
+              </div>
+              <div class="action-col">
+                <button class="btn-action" id="btnEraser">Borrar</button>
+                <button class="btn-action" id="btnClear">Limpiar</button>
+                <button class="btn-action" id="btnSave">Guardar</button>
               </div>
             </div>
           </div>
@@ -563,8 +608,9 @@
       </div>
     </div>
 
+    <div class="equip-band"><h1>Liga Parkuir</h1></div>
+
     <div class="gallery-section">
-      <div class="gallery-title">Liga Parkuir</div>
       <div class="gallery-empty" id="galleryEmpty">Todavía no hay diseños.</div>
       <div class="gallery-grid" id="galleryGrid"></div>
     </div>
