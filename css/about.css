@@ -51,7 +51,6 @@ body {
 
 #about-quote a {
   color: var(--pink);
-  text-decoration: none;
   text-decoration: underline;
 }
 #about-quote a:hover {
@@ -77,27 +76,9 @@ body {
   margin-bottom: 0;
 }
 
-/* ── CANVAS LÍQUIDO (modo TOCAR) ── */
+/* ── CANVAS LÍQUIDO — ya no se usa, se oculta siempre ── */
 #flow-canvas {
-  position: absolute;
-  inset: 0;
-  display: none;
-}
-#flow-canvas canvas {
-  width: 100%;
-  height: 100%;
-  display: block;
-  touch-action: none;
-}
-body:not(.reading) #text-block {
-  display: none;
-}
-body:not(.reading) #about-center {
-  overflow: hidden;
-  padding: 0;
-}
-body:not(.reading) #flow-canvas {
-  display: block;
+  display: none !important;
 }
 
 /* ── COL DERECHA — controles ── */
@@ -119,9 +100,8 @@ body:not(.reading) #flow-canvas {
   padding: 0.5rem 1.2rem;
   cursor: pointer;
   text-align: center;
-  transition:
-    transform 0.1s,
-    opacity 0.15s;
+  transition: transform 0.1s, opacity 0.15s;
+  background: var(--pink);
 }
 .mode-btn:hover {
   transform: scale(1.02);
@@ -129,39 +109,17 @@ body:not(.reading) #flow-canvas {
 .mode-btn#btn-leer {
   background: var(--orange, #fd7145);
 }
-.mode-btn#btn-tocar {
-  background: var(--pink);
-}
 
-/* hint de interacción */
-#gesture-hint {
-  font-family: "Outreque", sans-serif;
-  font-size: 0.6rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--ink);
-  opacity: 0.4;
-  line-height: 1.8;
-  margin-top: auto;
-  display: none;
-}
-body:not(.reading) #gesture-hint {
-  display: block;
-}
+/* botón activo según modo del body */
+body.reading            .mode-btn#btn-leer         { outline: 3px solid white; outline-offset: -3px; }
+body.mode-travestir     .mode-btn#btn-travestir     { outline: 3px solid white; outline-offset: -3px; }
+body.mode-fracasar      .mode-btn#btn-fracasar      { outline: 3px solid white; outline-offset: -3px; }
+body.mode-ilegibilidad  .mode-btn#btn-ilegibilidad  { outline: 3px solid white; outline-offset: -3px; }
 
 /* ── MODO LECTURA ── */
 body.reading #about-grid {
   overflow: visible;
   height: auto;
-}
-body.reading .mode-btn#btn-leer {
-  outline: 3px solid white;
-  outline-offset: -3px;
-}
-body:not(.reading) .mode-btn#btn-tocar {
-  outline: 3px solid white;
-  outline-offset: -3px;
 }
 
 /* ── MOBILE ── */
@@ -173,7 +131,6 @@ body:not(.reading) .mode-btn#btn-tocar {
 
   #about-grid {
     grid-template-columns: 1fr;
-    grid-template-rows: auto auto auto;
     overflow: visible;
     height: auto;
     display: flex;
@@ -194,10 +151,6 @@ body:not(.reading) .mode-btn#btn-tocar {
     min-width: 100px;
     font-size: 1.1rem;
   }
-  #gesture-hint {
-    flex-basis: 100%;
-    margin-top: 0.3rem;
-  }
 
   /* frase destacada */
   #about-left {
@@ -211,12 +164,6 @@ body:not(.reading) .mode-btn#btn-tocar {
     padding: 0.8rem 1rem 2rem;
     overflow: visible;
     min-height: 320px;
-  }
-  body:not(.reading) #about-center {
-    padding: 0.8rem 1rem 2rem;
-  }
-  #flow-canvas {
-    position: absolute;
-    inset: 0.8rem 1rem 2rem;
+    margin: 0;
   }
 }
