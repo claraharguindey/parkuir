@@ -49,6 +49,16 @@ body {
   font-weight: 600;
 }
 
+#about-quote a {
+  color: var(--pink);
+  text-decoration: none;
+  text-decoration: underline;
+
+}
+#about-quote a:hover {
+  color: black;
+}
+
 /* ── COL CENTRO — texto corrido ── */
 #about-center {
   position: relative;

@@ -183,6 +183,10 @@ nav a:hover {
   text-decoration: underline;
 }
 
+nav a.active {
+  text-decoration: underline;
+}
+
 /* ── HAMBURGUESA ── */
 
 #menu-toggle {
