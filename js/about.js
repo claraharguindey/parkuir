@@ -63,57 +63,38 @@ function modeLeer() {
 }
 
 // ── MODO: TRAVESTIR ───────────────────────────────────────
-// Las palabras cambian de fuente, caja (upper/lower/mixed) y dirección
-// al pasar el ratón por encima. Cada una elige su propia identidad.
+// Cada clic en el botón viste a todas las palabras con una identidad
+// tipográfica nueva y distinta. Sin hover — la transformación es colectiva.
+
+function dress(span) {
+  const CASES = ["uppercase", "lowercase", "capitalize", "none"];
+  span.style.fontFamily = FONT_STACK[pick(FONT_KEYS)];
+  span.style.textTransform = pick(CASES);
+  span.style.direction = Math.random() < 0.12 ? "rtl" : "ltr";
+  span.style.fontSize = rand(0.8, 1.3) + "em";
+  span.style.letterSpacing = rand(-0.02, 0.1) + "em";
+  span.style.transition = "all " + rand(0.2, 0.6).toFixed(2) + "s ease";
+}
 
 function modeTravestir() {
   stopAll();
   document.body.classList.remove("reading");
   wrapWords();
 
-  const CASES = ["uppercase", "lowercase", "capitalize"];
-  const DIRECTIONS = ["ltr", "rtl"];
-
   allWords().forEach((span) => {
-    // identidad aleatoria asignada al nacer
-    const font = pick(FONT_KEYS);
-    const textCase = pick(CASES);
-    const dir = Math.random() < 0.15 ? "rtl" : "ltr"; // mayoría ltr pero alguna rtl
-    const size = rand(0.85, 1.25);
-
     span.style.display = "inline-block";
-    span.style.transition = "all 0.25s ease";
-    span.style.cursor = "pointer";
-
-    function dress() {
-      span.style.fontFamily = FONT_STACK[font];
-      span.style.textTransform = textCase;
-      span.style.direction = dir;
-      span.style.fontSize = size + "em";
-      span.style.letterSpacing = rand(-0.02, 0.08) + "em";
-    }
-
-    function undress() {
-      span.style.fontFamily = "";
-      span.style.textTransform = "";
-      span.style.direction = "";
-      span.style.fontSize = "";
-      span.style.letterSpacing = "";
-    }
-
-    span.addEventListener("mouseenter", dress);
-    span.addEventListener("mouseleave", undress);
-    // touch
-    span.addEventListener("touchstart", dress, { passive: true });
-    span.addEventListener("touchend", undress, { passive: true });
   });
 
-  cleanupFns.push(() => {
-    allWords().forEach((span) => {
-      span.removeEventListener("mouseenter", () => {});
-      span.removeEventListener("mouseleave", () => {});
-    });
-  });
+  // vestimenta inicial al entrar en el modo
+  allWords().forEach(dress);
+
+  // cada clic en el botón vuelve a vestir
+  const btn = document.getElementById("btn-travestir");
+  function redress() {
+    allWords().forEach(dress);
+  }
+  btn.addEventListener("click", redress);
+  cleanupFns.push(() => btn.removeEventListener("click", redress));
 }
 
 // ── MODO: FRACASAR ────────────────────────────────────────
@@ -168,9 +149,16 @@ function modeFracar() {
 }
 
 // ── MODO: ILEGIBILIDAD ────────────────────────────────────
-// El texto existe pero no se entrega fácil.
-// Las palabras tienen opacidad baja; al detenerte encima se revelan,
-// pero las vecinas se oscurecen más. Hay que leer en soledad, despacio.
+// Cada clic en el botón baraja las letras de cada palabra.
+
+function shuffle(str) {
+  const chars = str.split("");
+  for (let i = chars.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [chars[i], chars[j]] = [chars[j], chars[i]];
+  }
+  return chars.join("");
+}
 
 function modeIlegibilidad() {
   stopAll();
@@ -179,50 +167,17 @@ function modeIlegibilidad() {
 
   const words = allWords();
 
-  words.forEach((span) => {
-    span.style.display = "inline-block";
-    span.style.opacity = "0.15";
-    span.style.transition = "opacity 0.4s ease";
-    span.style.cursor = "default";
-    span.style.userSelect = "none";
-  });
-
-  function reveal(e) {
-    const target = e.currentTarget;
-    const idx = words.indexOf(target);
-
-    words.forEach((span, i) => {
-      const dist = Math.abs(i - idx);
-      if (dist === 0) {
-        span.style.opacity = "1";
-      } else if (dist <= 2) {
-        span.style.opacity = "0.08";
-      } else {
-        span.style.opacity = "0.15";
-      }
+  function scramble() {
+    words.forEach((span) => {
+      span.textContent = shuffle(span.textContent);
     });
   }
 
-  function resetOpacity() {
-    words.forEach((span) => {
-      span.style.opacity = "0.15";
-    });
-  }
+  scramble();
 
-  words.forEach((span) => {
-    span.addEventListener("mouseenter", reveal);
-    span.addEventListener("touchstart", reveal, { passive: true });
-  });
-
-  textBlock.addEventListener("mouseleave", resetOpacity);
-
-  cleanupFns.push(() => {
-    words.forEach((span) => {
-      span.removeEventListener("mouseenter", reveal);
-      span.removeEventListener("touchstart", reveal);
-    });
-    textBlock.removeEventListener("mouseleave", resetOpacity);
-  });
+  const btn = document.getElementById("btn-ilegibilidad");
+  btn.addEventListener("click", scramble);
+  cleanupFns.push(() => btn.removeEventListener("click", scramble));
 }
 
 // ── API PÚBLICA ───────────────────────────────────────────
