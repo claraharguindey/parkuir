@@ -179,7 +179,6 @@
           grid-template-rows: auto auto auto;
           overflow: visible;
           height: auto;
-          /* reordenar: derecha (botones) arriba, luego izquierda, luego centro */
           display: flex;
           flex-direction: column;
         }
@@ -341,7 +340,7 @@
           startFlow();
         }
       }
-      window.setMode = setMode; // usado por los onclick inline
+      window.setMode = setMode;
 
       // ── TIPOGRAFÍAS DISPONIBLES PARA EL REMIX ──────────────────
       const FONT_STACK = {
@@ -394,8 +393,6 @@
       }
 
       async function createFlowText() {
-        // esperar a que las fuentes estén listas para que el canvas
-        // dibuje con la tipografía correcta desde el primer frame
         await Promise.all([
           document.fonts.load("16px BebasNeue"),
           document.fonts.load("16px Outreque"),
@@ -414,12 +411,8 @@
           (p) => p.textContent.trim().replace(/\s+/g, " ").split(" "),
         );
 
-        // el shader asume dpr=2 (igual que tu snippet original con
-        // Renderer({ dpr: 2 })); si se usa devicePixelRatio real, en
-        // pantallas con dpr=1 el resultado sale recortado/amplificado.
         const dpr = 2;
 
-        // ── canvas 2D donde se dibuja el texto ──
         const txCanvas = document.createElement("canvas");
         const txCtx = txCanvas.getContext("2d");
 
@@ -562,6 +555,7 @@
         let lastTime;
         const lastPos = new Vec2();
 
+        // ── POINTER (desktop) ──
         function onMove(e) {
           const rect = gl.canvas.getBoundingClientRect();
           const x = e.clientX - rect.left;
@@ -592,6 +586,64 @@
           texture.image = txCanvas;
         }
 
+        // ── TOUCH (móvil) ──
+        function getTouchPos(e) {
+          const touch = e.touches[0] || e.changedTouches[0];
+          const rect = gl.canvas.getBoundingClientRect();
+          return {
+            x: touch.clientX - rect.left,
+            y: touch.clientY - rect.top,
+          };
+        }
+
+        function onTouchStart(e) {
+          e.preventDefault();
+          const { x, y } = getTouchPos(e);
+          const rect = gl.canvas.getBoundingClientRect();
+          mouse.set(x / rect.width, 1 - y / rect.height);
+          lastPos.set(x, y);
+          lastTime = performance.now();
+        }
+
+        function onTouchMove(e) {
+          e.preventDefault();
+          const { x, y } = getTouchPos(e);
+          const rect = gl.canvas.getBoundingClientRect();
+          mouse.set(x / rect.width, 1 - y / rect.height);
+
+          if (!lastTime) {
+            lastTime = performance.now();
+            lastPos.set(x, y);
+          }
+          const dx = x - lastPos.x;
+          const dy = y - lastPos.y;
+          lastPos.set(x, y);
+          const t = performance.now();
+          const delta = Math.max(10.4, t - lastTime);
+          lastTime = t;
+          velocity.x = dx / delta;
+          velocity.y = dy / delta;
+          velocity.needsUpdate = true;
+        }
+
+        function onTouchEnd(e) {
+          e.preventDefault();
+          mouse.set(-1);
+          lastTime = null;
+        }
+
+        function onTouchClick(e) {
+          // tap sin movimiento → mezclar letras
+          if (
+            Math.abs(velocity.x) < 0.01 &&
+            Math.abs(velocity.y) < 0.01
+          ) {
+            currentWords = wordsWithStyle(true);
+            drawText();
+            texture.image = txCanvas;
+          }
+        }
+
         let rafId = null;
         function loop(t) {
           rafId = requestAnimationFrame(loop);
@@ -614,21 +666,35 @@
 
         function show() {
           wrap.style.display = "block";
+          gl.canvas.style.touchAction = "none";
           resizeFlow();
           resizeObs.observe(wrap);
+          // pointer (desktop)
           gl.canvas.addEventListener("pointermove", onMove);
           gl.canvas.addEventListener("pointerleave", onLeave);
           gl.canvas.addEventListener("pointerup", onLeave);
           gl.canvas.addEventListener("click", onClick);
+          // touch (móvil)
+          gl.canvas.addEventListener("touchstart", onTouchStart, { passive: false });
+          gl.canvas.addEventListener("touchmove", onTouchMove, { passive: false });
+          gl.canvas.addEventListener("touchend", onTouchEnd, { passive: false });
+          gl.canvas.addEventListener("touchend", onTouchClick, { passive: false });
           if (!rafId) rafId = requestAnimationFrame(loop);
         }
+
         function hide() {
           wrap.style.display = "none";
           resizeObs.disconnect();
+          // pointer
           gl.canvas.removeEventListener("pointermove", onMove);
           gl.canvas.removeEventListener("pointerleave", onLeave);
           gl.canvas.removeEventListener("pointerup", onLeave);
           gl.canvas.removeEventListener("click", onClick);
+          // touch
+          gl.canvas.removeEventListener("touchstart", onTouchStart);
+          gl.canvas.removeEventListener("touchmove", onTouchMove);
+          gl.canvas.removeEventListener("touchend", onTouchEnd);
+          gl.canvas.removeEventListener("touchend", onTouchClick);
           cancelAnimationFrame(rafId);
           rafId = null;
         }
