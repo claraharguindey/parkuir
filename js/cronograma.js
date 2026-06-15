@@ -104,7 +104,6 @@ function closeCard() {
   lastActive = null;
 }
 
-document.getElementById("info-card-close").addEventListener("click", closeCard);
 
 // ── PROXIMITY ─────────────────────────────────────────────
 function checkProximity() {

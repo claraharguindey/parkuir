@@ -53,7 +53,6 @@ body {
   color: var(--pink);
   text-decoration: none;
   text-decoration: underline;
-
 }
 #about-quote a:hover {
   color: black;
@@ -62,7 +61,7 @@ body {
 /* ── COL CENTRO — texto corrido ── */
 #about-center {
   position: relative;
-  padding: 2rem 2rem;
+  margin: 2rem;
   overflow-y: auto;
 }
 
@@ -166,7 +165,7 @@ body:not(.reading) .mode-btn#btn-tocar {
 }
 
 /* ── MOBILE ── */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   body {
     height: auto;
     overflow-y: auto;

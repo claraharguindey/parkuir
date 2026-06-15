@@ -22,12 +22,20 @@
   font-style: normal;
 }
 
+:root {
+  --bg: #f0d5c8;
+  --ink: #000000;
+  --pink: #ff3773;
+  --cream: #ffd9ba;
+  --pad: 2rem;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   scrollbar-width: thin;
-  scrollbar-color: #fd5e96 transparent;
+  scrollbar-color: var(--pink) transparent;
 }
 
 *::-webkit-scrollbar {
@@ -38,19 +46,13 @@
   background: transparent;
 }
 *::-webkit-scrollbar-thumb {
-  background: #fd5e96;
+  background: var(--pink);
   border-radius: 999px;
 }
 *::-webkit-scrollbar-thumb:hover {
-  background: #ff3773;
+  background: var(--pink);
 }
-:root {
-  --bg: #f0d5c8;
-  --ink: #000000;
-  --pink: #ff3773;
-  --cream: #ffd9ba;
-  --pad: 2rem;
-}
+
 
 /* ── FONDO MESH ANIMADO ── */
 body {

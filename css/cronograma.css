@@ -157,35 +157,6 @@ body {
   transform: translate(-50%, -50%) scale(1);
 }
 
-#info-card-close {
-  position: absolute;
-  top: 6px;
-  right: 6px;
-
-  width: 18px;
-  height: 18px;
-
-  border: none;
-  border-radius: 50%;
-
-  background: #ff4d4d;
-  color: white;
-
-  font-size: 10px;
-  font-weight: 700;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  cursor: pointer;
-  z-index: 10;
-}
-
-#info-card-close:hover {
-  transform: scale(1.05);
-}
-
 #info-card-img {
   position: relative;
 
