@@ -1,0 +1,213 @@
+body {
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  user-select: none;
+}
+
+/* ── BANDA TÍTULO ── */
+.about-band {
+  flex-shrink: 0;
+  background: var(--cream);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 0.4rem 2rem 1rem;
+  height: clamp(80px, 12vw, 160px);
+}
+.about-band h1 {
+  font-family: "BebasNeue", sans-serif;
+  font-size: clamp(2.5rem, 9vw, 8rem);
+  color: var(--pink);
+  line-height: 1;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+/* ── GRID 3 COLUMNAS ── */
+#about-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 0.8fr 2.5fr 0.7fr;
+  gap: 0;
+  overflow: hidden;
+  min-height: 0;
+}
+
+/* ── COL IZQUIERDA — frase destacada ── */
+#about-left {
+  padding: 2rem 1.5rem;
+  overflow-y: auto;
+}
+
+#about-quote {
+  font-family: "Outreque", sans-serif;
+  font-size: 1.5rem;
+  color: var(--pink);
+  font-weight: 600;
+}
+
+/* ── COL CENTRO — texto corrido ── */
+#about-center {
+  position: relative;
+  padding: 2rem 2rem;
+  overflow-y: auto;
+}
+
+#text-block p {
+  font-family: "Outreque", sans-serif;
+  font-size: 24px;
+  line-height: 1.75;
+  color: var(--ink);
+  margin-bottom: 1rem;
+}
+
+#text-block p:last-child {
+  margin-bottom: 0;
+}
+
+/* ── CANVAS LÍQUIDO (modo TOCAR) ── */
+#flow-canvas {
+  position: absolute;
+  inset: 0;
+  display: none;
+}
+#flow-canvas canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  touch-action: none;
+}
+body:not(.reading) #text-block {
+  display: none;
+}
+body:not(.reading) #about-center {
+  overflow: hidden;
+  padding: 0;
+}
+body:not(.reading) #flow-canvas {
+  display: block;
+}
+
+/* ── COL DERECHA — controles ── */
+#about-right {
+  padding: 2rem 1.5rem 2rem 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  align-items: stretch;
+}
+
+.mode-btn {
+  font-family: "BebasNeue", sans-serif;
+  font-size: 1.4rem;
+  letter-spacing: 0.05em;
+  color: white;
+  border: none;
+  border-radius: 999px;
+  padding: 0.5rem 1.2rem;
+  cursor: pointer;
+  text-align: center;
+  transition:
+    transform 0.1s,
+    opacity 0.15s;
+}
+.mode-btn:hover {
+  transform: scale(1.02);
+}
+.mode-btn#btn-leer {
+  background: var(--orange, #fd7145);
+}
+.mode-btn#btn-tocar {
+  background: var(--pink);
+}
+
+/* hint de interacción */
+#gesture-hint {
+  font-family: "Outreque", sans-serif;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink);
+  opacity: 0.4;
+  line-height: 1.8;
+  margin-top: auto;
+  display: none;
+}
+body:not(.reading) #gesture-hint {
+  display: block;
+}
+
+/* ── MODO LECTURA ── */
+body.reading #about-grid {
+  overflow: visible;
+  height: auto;
+}
+body.reading .mode-btn#btn-leer {
+  outline: 3px solid white;
+  outline-offset: -3px;
+}
+body:not(.reading) .mode-btn#btn-tocar {
+  outline: 3px solid white;
+  outline-offset: -3px;
+}
+
+/* ── MOBILE ── */
+@media (max-width: 768px) {
+  body {
+    height: auto;
+    overflow-y: auto;
+  }
+
+  #about-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    overflow: visible;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* botones arriba */
+  #about-right {
+    order: 1;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 1.2rem 1rem 0.5rem;
+    gap: 0.5rem;
+    align-items: flex-start;
+  }
+  .mode-btn {
+    flex: 1;
+    min-width: 100px;
+    font-size: 1.1rem;
+  }
+  #gesture-hint {
+    flex-basis: 100%;
+    margin-top: 0.3rem;
+  }
+
+  /* frase destacada */
+  #about-left {
+    order: 2;
+    padding: 0.8rem 1rem 0;
+  }
+
+  /* texto */
+  #about-center {
+    order: 3;
+    padding: 0.8rem 1rem 2rem;
+    overflow: visible;
+    min-height: 320px;
+  }
+  body:not(.reading) #about-center {
+    padding: 0.8rem 1rem 2rem;
+  }
+  #flow-canvas {
+    position: absolute;
+    inset: 0.8rem 1rem 2rem;
+  }
+}

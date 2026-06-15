@@ -5,199 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PARKUIR — Reglamento</title>
     <link rel="stylesheet" href="style.css" />
-    <style>
-      body {
-        height: 100vh;
-        overflow: hidden;
-        display: flex;
-        flex-direction: column;
-      }
-
-      /* ── BANDA TÍTULO ── */
-      .reglamento-band {
-        flex-shrink: 0;
-        background: var(--cream);
-        display: flex;
-        align-items: flex-end;
-        justify-content: center;
-        padding: 0.4rem 2rem 1rem;
-        height: clamp(80px, 12vw, 160px);
-      }
-      .reglamento-band h1 {
-        font-family: "BebasNeue", sans-serif;
-        font-size: clamp(2.5rem, 9vw, 8rem);
-        color: var(--pink);
-        line-height: 1;
-        letter-spacing: 0.01em;
-        text-transform: uppercase;
-      }
-
-      /* ── GRID 2 COLUMNAS ── */
-      #reglamento-grid {
-        flex: 1;
-        display: grid;
-        grid-template-columns: 280px 1fr;
-        overflow: hidden;
-        min-height: 0;
-      }
-
-      /* ── COL IZQUIERDA — botones ── */
-      #reglamento-nav {
-        padding: 2rem 1.5rem;
-        display: flex;
-        flex-direction: column;
-        gap: 0.8rem;
-        overflow-y: auto;
-      }
-
-      .reg-btn {
-        display: block;
-        font-family: "Outreque", sans-serif;
-        font-size: clamp(1.1rem, 1.6vw, 1.4rem);
-        font-weight: 700;
-        color: #ffd9ba;
-        border: none;
-        border-radius: 999px;
-        padding: 0.55rem 1.4rem;
-        cursor: pointer;
-        text-align: left;
-        letter-spacing: 0.01em;
-        width: 100%;
-        border-radius: 14px;
-        transition:
-          transform 0.1s,
-          filter 0.15s;
-      }
-      .reg-btn:hover {
-        transform: scale(1.02);
-        filter: brightness(1.08);
-      }
-      .reg-btn.active {
-        outline: 3px solid #ffd9ba;
-        outline-offset: -3px;
-      }
-
-      .reg-btn:nth-child(1) {
-        background: #fd5e96;
-      }
-      .reg-btn:nth-child(2) {
-        background: #fd7145;
-      }
-      .reg-btn:nth-child(3) {
-        background: #ff3773;
-      }
-      .reg-btn:nth-child(4) {
-        background: #ffd9ba;
-        color: #fd5e96;
-      }
-
-      /* ── COL DERECHA — texto ── */
-      #reglamento-text {
-        padding: 2rem 2.5rem 2rem 1.5rem;
-        overflow-y: auto;
-        font-family: "Outreque", sans-serif;
-      }
-
-      .reg-section {
-        display: none;
-      }
-      .reg-section.active {
-        display: block;
-      }
-
-      .reg-section h3 {
-        font-family: "Outreque", sans-serif;
-        font-size: 1rem;
-        font-weight: 700;
-        color: var(--pink);
-        letter-spacing: 0.03em;
-        text-transform: lowercase;
-        margin: 1.8rem 0 0.5rem;
-      }
-
-      .reg-section p {
-        font-family: "Outreque", sans-serif;
-        font-size: 24px;
-        line-height: 1.8;
-        color: black;
-        margin-bottom: 1rem;
-        max-width: 80%;
-      }
-      .reg-section p:last-child {
-        margin-bottom: 0;
-      }
-
-      .reg-section em {
-        font-style: italic;
-      }
-
-      .reg-section strong {
-        font-weight: 700;
-      }
-
-      /* ── BOTÓN PUBLICACIÓN ── */
-      #btn-publicacion {
-        position: fixed;
-        bottom: 2rem;
-        right: 2rem;
-        font-family: "Outreque", sans-serif;
-        font-size: clamp(1rem, 1.6vw, 1.4rem);
-        font-weight: 700;
-        color: #ffd9ba;
-        background: var(--pink);
-        border: none;
-        border-radius: 14px;
-        padding: 0.6rem 1.8rem;
-        cursor: pointer;
-        letter-spacing: 0.02em;
-        z-index: 20;
-        transition:
-          background 0.15s,
-          transform 0.1s;
-      }
-      #btn-publicacion:hover {
-        background: var(--orange, #fd7145);
-        transform: scale(1.03);
-      }
-
-      /* ── MOBILE ── */
-      @media (max-width: 768px) {
-        body {
-          height: auto;
-          overflow-y: auto;
-        }
-        #reglamento-grid {
-          grid-template-columns: 1fr;
-          overflow: visible;
-          height: auto;
-        }
-        #reglamento-nav {
-          padding: 1.2rem 1rem 0;
-          flex-direction: row;
-          flex-wrap: wrap;
-          gap: 0.5rem;
-        }
-        .reg-btn {
-          width: auto;
-          flex: 1;
-          min-width: 120px;
-          font-size: 0.95rem;
-          padding: 0.4rem 0.9rem;
-        }
-        #reglamento-text {
-          padding: 1.2rem 1rem 5rem;
-        }
-        #btn-publicacion {
-          bottom: 1rem;
-          right: 1rem;
-          font-size: 1rem;
-        }
-
-        .reg-section p {
-          max-width: 100%;
-        }
-      }
-    </style>
+    <link rel="stylesheet" href="./css/reglamento.css" />
   </head>
   <body>
     <header>
@@ -217,7 +25,6 @@
     </div>
 
     <div id="reglamento-grid">
-      <!-- COLUMNA IZQUIERDA — índice -->
       <nav id="reglamento-nav">
         <button class="reg-btn active" onclick="showSection('deporte', this)">
           A. deporte
@@ -233,7 +40,6 @@
         </button>
       </nav>
 
-      <!-- COLUMNA DERECHA — contenido -->
       <div id="reglamento-text">
         <!-- A. DEPORTE -->
         <div class="reg-section active" id="sec-deporte">
@@ -659,29 +465,7 @@
 
     <button id="btn-publicacion">publicación</button>
 
-    <script>
-      document
-        .getElementById("btn-publicacion")
-        .addEventListener("click", () => {
-          const enlace = document.createElement("a");
-          enlace.href = "/assets/parkuir.pdf";
-          enlace.download = "parkuir.pdf";
-          document.body.appendChild(enlace);
-          enlace.click();
-          document.body.removeChild(enlace);
-        });
-
-      function showSection(id, btn) {
-        document
-          .querySelectorAll(".reg-section")
-          .forEach((s) => s.classList.remove("active"));
-        document.getElementById("sec-" + id).classList.add("active");
-        document
-          .querySelectorAll(".reg-btn")
-          .forEach((b) => b.classList.remove("active"));
-        btn.classList.add("active");
-      }
-    </script>
+    <script src="js/reglamento.js"></script>
     <script src="js/menu.js"></script>
   </body>
 </html>

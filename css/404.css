@@ -1,0 +1,16 @@
+main.error-404 {
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 1.5rem;
+  padding: 2rem;
+}
+main.error-404 h1 {
+  margin: 0;
+}
+main.error-404 a {
+  text-decoration: underline;
+}

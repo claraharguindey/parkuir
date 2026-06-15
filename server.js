@@ -45,7 +45,6 @@ function serveFile(res, filePath) {
 
   fs.readFile(filePath, (err, data) => {
     if (err) {
-      // archivo no encontrado → servir pantalla 404 propia
       fs.readFile(path.join(__dirname, "404.html"), (err2, page404) => {
         res.writeHead(404, { "Content-Type": "text/html" });
         res.end(err2 ? "Not found" : page404);
@@ -62,20 +61,18 @@ const server = http.createServer((req, res) => {
   const parsed = url.parse(req.url, true);
   const pathname = parsed.pathname;
 
-  // CORS preflight
   if (req.method === "OPTIONS") {
     send(res, 200, {});
     return;
   }
 
-  // ── API ──────────────────────────────────────────────
-  // GET /api/liga — devuelve todas las camisetas
+  // GET /api/liga
   if (req.method === "GET" && pathname === "/api/liga") {
     send(res, 200, readData());
     return;
   }
 
-  // POST /api/liga — guarda una camiseta nueva
+  // POST /api/liga — guarda userId con la entrada
   if (req.method === "POST" && pathname === "/api/liga") {
     let body = "";
     req.on("data", (chunk) => (body += chunk));
@@ -87,17 +84,20 @@ const server = http.createServer((req, res) => {
           return;
         }
         const data = readData();
-        if (data.length >= MAX) data.pop(); // eliminar el más antiguo si hay 100
+        if (data.length >= MAX) data.pop();
         const entry = {
           id: Date.now(),
           title: item.title,
           desc: item.desc || "",
-          img: item.img, // base64 PNG
+          img: item.img,
           date: new Date().toISOString(),
+          userId: item.userId || null, // ← guardamos el userId
         };
-        data.unshift(entry); // más reciente primero
+        data.unshift(entry);
         writeData(data);
-        send(res, 201, entry);
+        // devolvemos la entrada sin userId para no exponerlo
+        const { userId: _, ...publicEntry } = entry;
+        send(res, 201, publicEntry);
       } catch (e) {
         send(res, 400, { error: "JSON inválido" });
       }
@@ -105,12 +105,34 @@ const server = http.createServer((req, res) => {
     return;
   }
 
-  // DELETE /api/liga/:id
+  // DELETE /api/liga/:id — solo si el userId coincide
   if (req.method === "DELETE" && pathname.startsWith("/api/liga/")) {
-    const id = parseInt(pathname.split("/").pop());
-    const data = readData().filter((d) => d.id !== id);
-    writeData(data);
-    send(res, 200, { ok: true });
+    let body = "";
+    req.on("data", (chunk) => (body += chunk));
+    req.on("end", () => {
+      const id = parseInt(pathname.split("/").pop());
+      const data = readData();
+      const entry = data.find((d) => d.id === id);
+
+      if (!entry) {
+        send(res, 404, { error: "No encontrado" });
+        return;
+      }
+
+      let userId = null;
+      try {
+        userId = JSON.parse(body).userId;
+      } catch {}
+
+      // si la entrada tiene userId y no coincide → prohibido
+      if (entry.userId && entry.userId !== userId) {
+        send(res, 403, { error: "No puedes borrar una equipación que no es tuya" });
+        return;
+      }
+
+      writeData(data.filter((d) => d.id !== id));
+      send(res, 200, { ok: true });
+    });
     return;
   }
 
@@ -119,7 +141,6 @@ const server = http.createServer((req, res) => {
     __dirname,
     pathname === "/" ? "index.html" : pathname,
   );
-  // Evitar salir del directorio
   if (!filePath.startsWith(__dirname)) {
     res.writeHead(403);
     res.end();
