@@ -6,7 +6,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=no"
     />
-    <title>Qué es Parkuir</title>
+    <title>PARKUIR — Qué es PARKUIR</title>
     <link rel="stylesheet" href="style.css" />
     <style>
       body {
@@ -41,7 +41,7 @@
       #about-grid {
         flex: 1;
         display: grid;
-        grid-template-columns: 280px 1fr 220px;
+        grid-template-columns: 0.8fr 2.5fr 0.7fr;
         gap: 0;
         overflow: hidden;
         min-height: 0;
@@ -54,12 +54,10 @@
       }
 
       #about-quote {
-        font-family: "BebasNeue", sans-serif;
-        font-size: clamp(1.4rem, 2vw, 1.9rem);
+        font-family: "Outreque", sans-serif;
+        font-size: 1.5rem;
         color: var(--pink);
-        line-height: 1.2;
-        letter-spacing: 0.01em;
-        text-transform: uppercase;
+        font-weight: 600;
       }
 
       /* ── COL CENTRO — texto corrido ── */
@@ -71,11 +69,12 @@
 
       #text-block p {
         font-family: "Outreque", sans-serif;
-        font-size: 0.9rem;
+        font-size: 24px;
         line-height: 1.75;
         color: var(--ink);
         margin-bottom: 1rem;
       }
+
       #text-block p:last-child {
         margin-bottom: 0;
       }
@@ -634,10 +633,7 @@
 
         function onTouchClick(e) {
           // tap sin movimiento → mezclar letras
-          if (
-            Math.abs(velocity.x) < 0.01 &&
-            Math.abs(velocity.y) < 0.01
-          ) {
+          if (Math.abs(velocity.x) < 0.01 && Math.abs(velocity.y) < 0.01) {
             currentWords = wordsWithStyle(true);
             drawText();
             texture.image = txCanvas;
@@ -675,10 +671,18 @@
           gl.canvas.addEventListener("pointerup", onLeave);
           gl.canvas.addEventListener("click", onClick);
           // touch (móvil)
-          gl.canvas.addEventListener("touchstart", onTouchStart, { passive: false });
-          gl.canvas.addEventListener("touchmove", onTouchMove, { passive: false });
-          gl.canvas.addEventListener("touchend", onTouchEnd, { passive: false });
-          gl.canvas.addEventListener("touchend", onTouchClick, { passive: false });
+          gl.canvas.addEventListener("touchstart", onTouchStart, {
+            passive: false,
+          });
+          gl.canvas.addEventListener("touchmove", onTouchMove, {
+            passive: false,
+          });
+          gl.canvas.addEventListener("touchend", onTouchEnd, {
+            passive: false,
+          });
+          gl.canvas.addEventListener("touchend", onTouchClick, {
+            passive: false,
+          });
           if (!rafId) rafId = requestAnimationFrame(loop);
         }
 

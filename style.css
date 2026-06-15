@@ -29,9 +29,9 @@
 }
 
 :root {
-  --bg:    #f0d5c8;
-  --ink:   #292929;
-  --pink:  #ff3773;
+  --bg: #f0d5c8;
+  --ink: #000000;
+  --pink: #ff3773;
   --cream: #ffd9ba;
   --pad: 2rem;
 }
@@ -49,32 +49,74 @@ body {
 
 /* gradiente mesh */
 body::before {
-  content: '';
+  content: "";
   position: fixed;
   inset: 0;
   z-index: -2;
   background:
-    radial-gradient(ellipse 90% 70% at 5%  15%,  #ffcba0 0%, transparent 55%),
-    radial-gradient(ellipse 70% 60% at 85%  5%,  #ffb8c8 0%, transparent 50%),
-    radial-gradient(ellipse 80% 55% at 40% 85%,  #fd8ab0 0%, transparent 55%),
-    radial-gradient(ellipse 60% 70% at 95% 75%,  #fd5e96 0%, transparent 50%),
-    radial-gradient(ellipse 70% 60% at 15% 90%,  #ffaa80 0%, transparent 55%),
+    radial-gradient(ellipse 90% 70% at 5% 15%, #ffcba0 0%, transparent 55%),
+    radial-gradient(ellipse 70% 60% at 85% 5%, #ffb8c8 0%, transparent 50%),
+    radial-gradient(ellipse 80% 55% at 40% 85%, #fd8ab0 0%, transparent 55%),
+    radial-gradient(ellipse 60% 70% at 95% 75%, #fd5e96 0%, transparent 50%),
+    radial-gradient(ellipse 70% 60% at 15% 90%, #ffaa80 0%, transparent 55%),
     #fd8aaa;
   background-size:
-    200% 200%, 180% 180%, 200% 200%,
-    170% 170%, 190% 190%, 100%;
+    200% 200%,
+    180% 180%,
+    200% 200%,
+    170% 170%,
+    190% 190%,
+    100%;
   animation: meshMove 12s ease infinite;
 }
 
 @keyframes meshMove {
-  0%   { background-position: 0% 0%,   100% 0%,   50% 100%, 100% 100%, 0% 50%,  0 0; }
-  25%  { background-position: 50% 30%,  0% 50%,  100% 50%,  50%  0%,  100% 80%, 0 0; }
-  50%  { background-position: 100% 60%, 50% 100%, 0%   0%,   0%  60%,  50% 20%, 0 0; }
-  75%  { background-position: 30% 90%, 100% 20%,  80% 80%,  20% 100%, 80% 50%, 0 0; }
-  100% { background-position: 0% 0%,   100% 0%,   50% 100%, 100% 100%, 0% 50%,  0 0; }
+  0% {
+    background-position:
+      0% 0%,
+      100% 0%,
+      50% 100%,
+      100% 100%,
+      0% 50%,
+      0 0;
+  }
+  25% {
+    background-position:
+      50% 30%,
+      0% 50%,
+      100% 50%,
+      50% 0%,
+      100% 80%,
+      0 0;
+  }
+  50% {
+    background-position:
+      100% 60%,
+      50% 100%,
+      0% 0%,
+      0% 60%,
+      50% 20%,
+      0 0;
+  }
+  75% {
+    background-position:
+      30% 90%,
+      100% 20%,
+      80% 80%,
+      20% 100%,
+      80% 50%,
+      0 0;
+  }
+  100% {
+    background-position:
+      0% 0%,
+      100% 0%,
+      50% 100%,
+      100% 100%,
+      0% 50%,
+      0 0;
+  }
 }
-
-
 
 /* grain estático */
 body::after {
@@ -88,7 +130,6 @@ body::after {
   background-size: 182px;
   opacity: 0.18;
 }
-
 
 /* ── HEADER ── */
 header {
@@ -116,7 +157,9 @@ nav a {
   font-family: "Outreque", sans-serif;
   color: var(--ink);
   text-decoration: none;
+  font-weight: 600;
   letter-spacing: 0.03em;
+  font-size: 1.2rem;
 }
 
 nav a:hover {
@@ -137,7 +180,7 @@ nav a:hover {
 
 /* ── MOBILE ── */
 
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
   #menu-toggle {
     display: block;
   }
@@ -179,7 +222,7 @@ nav a:hover {
   flex-shrink: 0;
   height: clamp(60px, 8vw, 130px);
   background: var(--cream);
-  border-bottom: 1.5px solid rgba(0,0,0,0.08);
+  border-bottom: 1.5px solid rgba(0, 0, 0, 0.08);
 }
 
 /* ── MAIN ── */
@@ -262,7 +305,7 @@ main {
 /* ── FOOTER ── */
 footer {
   flex-shrink: 0;
-  border-top: 1px solid rgba(255,255,255,0.2);
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
   padding: 0.75rem var(--pad);
   display: flex;
   justify-content: space-between;
@@ -295,18 +338,27 @@ footer {
 }
 
 @media (max-width: 768px) {
-  body { height: 100dvh; }
+  body {
+    height: 100dvh;
+  }
 
-  header { padding: 0.6rem var(--pad); }
+  header {
+    padding: 0.6rem var(--pad);
+  }
 
-  .top-band { height: clamp(40px, 6vw, 80px); }
+  .top-band {
+    height: clamp(40px, 6vw, 80px);
+  }
 
   main {
     padding: clamp(4px, 1vw, 8px) 0;
     gap: clamp(3px, 0.5vh, 8px);
   }
 
-  .row { gap: 0.02em; padding: 0; }
+  .row {
+    gap: 0.02em;
+    padding: 0;
+  }
 
   .row span {
     font-size: clamp(2rem, min(20vw, 22vh), 10rem);
@@ -314,7 +366,9 @@ footer {
   }
 
   /* ocultar segunda foto en fila 1 */
-  .row:nth-child(1) .img-wrap:nth-of-type(2) { display: none; }
+  .row:nth-child(1) .img-wrap:nth-of-type(2) {
+    display: none;
+  }
 
   .img-wrap {
     height: 70%;
@@ -334,20 +388,41 @@ footer {
     font-size: clamp(1.8rem, min(22vw, 20vh), 8rem);
   }
 
-  .img-wrap { height: 60%; border-radius: 4px; }
-  #cam-wrap { height: 65%; }
+  .img-wrap {
+    height: 60%;
+    border-radius: 4px;
+  }
+  #cam-wrap {
+    height: 65%;
+  }
 }
 
 @media (max-height: 500px) and (orientation: landscape) {
-  .top-band { height: 30px; }
-  header { padding: 0.3rem var(--pad); }
-  main { gap: 2px; padding: 2px 0; }
-  .row span { font-size: clamp(1.5rem, 18vh, 8rem); }
-  .img-wrap, #cam-wrap { height: 75%; }
+  .top-band {
+    height: 30px;
+  }
+  header {
+    padding: 0.3rem var(--pad);
+  }
+  main {
+    gap: 2px;
+    padding: 2px 0;
+  }
+  .row span {
+    font-size: clamp(1.5rem, 18vh, 8rem);
+  }
+  .img-wrap,
+  #cam-wrap {
+    height: 75%;
+  }
 }
 
 @media (max-width: 768px) {
-  body { height: auto; overflow-y: auto; overflow-x: hidden; }
+  body {
+    height: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
 
   main {
     flex-direction: column;
@@ -390,7 +465,9 @@ footer {
     border-radius: 8px;
   }
 
-  .img-hide-mobile { display: none; }
+  .img-hide-mobile {
+    display: none;
+  }
 
   #cam-wrap {
     width: 65%;
@@ -407,55 +484,86 @@ footer {
     align-items: center;
   }
 
-  .row:nth-child(1) { 
-    flex-direction: column; 
+  .row:nth-child(1) {
+    flex-direction: column;
     align-items: flex-start;
   }
   .row:nth-child(1)::before {
-    content: 'PARKUIR';
+    content: "PARKUIR";
     font-family: "BebasNeue", sans-serif;
     font-size: clamp(6rem, 20vw, 7rem);
     color: var(--pink);
     line-height: 1;
     letter-spacing: -0.01em;
   }
-  .row:nth-child(1) span { display: none; }
+  .row:nth-child(1) span {
+    display: none;
+  }
 
   .row:nth-child(2) {
     flex-direction: column;
     align-items: flex-end;
   }
   .row:nth-child(2)::before {
-    content: 'DEPORTE';
+    content: "DEPORTE";
     font-family: "BebasNeue", sans-serif;
     font-size: clamp(6rem, 20vw, 7rem);
     color: var(--pink);
     line-height: 1;
     letter-spacing: -0.01em;
   }
-  .row:nth-child(2) span { display: none; }
+  .row:nth-child(2) span {
+    display: none;
+  }
 
   .row:nth-child(3) {
     flex-direction: column;
     align-items: flex-start;
   }
   .row:nth-child(3)::before {
-    content: 'SUBVERSIVO';
+    content: "SUBVERSIVO";
     font-family: "BebasNeue", sans-serif;
     font-size: clamp(6rem, 20vw, 7rem);
     color: var(--pink);
     line-height: 1;
     letter-spacing: -0.01em;
   }
-  .row:nth-child(3) span { display: none; }
+  .row:nth-child(3) span {
+    display: none;
+  }
 }
 
 @media (max-height: 500px) and (orientation: landscape) {
-  body { height: auto; overflow-y: auto; }
-  main { flex-direction: column; height: auto; overflow: visible; padding: 0 0.5rem; gap: 0.5rem; }
-  .row { flex-direction: row; height: auto; align-items: center; flex-wrap: nowrap; }
-  .row span { display: flex; font-size: clamp(2rem, 12vh, 5rem); }
-  .row::before { display: none; }
-  .img-wrap, #cam-wrap { height: 60%; width: auto; }
-  .img-hide-mobile { display: flex; }
+  body {
+    height: auto;
+    overflow-y: auto;
+  }
+  main {
+    flex-direction: column;
+    height: auto;
+    overflow: visible;
+    padding: 0 0.5rem;
+    gap: 0.5rem;
+  }
+  .row {
+    flex-direction: row;
+    height: auto;
+    align-items: center;
+    flex-wrap: nowrap;
+  }
+  .row span {
+    display: flex;
+    font-size: clamp(2rem, 12vh, 5rem);
+  }
+  .row::before {
+    display: none;
+  }
+  .img-wrap,
+  #cam-wrap {
+    height: 60%;
+    width: auto;
+  }
+  .img-hide-mobile {
+    display: flex;
+  }
 }
