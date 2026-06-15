@@ -49,13 +49,12 @@ body {
   font-weight: 700;
   color: #ffd9ba;
   border: none;
-  border-radius: 999px;
+  border-radius: 14px;
   padding: 0.55rem 1.4rem;
   cursor: pointer;
   text-align: left;
   letter-spacing: 0.01em;
   width: 100%;
-  border-radius: 14px;
   transition:
     transform 0.1s,
     filter 0.15s;
@@ -82,6 +81,10 @@ body {
   background: #ffd9ba;
   color: #fd5e96;
 }
+.reg-btn:nth-child(5) {
+  background: #fd5e96;
+  opacity: 0.7;
+}
 
 /* ── COL DERECHA — texto ── */
 #reglamento-text {
@@ -99,12 +102,11 @@ body {
 
 .reg-section h3 {
   font-family: "Outreque", sans-serif;
-  font-size: 1rem;
+  font-size: 24px;
   font-weight: 700;
   color: var(--pink);
   letter-spacing: 0.03em;
-  text-transform: lowercase;
-  margin: 1.8rem 0 0.5rem;
+  text-transform: uppercase;
 }
 
 .reg-section p {
@@ -122,9 +124,57 @@ body {
 .reg-section em {
   font-style: italic;
 }
-
 .reg-section strong {
   font-weight: 700;
+}
+
+/* ── REFERENCIAS ── */
+.refs-block {
+  margin-bottom: 2.5rem;
+}
+.refs-block:last-child {
+  margin-bottom: 0;
+}
+
+.refs-cat {
+  font-family: "Outreque", sans-serif;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  opacity: 0.45;
+  color: black;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.refs-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.refs-list li {
+  font-family: "Outreque", sans-serif;
+  font-size: 24px;
+  line-height: 1.5;
+  color: black;
+  padding: 0.55rem 0;
+  max-width: 80%;
+}
+
+.refs-list li:first-child {
+  border-top: 1px solid var(--pink);
+}
+
+.refs-list a {
+  color: black;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.refs-list a:hover {
+  color: var(--pink);
 }
 
 /* ── BOTÓN PUBLICACIÓN ── */
@@ -184,8 +234,10 @@ body {
     right: 1rem;
     font-size: 1rem;
   }
-
   .reg-section p {
+    max-width: 100%;
+  }
+  .refs-list li {
     max-width: 100%;
   }
 }
