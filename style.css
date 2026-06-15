@@ -69,12 +69,13 @@ body::before {
   position: fixed;
   inset: 0;
   z-index: -2;
-  background:
-    radial-gradient(ellipse 90% 70% at 5% 15%, #ffcba0 0%, transparent 55%),
-    radial-gradient(ellipse 70% 60% at 85% 5%, #ffb8c8 0%, transparent 50%),
-    radial-gradient(ellipse 80% 55% at 40% 85%, #fd8ab0 0%, transparent 55%),
-    radial-gradient(ellipse 60% 70% at 95% 75%, #fd5e96 0%, transparent 50%),
-    radial-gradient(ellipse 70% 60% at 15% 90%, #ffaa80 0%, transparent 55%),
+    background:
+    radial-gradient(ellipse 140% 120% at -10% 10%, #ff8c3a 0%, transparent 50%),
+    radial-gradient(ellipse 120% 100% at 110% -10%, #ffb8c8 0%, transparent 50%),
+    radial-gradient(ellipse 130% 110% at 20% 110%, #fd6a90 0%, transparent 50%),
+    radial-gradient(ellipse 120% 130% at 110% 90%, #fd5e96 0%, transparent 50%),
+    radial-gradient(ellipse 110% 150% at -10% 80%, #ff6a1a 0%, transparent 50%),
+    radial-gradient(ellipse 100% 120% at 60% 40%, #fd7145 0%, transparent 55%),
     #fd8aaa;
   background-size:
     200% 200%,
@@ -83,7 +84,7 @@ body::before {
     170% 170%,
     190% 190%,
     100%;
-  animation: meshMove 12s ease infinite;
+  animation: meshMove 10s ease infinite;
 }
 
 @keyframes meshMove {
@@ -349,7 +350,6 @@ footer {
 .interior body {
   height: auto;
   overflow: auto;
-  background: var(--bg);
   color: var(--ink);
 }
 
