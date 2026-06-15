@@ -14,9 +14,6 @@
         flex-direction: column;
       }
 
-      /* el grano global (body::after) es position:fixed con z-index:0 y se
-         pinta encima del contenido no posicionado, aclarando los colores.
-         Subimos el contenido por encima de esa capa. */
       header,
       .top-band,
       .equip-band,
@@ -51,7 +48,7 @@
         grid-template-columns: 1fr 1fr;
         gap: 2rem;
         padding: 2rem 2.5rem 3rem;
-        max-width: 1100px;
+        max-width: 70%;
         margin: 0 auto;
         width: 100%;
         align-items: stretch;
@@ -73,9 +70,8 @@
         padding-top: 0.3rem;
       }
       .tools-label {
-        font-family: "BebasNeue", sans-serif;
-        font-size: 0.65rem;
-        letter-spacing: 0.1em;
+        font-family: "Outreque", sans-serif;
+        font-size: 16px;
         text-transform: uppercase;
         color: var(--ink);
         margin-bottom: 0.2rem;
@@ -176,13 +172,6 @@
         flex-direction: column;
         gap: 0.4rem;
       }
-      .colors-label {
-        font-family: "BebasNeue", sans-serif;
-        font-size: 0.65rem;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        color: var(--ink);
-      }
       .palette-rows {
         display: flex;
         flex-direction: column;
@@ -194,6 +183,7 @@
         gap: 0.45rem;
         align-items: center;
         flex-wrap: wrap;
+        justify-content: space-around;
       }
       .colors-block {
         display: flex;
@@ -201,8 +191,8 @@
         gap: 0.6rem;
       }
       .color-btn {
-        width: 40px;
-        height: 40px;
+        width: 50px;
+        height: 50px;
         border-radius: 50%;
         border: 2.5px solid var(--ink);
         cursor: pointer;
@@ -226,14 +216,14 @@
         gap: 0.35rem;
       }
       .btn-action {
-        font-family: "BebasNeue", sans-serif;
+        font-family: "Outreque", sans-serif;
         font-size: 0.8rem;
         letter-spacing: 0.08em;
         text-transform: uppercase;
-        background: rgba(255, 255, 255, 0.5);
-        border: 1.5px solid rgba(0, 0, 0, 0.1);
-        border-radius: 999px;
-        padding: 0.28rem 0.9rem;
+        background: var(--cream);
+        border: 0;
+        border-radius: 14px;
+        padding: 0.5rem;
         cursor: pointer;
         transition: background 0.15s;
         white-space: nowrap;
@@ -255,8 +245,7 @@
         min-width: 0;
       }
       .field-nombre {
-        background: var(--pink);
-        border: 2px solid rgba(255, 255, 255, 0.45);
+        background: #fd5e96;
         border-radius: 12px;
         padding: 0.85rem 1.2rem;
       }
@@ -265,14 +254,12 @@
         background: transparent;
         border: none;
         outline: none;
-        font-family: "BebasNeue", sans-serif;
+        font-family: "Outreque", sans-serif;
         font-size: 1rem;
-        letter-spacing: 0.12em;
         text-transform: uppercase;
-        color: rgba(255, 255, 255, 0.65);
       }
       .field-nombre input::placeholder {
-        color: rgba(255, 255, 255, 0.45);
+        color: #ffd9ba;
       }
 
       .field-desc {
@@ -283,9 +270,8 @@
         min-width: 0;
       }
       .field-desc-label {
-        font-family: "BebasNeue", sans-serif;
-        font-size: 0.7rem;
-        letter-spacing: 0.12em;
+        font-family: "Outreque", sans-serif;
+        font-size: 0.9rem;
         text-transform: uppercase;
         color: var(--pink);
         margin-bottom: 0.4rem;
@@ -329,15 +315,16 @@
       }
       .btn-submit {
         flex: 1;
-        background: #ffb0d0;
+        background: #fd5e96;
         border: none;
         border-radius: 12px;
         padding: 0.85rem 1.5rem;
-        font-family: "BebasNeue", sans-serif;
+        font-family: "Outrque", sans-serif;
         font-size: 1.1rem;
+        font-weight: 600;
         letter-spacing: 0.04em;
         text-transform: lowercase;
-        color: var(--ink);
+        color: var(--cream);
         cursor: pointer;
         transition: background 0.15s;
       }
@@ -348,7 +335,7 @@
       /* ── GALERÍA ── */
       .gallery-section {
         padding: 0 2.5rem 3rem;
-        max-width: 1100px;
+        max-width: 70%;
         margin: 0 auto;
         width: 100%;
       }
@@ -360,7 +347,6 @@
       .gallery-empty {
         font-family: "Outreque", sans-serif;
         font-size: 0.85rem;
-        text-transform: uppercase;
         letter-spacing: 0.1em;
         color: rgba(255, 255, 255, 0.5);
         padding: 1rem 0;
@@ -489,8 +475,7 @@
         }
         .palette-area {
           grid-column: 1 / -1;
-          width: 100vw;
-          margin-left: -1.2rem;
+          width: 100%;
           padding: 0 1.2rem;
         }
       }
@@ -521,7 +506,7 @@
       </nav>
     </header>
 
-    <div class="equip-band"><h1>Equipacion</h1></div>
+    <div class="equip-band"><h1>Equipación</h1></div>
 
     <div class="equip-main">
       <!-- IZQUIERDA -->
@@ -552,7 +537,6 @@
           </div>
 
           <div class="palette-area">
-            <div class="colors-label">Tamaño</div>
             <div class="size-control">
               <span class="size-dot-min"></span>
               <input
@@ -567,19 +551,21 @@
               />
               <span class="size-dot-max"></span>
             </div>
+            <div class="tools-label">Tamaño pincel</div>
 
-            <div class="colors-label">Colores</div>
             <div class="colors-block">
               <div class="palette-rows">
                 <div class="palette-row" id="paletteRow1"></div>
                 <div class="palette-row" id="paletteRow2"></div>
               </div>
+
               <div class="action-col">
                 <button class="btn-action" id="btnEraser">Borrar</button>
                 <button class="btn-action" id="btnClear">Limpiar</button>
                 <button class="btn-action" id="btnSave">Guardar</button>
               </div>
             </div>
+            <div class="tools-label">Colores</div>
           </div>
         </div>
       </div>
@@ -598,7 +584,7 @@
           <div class="field-desc-label">Descripción</div>
           <textarea
             id="shirtDesc"
-            placeholder="Cuéntanos algo sobre tu equipación..."
+            placeholder="Cuéntanos algo sobre tu equipo..."
           ></textarea>
         </div>
         <div class="submit-row">
