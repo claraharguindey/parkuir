@@ -448,10 +448,11 @@ header,
   color: var(--ink);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .equip-main {
     grid-template-columns: 1fr;
     padding: 1.2rem;
+    max-width: 100%;
   }
   .left-panel {
     grid-template-columns: 44px 1fr;
@@ -463,6 +464,9 @@ header,
     grid-column: 1 / -1;
     width: 100%;
     padding: 0 1.2rem;
+  }
+  .gallery-section {
+    max-width: 100%;
   }
 }
 @media (max-width: 480px) {
