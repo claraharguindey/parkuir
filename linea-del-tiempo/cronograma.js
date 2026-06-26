@@ -46,7 +46,7 @@ let stepPhase = 0,
 let activeCard = null,
   lastActive = null;
 
-const WORLD_W = 5700,
+const WORLD_W = 13870,
   GRAVITY = 0.55,
   JUMP_F = -13;
 const ACCEL = 0.55,
