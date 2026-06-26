@@ -181,12 +181,12 @@ body {
   }
 
   .page-left {
-    order: 2;
+    order: 3;
     padding: 0.8rem 1rem 0;
   }
 
   .page-center {
-    order: 3;
+    order: 2;
     padding: 0.8rem 1rem 2rem;
     overflow: visible;
   }
