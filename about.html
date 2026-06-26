@@ -2,12 +2,10 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, user-scalable=no"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
     <title>PARKUIR — Qué es PARKUIR</title>
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="./css/layout.css" />
     <link rel="stylesheet" href="./css/about.css" />
   </head>
   <body class="reading">
@@ -24,47 +22,36 @@
       </nav>
     </header>
 
-    <div class="about-band">
+    <!-- banda título genérica -->
+    <div class="page-band">
       <h1>Qué es eso del Parkuir</h1>
     </div>
 
-    <div id="about-grid">
-      <!-- COLUMNA IZQUIERDA — frase -->
-      <div id="about-left">
-        <p id="about-quote">
+    <!-- grid genérico -->
+    <div class="page-grid">
+
+      <!-- COL IZQUIERDA — frase destacada -->
+      <div class="page-left">
+        <p class="page-quote">
           Parkuir es un deporte para no encajar, para habitar el espacio público
           desde el goce y la desobediencia. En Parkuir se camina raro, nos
           travestimos, se practica la caída, no se suda nada y, sobre todo, se
           disfruta.
           <br /><br />
           Parkuir es un proyecto de Maria Laudes
-          <a
-            href="https://instagram.com/marialaudes"
-            target="_blank"
-            rel="noopener"
-            >@marialaudes</a
-          >
-          <a href="mailto:mlaudesgonzalez@gmail.com"
-            >mlaudesgonzalez@gmail.com</a
-          >
-
+          <a href="https://instagram.com/marialaudes" target="_blank" rel="noopener">@marialaudes</a>
+          <a href="mailto:mlaudesgonzalez@gmail.com">mlaudesgonzalez@gmail.com</a>
           y Guiu Gimeno Bardís
-          <a
-            href="https://instagram.com/gimenobardis"
-            target="_blank"
-            rel="noopener"
-            >@gimenobardis</a
-          >
+          <a href="https://instagram.com/gimenobardis" target="_blank" rel="noopener">@gimenobardis</a>
           <a href="mailto:guiu.gimeno@gmail.com">guiu.gimeno@gmail.com</a>
-
           <br />
           <a href="mailto:hola@parkuir.com">hola@parkuir.com</a>
         </p>
       </div>
 
-      <!-- COLUMNA CENTRO — texto completo -->
-      <div id="about-center">
-        <div id="text-block">
+      <!-- COL CENTRO — texto + canvas -->
+      <div class="page-center">
+        <div id="text-block" class="page-body">
           <p>
             ¡Holi! Somos Maria Laudes y Guiu Gimeno Bardis, aunque en Parkuir
             hemos tenido muchísimos otros nombres: Fast Zópez, Rayito McQueen,
@@ -111,34 +98,16 @@
         <div id="flow-canvas"></div>
       </div>
 
-      <!-- COLUMNA DERECHA — controles -->
-      <div id="about-right">
-        <button class="mode-btn" id="btn-leer" onclick="setMode('read')">
-          Léelo
-        </button>
-        <button
-          class="mode-btn"
-          id="btn-travestir"
-          onclick="setMode('travestir')"
-        >
-          Hazlo travesti
-        </button>
-        <button
-          class="mode-btn"
-          id="btn-fracasar"
-          onclick="setMode('fracasar')"
-        >
-          Hazlo fracasado
-        </button>
-        <button
-          class="mode-btn"
-          id="btn-ilegibilidad"
-          onclick="setMode('ilegibilidad')"
-        >
-          Hazlo ilegible
-        </button>
+      <!-- COL DERECHA — botones de modo -->
+      <div class="page-right">
+        <button class="panel-btn pink"   id="btn-leer"         onclick="setMode('read')">Léelo</button>
+        <button class="panel-btn orange" id="btn-travestir"    onclick="setMode('travestir')">Hazlo travesti</button>
+        <button class="panel-btn red"    id="btn-fracasar"     onclick="setMode('fracasar')">Hazlo fracasado</button>
+        <button class="panel-btn cream"  id="btn-ilegibilidad" onclick="setMode('ilegibilidad')">Hazlo ilegible</button>
       </div>
+
     </div>
+
     <script type="module" src="js/about.js"></script>
     <script src="js/menu.js"></script>
   </body>

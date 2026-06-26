@@ -168,14 +168,11 @@ body {
 
 .card-desc {
   font-family: "Outreque", sans-serif;
-  font-size: 14px;
+  font-size: 18px;
   color: var(--ink);
   line-height: 1.55;
   flex: 1;
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 5;
-  -webkit-box-orient: vertical;
+  overflow: auto;
 }
 
 @media (max-width: 900px) {
