@@ -27,6 +27,7 @@
   margin-bottom: 1rem;
   max-width: 80%;
   font-size: 20px;
+  line-height: 1.5;
 }
 .reg-section p:last-child {
   margin-bottom: 0;
