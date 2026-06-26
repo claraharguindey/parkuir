@@ -142,10 +142,10 @@ body {
   outline-color: #fd5e96;
 }
 
-/* Colores por defecto del sistema Parkuir */
 .panel-btn.ink        { background: var(--ink); }
 .panel-btn.pink       { background: #fd5e96; }
 .panel-btn.orange     { background: #fd7145; }
+.panel-btn.black        { background: #000000; }
 .panel-btn.red        { background: #ff3773; }
 
 /* ── RESPONSIVE ── */

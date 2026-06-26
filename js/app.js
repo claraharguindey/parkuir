@@ -20,17 +20,16 @@ new p5(function (p) {
 
   p.setup = function () {
     const wrap = document.getElementById("cam-wrap");
-    const cnv = p.createCanvas(
-      wrap.offsetWidth || 240,
-      wrap.offsetHeight || 180,
-    );
+    const cnv = p.createCanvas(wrap.offsetWidth || 240, wrap.offsetHeight || 180);
     cnv.parent("cam-wrap");
 
-    capture = p.createCapture(p.VIDEO);
+    capture = p.createCapture(p.VIDEO, () => {
+      const ph = document.getElementById("cam-placeholder");
+      if (ph) ph.remove();
+    });
     capture.size(320, 240);
     capture.hide();
 
-    // sin flipped — imagen y keypoints en el mismo sistema de coordenadas
     bodyPose = ml5.bodyPose("MoveNet", { flipped: false }, () => {
       bodyPose.detectStart(capture, (r) => {
         poses = r;
@@ -40,8 +39,6 @@ new p5(function (p) {
 
   p.draw = function () {
     p.clear();
-
-    // imagen tal cual, sin espejeo
     p.image(capture, 0, 0, p.width, p.height);
 
     if (!poses.length) return;
@@ -49,7 +46,6 @@ new p5(function (p) {
     const sx = p.width / 320;
     const sy = p.height / 240;
 
-    // conexiones
     p.stroke(255, 255, 255, 210);
     p.strokeWeight(1.5);
     p.noFill();
@@ -59,7 +55,6 @@ new p5(function (p) {
       }
     });
 
-    // puntos clave
     p.noStroke();
     p.fill(255, 255, 255, 230);
     [1, 2].forEach((i) => {

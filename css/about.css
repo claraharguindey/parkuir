@@ -18,3 +18,28 @@ body.mode-ilegibilidad #btn-ilegibilidad {
   outline: 3px solid #fd5e96;
   outline-offset: -3px;
 }
+
+.logos {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.logos img {
+  max-width: 200px;
+}
+
+@media (max-width: 768px) {
+  .logos {
+    flex-direction: row;
+    gap: 20px;
+  }
+
+  .logos img {
+    max-width: 100px;
+  }
+
+  #text-block {
+    width: 100%;
+  }
+}

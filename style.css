@@ -316,6 +316,16 @@ main {
   margin: 0 0.3em;
   background: #ff3773;
 }
+
+#cam-placeholder {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0.5;
+}
+
 #cam-wrap canvas {
   position: absolute !important;
   inset: 0;
@@ -324,6 +334,7 @@ main {
   filter: grayscale(100%) contrast(1.3) brightness(0.85);
   mix-blend-mode: multiply;
 }
+
 
 /* ── FOOTER ── */
 footer {
