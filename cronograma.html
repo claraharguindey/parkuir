@@ -1,83 +1,108 @@
 <!doctype html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PARKUIR — Línea del tiempo</title>
-  <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="css/cronograma.css" />
-</head>
-<body>
-  <header>
-    <a href="/">parkuir</a>
-    <button id="menu-toggle" aria-label="Abrir menú">☰</button>
-    <nav id="main-nav">
-      <a href="/about.html">qué es parkuir</a>
-      <a class="active" href="/cronograma.html">línea del tiempo</a>
-      <a href="/reglamento.html">reglamento</a>
-      <a href="/jugadorxs.html">jugadorxs</a>
-      <a href="/equipacion.html">equipación</a>
-      <a href="/acciones.html">acciones</a>
-    </nav>
-  </header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PARKUIR — Línea del tiempo</title>
 
-  <div class="crono-band">
-    <h1>Línea del tiempo</h1>
-  </div>
+    <!-- Open Graph / compartir -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://parkuir.com/cronograma.html" />
+    <meta property="og:title" content="PARKUIR — Línea del tiempo" />
+    <meta
+      property="og:description"
+      content="Un deporte para no encajar, para habitar el espacio público desde el goce y la desobediencia. Se camina raro, nos travestimos, se practica la caída, no se suda nada y, sobre todo, se disfruta."
+    />
+    <meta property="og:image" content="https://parkuir.com/images/og.png" />
 
-  <div id="info-card">
-    <div id="info-card-img">
-      <img id="info-card-img-el" alt="" />
-      <div id="info-card-year"></div>
+    <!-- Twitter/X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://parkuir.com/cronograma.html" />
+    <meta name="twitter:title" content="PARKUIR — Línea del tiempo" />
+    <meta
+      name="twitter:description"
+      content="Un deporte para no encajar, para habitar el espacio público desde el goce y la desobediencia. Se camina raro, nos travestimos, se practica la caída, no se suda nada y, sobre todo, se disfruta."
+    />
+    <meta name="twitter:image" content="https://parkuir.com/images/og.png" />
+
+    <!-- Color del navegador -->
+    <meta name="theme-color" content="#fd8aaa" />
+
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="css/cronograma.css" />
+  </head>
+  <body>
+    <header>
+      <a href="/">parkuir</a>
+      <button id="menu-toggle" aria-label="Abrir menú">☰</button>
+      <nav id="main-nav">
+        <a href="/about.html">qué es parkuir</a>
+        <a class="active" href="/cronograma.html">línea del tiempo</a>
+        <a href="/reglamento.html">reglamento</a>
+        <a href="/jugadorxs.html">jugadorxs</a>
+        <a href="/equipacion.html">equipación</a>
+        <a href="/acciones.html">acciones</a>
+      </nav>
+    </header>
+
+    <div class="crono-band">
+      <h1>Línea del tiempo</h1>
     </div>
-    <div id="info-card-content">
-      <div id="info-card-title"></div>
-      <div id="info-card-text"></div>
-    </div>
-  </div>
 
-  <div id="world-wrapper">
-    <div id="world">
-      <div id="ground-line"></div>
-      <div id="player">
-        <img id="player-img" src="./images/idle.png" alt="" />
+    <div id="info-card">
+      <div id="info-card-img">
+        <img id="info-card-img-el" alt="" />
+        <div id="info-card-year"></div>
+      </div>
+      <div id="info-card-content">
+        <div id="info-card-title"></div>
+        <div id="info-card-text"></div>
       </div>
     </div>
-  </div>
 
-  <div id="site-footer">
-    <button id="btn-left">←</button>
-    <button id="btn-jump">↑</button>
-    <button id="btn-right">→</button>
-  </div>
-  <div id="footer-hint">← → moverse · ↑ saltar</div>
+    <div id="world-wrapper">
+      <div id="world">
+        <div id="ground-line"></div>
+        <div id="player">
+          <img id="player-img" src="./images/idle.png" alt="" />
+        </div>
+      </div>
+    </div>
 
-  <!-- 1. datos -->
-  <script src="js/cronograma-data.js"></script>
+    <div id="site-footer">
+      <button id="btn-left">←</button>
+      <button id="btn-jump">↑</button>
+      <button id="btn-right">→</button>
+    </div>
+    <div id="footer-hint">← → moverse · ↑ saltar</div>
 
-  <!-- 2. generar edificios desde datos -->
-  <script>
-    (function () {
-      const world  = document.getElementById('world');
-      const player = document.getElementById('player');
-      CRONOGRAMA.forEach(d => {
-        const bld = document.createElement('div');
-        bld.className    = 'bld';
-        bld.dataset.left = d.left;
-        bld.dataset.w    = d.w;
-        bld.dataset.h    = d.h;
-        if (d.wb)  bld.dataset.wb   = d.wb;
-        bld.dataset.year = d.year;
-        bld.dataset.es   = d.es;
-        bld.dataset.body = d.body;
-        if (d.img) bld.dataset.img  = d.img;
-        bld.innerHTML = '<div class="block"></div><div class="bld-year"></div>';
-        world.insertBefore(bld, player);
-      });
-    })();
-  </script>
+    <!-- 1. datos -->
+    <script src="js/cronograma-data.js"></script>
 
-  <script src="js/cronograma.js"></script>
-  <script src="js/menu.js"></script>
-</body>
+    <!-- 2. generar edificios desde datos -->
+    <script>
+      (function () {
+        const world = document.getElementById("world");
+        const player = document.getElementById("player");
+        CRONOGRAMA.forEach((d) => {
+          const bld = document.createElement("div");
+          bld.className = "bld";
+          bld.dataset.left = d.left;
+          bld.dataset.w = d.w;
+          bld.dataset.h = d.h;
+          if (d.wb) bld.dataset.wb = d.wb;
+          bld.dataset.year = d.year;
+          bld.dataset.es = d.es;
+          bld.dataset.body = d.body;
+          if (d.img) bld.dataset.img = d.img;
+          bld.innerHTML =
+            '<div class="block"></div><div class="bld-year"></div>';
+          world.insertBefore(bld, player);
+        });
+      })();
+    </script>
+
+    <script src="js/cronograma.js"></script>
+    <script src="js/menu.js"></script>
+  </body>
 </html>
