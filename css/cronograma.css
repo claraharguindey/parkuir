@@ -34,7 +34,7 @@ body {
 }
 #world {
   position: absolute;
-  width: 6000px;
+  width: 13870px;
   height: 100%;
   top: 0;
   left: 0;
@@ -110,7 +110,7 @@ body {
 #ground-line {
   position: absolute;
   left: 0;
-  width: 6000px;
+  width: 13870px;
   background: var(--pink);
 }
 
