@@ -24,382 +24,101 @@
     <div class="acciones-band"><h1>Acciones</h1></div>
 
     <div id="juego">
-      <div id="filtros">
-        <button class="filtro-btn active" data-cat="todos">Todas</button>
-        <button class="filtro-btn" data-cat="basicos">Básicos Parkuir</button>
-        <button class="filtro-btn" data-cat="arquitectura">Arquitectura</button>
-        <button class="filtro-btn" data-cat="material">
-          Requiere material
-        </button>
-        <button class="filtro-btn" data-cat="grupo">En grupo</button>
+
+      <!-- CONTROLES — columna izquierda -->
+      <div id="controles">
+        <div id="filtros">
+          <button class="filtro-btn active" data-cat="todos">todas</button>
+          <button class="filtro-btn" data-cat="basicos">básicos parkuir</button>
+          <button class="filtro-btn" data-cat="arquitectura">arquitectura</button>
+          <button class="filtro-btn" data-cat="material">requiere material</button>
+          <button class="filtro-btn" data-cat="grupo">en grupo</button>
+        </div>
+        <button id="btn-tirar">otra acción →</button>
+        <div id="contador"></div>
       </div>
 
+      <!-- TARJETA — columna derecha -->
       <div id="card-area">
         <div class="accion-card" id="accion-card">
-          <div class="accion-num" id="accion-num"></div>
+          <div class="accion-header">
+            <div class="accion-num" id="accion-num"></div>
+            <div class="accion-titulo" id="accion-titulo"></div>
+          </div>
+          <div class="accion-body">
+            <div class="accion-desc" id="accion-desc"></div>
+            <div class="accion-material" id="accion-material"></div>
+          </div>
           <span class="accion-cat-badge" id="accion-badge"></span>
-          <div class="accion-titulo" id="accion-titulo"></div>
-          <div class="accion-desc" id="accion-desc"></div>
-          <div class="accion-material" id="accion-material"></div>
         </div>
       </div>
 
-      <button id="btn-tirar">otra acción</button>
-      <div id="contador"></div>
     </div>
 
     <script>
       const CAT_COLORS = {
-        basicos: "#fd5e96",
+        basicos:      "#fd5e96",
         arquitectura: "#fd7145",
-        material: "#ff3773",
-        grupo: "#ffd9ba",
+        material:     "#ff3773",
+        grupo:        "#ffd9ba",
       };
 
       const CAT_LABELS = {
-        basicos: "Básicos Parkuir",
-        arquitectura: "Arquitectura",
-        material: "Requiere material",
-        grupo: "En grupo",
+        basicos:      "BÁSICOS PARKUIR",
+        arquitectura: "ARQUITECTURA",
+        material:     "REQUIERE MATERIAL",
+        grupo:        "EN GRUPO",
       };
 
       const ACCIONES = [
-        {
-          n: 1,
-          cat: "basicos",
-          titulo: "Desesperar",
-          desc: "Cambia los tiempos de la acción que vas a realizar, con el objetivo de desesperar a quienes observan.",
-          material: null,
-        },
-        {
-          n: 2,
-          cat: "basicos",
-          titulo: "No llegar",
-          desc: "Elige un destino cercano y empieza a dirigirte hacia él. Antes de llegar, haz alguna acción para impedir tu propia llegada: cambia de dirección, detente, da un rodeo innecesario, cómete un helado, acaricia un perro...",
-          material: null,
-        },
-        {
-          n: 3,
-          cat: "basicos",
-          titulo: "Incomodar",
-          desc: "Piensa en un gesto pequeño: sentarse, girar, moverse. Hazlo de manera que desafíe las expectativas: lento, exagerado, ruidoso o absurdo.",
-          material: null,
-        },
-        {
-          n: 4,
-          cat: "basicos",
-          titulo: "Pereza",
-          desc: "Esfuérzate mucho en ser lo más perezose posible. Si te cuesta, piensa en una acción cotidiana y hazla demostrando tu mejor habilidad perezosa.",
-          material: null,
-        },
-        {
-          n: 5,
-          cat: "basicos",
-          titulo: "Caer",
-          desc: "Déjate caer. No importa desde dónde ni cómo, importa el cómo caes. Investiga la caída como gesto, como coreografía. Inspírate en el vogue, en les torpes.",
-          material: null,
-        },
-        {
-          n: 6,
-          cat: "basicos",
-          titulo: "Fliparse",
-          desc: "Haz un movimiento sutil o cotidiano. Pero exágeralo y celébralo muchísimo, como si acabases de lograr una hazaña histórica… aunque no haya pasado nada.",
-          material: null,
-        },
-        {
-          n: 7,
-          cat: "basicos",
-          titulo: "Sí, pero no",
-          desc: "Haz un calentamiento larguísimo, serio y concentrado… para después no hacer absolutamente nada. El calentamiento como acción final.",
-          material: null,
-        },
-        {
-          n: 8,
-          cat: "basicos",
-          titulo: "La rata manda",
-          desc: "Elige un animal cercano (paloma, perro, rata, cucaracha…) y conviértelo en tu profe de danza. Obsérvalo atentamente e imita su coreografía, su ritmo y su lógica corporal.",
-          material: null,
-        },
-        {
-          n: 9,
-          cat: "basicos",
-          titulo: "Suspende la gravedad",
-          desc: "Olvida que la gravedad existe. Camina como si no te afectara del todo. Juega a flotar, a resistirte, a negociar con el suelo.",
-          material: null,
-        },
-        {
-          n: 10,
-          cat: "basicos",
-          titulo: "Baila la ciudad",
-          desc: "Detente y escucha el entorno: voces, motores, sirenas, pasos, obras. Céntrate en el ruido que más te interese y conviértelo en la música que marcará tu coreografía.",
-          material: null,
-        },
-        {
-          n: 11,
-          cat: "basicos",
-          titulo: "Animar lo cotidiano",
-          desc: "Detecta a alguien haciendo algo absolutamente normal (esperar, caminar, barrer). Anímale como si estuviera compitiendo en una final mundial.",
-          material: null,
-        },
-        {
-          n: 12,
-          cat: "basicos",
-          titulo: "Modo perrito",
-          desc: "Muévete como perrito: olisquea, estírate, sacúdete, rueda. Baja el cuerpo, pierde verticalidad, abandona lo humano por un rato.",
-          material: null,
-        },
-        {
-          n: 13,
-          cat: "arquitectura",
-          titulo: "Función en fuga",
-          desc: "Detecta un elemento arquitectónico y úsalo para algo que no fue diseñado. Una escalera para sentarse, un bordillo para bailar, una barandilla para descansar.",
-          material: null,
-        },
-        {
-          n: 14,
-          cat: "arquitectura",
-          titulo: "Descanso",
-          desc: "Elige un lugar público y haz del descanso tu acción principal. Acuéstate, siéntate o recuéstate apoyando tu cuerpo. Transformando un espacio de paso en un espacio de descanso.",
-          material: null,
-        },
-        {
-          n: 15,
-          cat: "arquitectura",
-          titulo: "Postura sexual",
-          desc: "¿Cómo es una postura sexual en relación con un elemento arquitectónico? Elige un elemento de la arquitectura que más te seduzca y piensa cómo sería la postura sexual si follaras con él. ¡Atrévete a hacerla!",
-          material: null,
-        },
-        {
-          n: 16,
-          cat: "arquitectura",
-          titulo: "Parkour dactilar",
-          desc: "Haz parkour con los dedos. Recorre una barandilla, una grieta, una pared con tus dedos. Haz piruetas, salta, trepa y cae en miniatura.",
-          material: null,
-        },
-        {
-          n: 17,
-          cat: "arquitectura",
-          titulo: "Tumbar la ciudad",
-          desc: "Túmbate. En el suelo, en un banco, en una rampa, donde tú quieras. Cambia el eje vertical del espacio público y obsérvalo desde abajo.",
-          material: null,
-        },
-        {
-          n: 18,
-          cat: "arquitectura",
-          titulo: "Ornamento",
-          desc: "Conviértete en ornamento. Adhiérete a una columna, una farola, una fachada. Exagera el gesto, la presencia inútil. Haz que tu cuerpo sea una decoración.",
-          material: null,
-        },
-        {
-          n: 19,
-          cat: "arquitectura",
-          titulo: "Mover un edificio",
-          desc: "Intenta mover un edificio de sitio.",
-          material: null,
-        },
-        {
-          n: 20,
-          cat: "arquitectura",
-          titulo: "Confesionario urbano",
-          desc: "Susúrrale tu mayor secreto a un elemento arquitectónico: una pared, un semáforo, una farola... La ciudad también escucha y guarda memoria.",
-          material: null,
-        },
-        {
-          n: 21,
-          cat: "arquitectura",
-          titulo: "Ligoteo arquitectónico",
-          desc: "Elige un elemento del espacio público y flirtea con él. Cuéntale por qué te gusta, qué te atrae, qué te excita de su forma, su textura o su historia.",
-          material: null,
-        },
-        {
-          n: 22,
-          cat: "arquitectura",
-          titulo: "Arquitectura hostil, gesto tierno",
-          desc: "Localiza un banco incómodo, pinchos, barreras o dispositivos de expulsión. Resignifícalos con el cuerpo: apoyarte, rodearlos, abrazarlos, burlarlos.",
-          material: null,
-        },
-        {
-          n: 23,
-          cat: "arquitectura",
-          titulo: "Cuerpo–parche",
-          desc: "Encuentra un elemento roto, agrietado o dañado. Intenta arreglarlo con tu cuerpo: tápalo, sosténlo, cúbrelo…",
-          material: null,
-        },
-        {
-          n: 24,
-          cat: "arquitectura",
-          titulo: "Alfombra roja",
-          desc: "Camina por la calle como si fuera una alfombra roja. Detente, posa, saluda.",
-          material: null,
-        },
-        {
-          n: 25,
-          cat: "material",
-          titulo: "Pelea de pelucas",
-          desc: "Dos personas o más se enfrentan intentando quitarse la peluca mutuamente mientras protegen la propia.",
-          material: "Requiere: pelucas",
-        },
-        {
-          n: 26,
-          cat: "material",
-          titulo: "Lanzamiento de pelucas",
-          desc: "Marca una línea imaginaria en el suelo. A la señal, lanzad vuestra peluca. Podéis explorar distintas técnicas: solo usando la cabeza, haciendo posturas, con las manos…",
-          material: "Requiere: pelucas",
-        },
-        {
-          n: 27,
-          cat: "material",
-          titulo: "Carrera de tacones",
-          desc: "Elige un recorrido y hacedlo con los tacones: corre, camina, salta. No solo se trata de rapidez, también de equilibrio, estilo y riesgo creativo.",
-          material: "Requiere: tacones (o tacones imaginarios)",
-        },
-        {
-          n: 28,
-          cat: "material",
-          titulo: "Lanzamiento de dildos",
-          desc: "Establece un objetivo o un espacio delimitado y lanza tu dildo. Podéis decidir qué categoría jugáis: quién lanza más lejos, quién consigue pegarlo, quién lo encesta…",
-          material: "Requiere: dildos u otros juguetes sexuales",
-        },
-        {
-          n: 29,
-          cat: "material",
-          titulo: "Deporte con tacones",
-          desc: "Escoge un deporte que conozcas (baloncesto, salto, estiramientos, yoga…) y hazlo con tacones.",
-          material: "Requiere: tacones (o tacones imaginarios)",
-        },
-        {
-          n: 30,
-          cat: "material",
-          titulo: "Saltar sobre cojines",
-          desc: "Coloca cojines, almohadas o mantas en el suelo y crea un circuito. Salta, rueda o baila sobre ellos. También puedes practicar la caída.",
-          material: "Requiere: cojines u objetos blandos",
-        },
-        {
-          n: 31,
-          cat: "material",
-          titulo: "Carreras con objetos ridículos",
-          desc: "Elige algún objeto inesperado (platos, paraguas, bolsas…). Definid un recorrido y organizad una carrera de relevos. El objetivo no es llegar antes, sino inventar formas de moverse con ese objeto.",
-          material: "Requiere: objetos ridículos",
-        },
-        {
-          n: 32,
-          cat: "material",
-          titulo: "Draguea la arquitectura",
-          desc: "Usa maquillaje, pelucas, lentejuelas, ropa o cosas que encuentres y crea un mini-personaje drag con algún elemento arquitectónico que elijas. Ponle un buen nombre travesti.",
-          material: "Requiere: maquillaje, pelucas, lentejuelas…",
-        },
-        {
-          n: 33,
-          cat: "material",
-          titulo: "Piruetas con mantas",
-          desc: "Coge una manta o tela grande y úsala para deslizarte, envolverte o crear obstáculos. Convierte la tela en una extensión de tu cuerpo.",
-          material: "Requiere: mantas o telas",
-        },
-        {
-          n: 34,
-          cat: "material",
-          titulo: "Coreografía de objetos",
-          desc: "Selecciona tres objetos del entorno (botellas, pelotas, sillas…) y crea una minicoreografía convirtiéndolos en bailarines.",
-          material: "Requiere: objetos del entorno",
-        },
-        {
-          n: 35,
-          cat: "material",
-          titulo: "Gym glam",
-          desc: "Toma tu maquillaje (labiales, polvos, brochas, sombras…) como si fueran elementos de gimnasio. Úsalos para hacer levantamientos, sentadillas, saltos, series…",
-          material: "Requiere: maquillaje o accesorios",
-        },
-        {
-          n: 36,
-          cat: "material",
-          titulo: "Parque de accesorios",
-          desc: "Haz un parque de obstáculos pero con comida, donde cada prueba implica comerse el obstáculo.",
-          material: "Requiere: comida",
-        },
-        {
-          n: 37,
-          cat: "grupo",
-          titulo: "Priorizar el amor",
-          desc: "Elige una disciplina deportiva para hacer en pareja o en grupo. Empezad a jugar, pero elegid priorizar el amor antes que la competición.",
-          material: null,
-        },
-        {
-          n: 38,
-          cat: "grupo",
-          titulo: "Priorizar el deseo",
-          desc: "Elige una disciplina deportiva para hacer en pareja o en grupo. Empezad a jugar, pero elegid priorizar el deseo: ¿Qué te apetece? Parar, cambiar, desviarse…",
-          material: null,
-        },
-        {
-          n: 39,
-          cat: "grupo",
-          titulo: "Narración deportiva",
-          desc: "Realiza cualquier acción que quieras, mientras otra persona narra todo como si se tratara de un gran evento deportivo. Exagera la épica, la tensión y la importancia de lo que está pasando.",
-          material: null,
-        },
-        {
-          n: 40,
-          cat: "grupo",
-          titulo: "Coreografía colectiva",
-          desc: "En grupo, empezad a moveros sin acordar nada previamente. Un gesto aparece y otres lo siguen, lo transforman o lo abandonan.",
-          material: null,
-        },
-        {
-          n: 41,
-          cat: "grupo",
-          titulo: "Sostenerse y caer",
-          desc: "Juntaos y sujetaos unes a otres. Dejad que los cuerpos empiecen a perder el equilibrio, confiando en que el grupo sostenga la caída o la haga más blanda.",
-          material: null,
-        },
-        {
-          n: 42,
-          cat: "grupo",
-          titulo: "Pelea blanda",
-          desc: "Iniciad una pelea homoerótica: puede ser entre vosotres o con un elemento arquitectónico. Empujad, abrazad, resistid, deslizaos... Una lucha sin objetivo, más cerca del roce que de la victoria.",
-          material: null,
-        },
-        {
-          n: 43,
-          cat: "grupo",
-          titulo: "Carrera fake",
-          desc: "Colocaos en línea, estiraos, preparaos y haced una cuenta atrás. Cuando llega el momento de salir, cada persona hará algo distinto a correr en línea recta.",
-          material: null,
-        },
-        {
-          n: 44,
-          cat: "grupo",
-          titulo: "No hacer nada",
-          desc: "En grupo, probad a no hacer nada durante el mayor tiempo posible. Moverse, hablar o reír puede ser parte del juego o de romperlo.",
-          material: null,
-        },
-        {
-          n: 45,
-          cat: "grupo",
-          titulo: "Arrastrarse",
-          desc: "Una persona se deja arrastrar suavemente por el grupo. El ritmo no lo marca quien tira, sino quien se deja llevar.",
-          material: null,
-        },
-        {
-          n: 46,
-          cat: "grupo",
-          titulo: "Apoyarse",
-          desc: "Buscad formas de moveros sin tocar el suelo y con el apoyo de otres. Explorad equilibrios inestables, pesos compartidos y errores.",
-          material: null,
-        },
-        {
-          n: 47,
-          cat: "grupo",
-          titulo: "Hacerlo mal juntes",
-          desc: "Elegid una acción sencilla y hacedla mal, todes a la vez. Repetid el fallo.",
-          material: null,
-        },
-        {
-          n: 48,
-          cat: "grupo",
-          titulo: "Calentar para la vida",
-          desc: "Diseña un calentamiento que no sirva para ningún deporte concreto, sino para existir: bostezar, sacudirte, suspirar, estirarte mal… Después compártelo con tus amigues.",
-          material: null,
-        },
+        { n:  1, cat: "basicos",      titulo: "Desesperar",           desc: "Cambia los tiempos de la acción que vas a realizar, con el objetivo de desesperar a quienes observan.", material: null },
+        { n:  2, cat: "basicos",      titulo: "No llegar",            desc: "Elige un destino cercano y empieza a dirigirte hacia él. Antes de llegar, haz alguna acción para impedir tu propia llegada: cambia de dirección, detente, da un rodeo innecesario, cómete un helado, acaricia un perro...", material: null },
+        { n:  3, cat: "basicos",      titulo: "Incomodar",            desc: "Piensa en un gesto pequeño: sentarse, girar, moverse. Hazlo de manera que desafíe las expectativas: lento, exagerado, ruidoso o absurdo.", material: null },
+        { n:  4, cat: "basicos",      titulo: "Pereza",               desc: "Esfuérzate mucho en ser lo más perezose posible. Si te cuesta, piensa en una acción cotidiana y hazla demostrando tu mejor habilidad perezosa.", material: null },
+        { n:  5, cat: "basicos",      titulo: "Caer",                 desc: "Déjate caer. No importa desde dónde ni cómo, importa el cómo caes. Investiga la caída como gesto, como coreografía. Inspírate en el vogue, en les torpes.", material: null },
+        { n:  6, cat: "basicos",      titulo: "Fliparse",             desc: "Haz un movimiento sutil o cotidiano. Pero exágeralo y celébralo muchísimo, como si acabases de lograr una hazaña histórica… aunque no haya pasado nada.", material: null },
+        { n:  7, cat: "basicos",      titulo: "Sí, pero no",          desc: "Haz un calentamiento larguísimo, serio y concentrado… para después no hacer absolutamente nada. El calentamiento como acción final.", material: null },
+        { n:  8, cat: "basicos",      titulo: "La rata manda",        desc: "Elige un animal cercano (paloma, perro, rata, cucaracha…) y conviértelo en tu profe de danza. Obsérvalo atentamente e imita su coreografía, su ritmo y su lógica corporal.", material: null },
+        { n:  9, cat: "basicos",      titulo: "Suspende la gravedad", desc: "Olvida que la gravedad existe. Camina como si no te afectara del todo. Juega a flotar, a resistirte, a negociar con el suelo.", material: null },
+        { n: 10, cat: "basicos",      titulo: "Baila la ciudad",      desc: "Detente y escucha el entorno: voces, motores, sirenas, pasos, obras. Céntrate en el ruido que más te interese y conviértelo en la música que marcará tu coreografía.", material: null },
+        { n: 11, cat: "basicos",      titulo: "Animar lo cotidiano",  desc: "Detecta a alguien haciendo algo absolutamente normal (esperar, caminar, barrer). Anímale como si estuviera compitiendo en una final mundial.", material: null },
+        { n: 12, cat: "basicos",      titulo: "Modo perrito",         desc: "Muévete como perrito: olisquea, estírate, sacúdete, rueda. Baja el cuerpo, pierde verticalidad, abandona lo humano por un rato.", material: null },
+        { n: 13, cat: "arquitectura", titulo: "Función en fuga",      desc: "Detecta un elemento arquitectónico y úsalo para algo que no fue diseñado. Una escalera para sentarse, un bordillo para bailar, una barandilla para descansar.", material: null },
+        { n: 14, cat: "arquitectura", titulo: "Descanso",             desc: "Elige un lugar público y haz del descanso tu acción principal. Acuéstate, siéntate o recuéstate apoyando tu cuerpo. Transformando un espacio de paso en un espacio de descanso.", material: null },
+        { n: 15, cat: "arquitectura", titulo: "Postura sexual",       desc: "¿Cómo es una postura sexual en relación con un elemento arquitectónico? Elige un elemento de la arquitectura que más te seduzca y piensa cómo sería la postura sexual si follaras con él. ¡Atrévete a hacerla!", material: null },
+        { n: 16, cat: "arquitectura", titulo: "Parkour dactilar",     desc: "Haz parkour con los dedos. Recorre una barandilla, una grieta, una pared con tus dedos. Haz piruetas, salta, trepa y cae en miniatura.", material: null },
+        { n: 17, cat: "arquitectura", titulo: "Tumbar la ciudad",     desc: "Túmbate. En el suelo, en un banco, en una rampa, donde tú quieras. Cambia el eje vertical del espacio público y obsérvalo desde abajo.", material: null },
+        { n: 18, cat: "arquitectura", titulo: "Ornamento",            desc: "Conviértete en ornamento. Adhiérete a una columna, una farola, una fachada. Exagera el gesto, la presencia inútil. Haz que tu cuerpo sea una decoración.", material: null },
+        { n: 19, cat: "arquitectura", titulo: "Mover un edificio",    desc: "Intenta mover un edificio de sitio.", material: null },
+        { n: 20, cat: "arquitectura", titulo: "Confesionario urbano", desc: "Susúrrale tu mayor secreto a un elemento arquitectónico: una pared, un semáforo, una farola... La ciudad también escucha y guarda memoria.", material: null },
+        { n: 21, cat: "arquitectura", titulo: "Ligoteo arquitectónico", desc: "Elige un elemento del espacio público y flirtea con él. Cuéntale por qué te gusta, qué te atrae, qué te excita de su forma, su textura o su historia.", material: null },
+        { n: 22, cat: "arquitectura", titulo: "Arquitectura hostil, gesto tierno", desc: "Localiza un banco incómodo, pinchos, barreras o dispositivos de expulsión. Resignifícalos con el cuerpo: apoyarte, rodearlos, abrazarlos, burlarlos.", material: null },
+        { n: 23, cat: "arquitectura", titulo: "Cuerpo–parche",        desc: "Encuentra un elemento roto, agrietado o dañado. Intenta arreglarlo con tu cuerpo: tápalo, sosténlo, cúbrelo…", material: null },
+        { n: 24, cat: "arquitectura", titulo: "Alfombra roja",        desc: "Camina por la calle como si fuera una alfombra roja. Detente, posa, saluda.", material: null },
+        { n: 25, cat: "material",     titulo: "Pelea de pelucas",     desc: "Dos personas o más se enfrentan intentando quitarse la peluca mutuamente mientras protegen la propia.", material: "Requiere: pelucas" },
+        { n: 26, cat: "material",     titulo: "Lanzamiento de pelucas", desc: "Marca una línea imaginaria en el suelo. A la señal, lanzad vuestra peluca. Podéis explorar distintas técnicas: solo usando la cabeza, haciendo posturas, con las manos…", material: "Requiere: pelucas" },
+        { n: 27, cat: "material",     titulo: "Carrera de tacones",   desc: "Elige un recorrido y hacedlo con los tacones: corre, camina, salta. No solo se trata de rapidez, también de equilibrio, estilo y riesgo creativo.", material: "Requiere: tacones (o tacones imaginarios)" },
+        { n: 28, cat: "material",     titulo: "Lanzamiento de dildos", desc: "Establece un objetivo o un espacio delimitado y lanza tu dildo. Podéis decidir qué categoría jugáis: quién lanza más lejos, quién consigue pegarlo, quién lo encesta…", material: "Requiere: dildos u otros juguetes sexuales" },
+        { n: 29, cat: "material",     titulo: "Deporte con tacones",  desc: "Escoge un deporte que conozcas (baloncesto, salto, estiramientos, yoga…) y hazlo con tacones.", material: "Requiere: tacones (o tacones imaginarios)" },
+        { n: 30, cat: "material",     titulo: "Saltar sobre cojines", desc: "Coloca cojines, almohadas o mantas en el suelo y crea un circuito. Salta, rueda o baila sobre ellos. También puedes practicar la caída.", material: "Requiere: cojines u objetos blandos" },
+        { n: 31, cat: "material",     titulo: "Carreras con objetos ridículos", desc: "Elige algún objeto inesperado (platos, paraguas, bolsas…). Definid un recorrido y organizad una carrera de relevos. El objetivo no es llegar antes, sino inventar formas de moverse con ese objeto.", material: "Requiere: objetos ridículos" },
+        { n: 32, cat: "material",     titulo: "Draguea la arquitectura", desc: "Usa maquillaje, pelucas, lentejuelas, ropa o cosas que encuentres y crea un mini-personaje drag con algún elemento arquitectónico que elijas. Ponle un buen nombre travesti.", material: "Requiere: maquillaje, pelucas, lentejuelas…" },
+        { n: 33, cat: "material",     titulo: "Piruetas con mantas",  desc: "Coge una manta o tela grande y úsala para deslizarte, envolverte o crear obstáculos. Convierte la tela en una extensión de tu cuerpo.", material: "Requiere: mantas o telas" },
+        { n: 34, cat: "material",     titulo: "Coreografía de objetos", desc: "Selecciona tres objetos del entorno (botellas, pelotas, sillas…) y crea una minicoreografía convirtiéndolos en bailarines.", material: "Requiere: objetos del entorno" },
+        { n: 35, cat: "material",     titulo: "Gym glam",             desc: "Toma tu maquillaje (labiales, polvos, brochas, sombras…) como si fueran elementos de gimnasio. Úsalos para hacer levantamientos, sentadillas, saltos, series…", material: "Requiere: maquillaje o accesorios" },
+        { n: 36, cat: "material",     titulo: "Parque de accesorios", desc: "Haz un parque de obstáculos pero con comida, donde cada prueba implica comerse el obstáculo.", material: "Requiere: comida" },
+        { n: 37, cat: "grupo",        titulo: "Priorizar el amor",    desc: "Elige una disciplina deportiva para hacer en pareja o en grupo. Empezad a jugar, pero elegid priorizar el amor antes que la competición.", material: null },
+        { n: 38, cat: "grupo",        titulo: "Priorizar el deseo",   desc: "Elige una disciplina deportiva para hacer en pareja o en grupo. Empezad a jugar, pero elegid priorizar el deseo: ¿Qué te apetece? Parar, cambiar, desviarse…", material: null },
+        { n: 39, cat: "grupo",        titulo: "Narración deportiva",  desc: "Realiza cualquier acción que quieras, mientras otra persona narra todo como si se tratara de un gran evento deportivo. Exagera la épica, la tensión y la importancia de lo que está pasando.", material: null },
+        { n: 40, cat: "grupo",        titulo: "Coreografía colectiva", desc: "En grupo, empezad a moveros sin acordar nada previamente. Un gesto aparece y otres lo siguen, lo transforman o lo abandonan.", material: null },
+        { n: 41, cat: "grupo",        titulo: "Sostenerse y caer",    desc: "Juntaos y sujetaos unes a otres. Dejad que los cuerpos empiecen a perder el equilibrio, confiando en que el grupo sostenga la caída o la haga más blanda.", material: null },
+        { n: 42, cat: "grupo",        titulo: "Pelea blanda",         desc: "Iniciad una pelea homoerótica: puede ser entre vosotres o con un elemento arquitectónico. Empujad, abrazad, resistid, deslizaos... Una lucha sin objetivo, más cerca del roce que de la victoria.", material: null },
+        { n: 43, cat: "grupo",        titulo: "Carrera fake",         desc: "Colocaos en línea, estiraos, preparaos y haced una cuenta atrás. Cuando llega el momento de salir, cada persona hará algo distinto a correr en línea recta.", material: null },
+        { n: 44, cat: "grupo",        titulo: "No hacer nada",        desc: "En grupo, probad a no hacer nada durante el mayor tiempo posible. Moverse, hablar o reír puede ser parte del juego o de romperlo.", material: null },
+        { n: 45, cat: "grupo",        titulo: "Arrastrarse",          desc: "Una persona se deja arrastrar suavemente por el grupo. El ritmo no lo marca quien tira, sino quien se deja llevar.", material: null },
+        { n: 46, cat: "grupo",        titulo: "Apoyarse",             desc: "Buscad formas de moveros sin tocar el suelo y con el apoyo de otres. Explorad equilibrios inestables, pesos compartidos y errores.", material: null },
+        { n: 47, cat: "grupo",        titulo: "Hacerlo mal juntes",   desc: "Elegid una acción sencilla y hacedla mal, todes a la vez. Repetid el fallo.", material: null },
+        { n: 48, cat: "grupo",        titulo: "Calentar para la vida", desc: "Diseña un calentamiento que no sirva para ningún deporte concreto, sino para existir: bostezar, sacudirte, suspirar, estirarte mal… Después compártelo con tus amigues.", material: null },
       ];
 
       let catActual = "todos";
@@ -414,8 +133,7 @@
         const pool = accionesFiltradas();
         if (vistos.length >= pool.length) vistos = [];
         const disponibles = pool.filter((a) => !vistos.includes(a.n));
-        const accion =
-          disponibles[Math.floor(Math.random() * disponibles.length)];
+        const accion = disponibles[Math.floor(Math.random() * disponibles.length)];
         vistos.push(accion.n);
         mostrar(accion);
         actualizarContador(pool.length);
@@ -427,14 +145,22 @@
         card.offsetHeight;
         card.style.animation = "";
 
-        document.getElementById("accion-num").textContent =
-          `#${String(a.n).padStart(2, "0")}`;
+        const bg = CAT_COLORS[a.cat] || "#ffd9ba";
+        card.style.background = bg;
+
+        const lightBg = a.cat === "grupo";
+        const textColor = lightBg ? "#fd5e96" : "#fff";
+        card.style.color = textColor;
+        card.querySelectorAll(".accion-num, .accion-titulo, .accion-desc, .accion-material, .accion-cat-badge").forEach(el => {
+          el.style.color = textColor;
+        });
+
+        document.getElementById("accion-num").textContent = String(a.n).padStart(2, "0");
         document.getElementById("accion-titulo").textContent = a.titulo;
         document.getElementById("accion-desc").textContent = a.desc;
 
         const badge = document.getElementById("accion-badge");
         badge.textContent = CAT_LABELS[a.cat];
-        badge.style.background = CAT_COLORS[a.cat];
         badge.dataset.cat = a.cat;
 
         const mat = document.getElementById("accion-material");
@@ -449,9 +175,7 @@
 
       document.querySelectorAll(".filtro-btn").forEach((btn) => {
         btn.addEventListener("click", () => {
-          document
-            .querySelectorAll(".filtro-btn")
-            .forEach((b) => b.classList.remove("active"));
+          document.querySelectorAll(".filtro-btn").forEach((b) => b.classList.remove("active"));
           btn.classList.add("active");
           catActual = btn.dataset.cat;
           vistos = [];
