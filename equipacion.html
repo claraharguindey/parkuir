@@ -26,21 +26,47 @@
     <div class="equip-main">
       <!-- IZQUIERDA -->
       <div class="left-panel">
+
         <div class="tools-sidebar">
-          <div class="tools-label">Pinceles</div>
-          <button class="tool-btn active" data-size="5" data-shape="round">
-            <span class="dot" style="width: 46px; height: 46px"></span>
-          </button>
-          <button class="tool-btn" data-size="12" data-shape="round">
-            <span class="dot" style="width: 36px; height: 36px"></span>
-          </button>
-          <button class="tool-btn" data-size="22" data-shape="round">
-            <span class="dot" style="width: 24px; height: 24px"></span>
-          </button>
-          <button class="tool-btn" data-size="16" data-shape="triangle">
-            ▼
-          </button>
-          <button class="tool-btn" data-size="16" data-shape="star">✳</button>
+          <div class="size-vertical">
+            <input
+              type="range"
+              id="brushSizeSlider"
+              class="size-slider-v"
+              min="2"
+              max="40"
+              step="1"
+              value="5"
+              orient="vertical"
+              aria-label="Tamaño del pincel"
+            />
+          </div>
+
+          <!-- Pinceles -->
+          <div class="tools-col">
+            <div class="tools-label">Pinceles</div>
+            <button class="tool-btn active" data-shape="round" title="Pincel redondo">
+              <span class="tool-icon">●</span>
+            </button>
+            <button class="tool-btn" data-shape="square" title="Cuadrado">
+              <span class="tool-icon">■</span>
+            </button>
+            <button class="tool-btn" data-shape="triangle" title="Triángulo">
+              <span class="tool-icon">▲</span>
+            </button>
+            <button class="tool-btn" data-shape="triangle-down" title="Triángulo invertido">
+              <span class="tool-icon">▼</span>
+            </button>
+            <button class="tool-btn" data-shape="diamond" title="Rombo">
+              <span class="tool-icon">◆</span>
+            </button>
+            <button class="tool-btn" data-shape="heart" title="Corazón">
+              <span class="tool-icon">♥</span>
+            </button>
+            <button class="tool-btn" data-shape="star" title="Estrella">
+              <span class="tool-icon">✷</span>
+            </button>
+          </div>
         </div>
 
         <div class="shirt-area">
@@ -50,21 +76,6 @@
           </div>
 
           <div class="palette-area">
-            <div class="size-control">
-              <span class="size-dot-min"></span>
-              <input
-                type="range"
-                id="brushSizeSlider"
-                class="size-slider"
-                min="2"
-                max="40"
-                step="1"
-                value="5"
-                aria-label="Tamaño del pincel"
-              />
-              <span class="size-dot-max"></span>
-            </div>
-            <div class="tools-label">Tamaño pincel</div>
             <div class="colors-block">
               <div class="palette-rows">
                 <div class="palette-row" id="paletteRow1"></div>

@@ -46,10 +46,6 @@ document.querySelectorAll(".tool-btn").forEach((btn) => {
       .forEach((b) => b.classList.remove("active"));
     btn.classList.add("active");
     currentShape = btn.dataset.shape || "round";
-    if (currentShape === "round") {
-      brushSize = parseInt(btn.dataset.size);
-      document.getElementById("brushSizeSlider").value = brushSize;
-    }
     erasing = false;
     document.getElementById("btnEraser").textContent = "Borrar";
   });
@@ -127,6 +123,7 @@ function drawMark(x, y) {
   tc.strokeStyle = currentColor;
 
   if (currentShape === "triangle") {
+    // triángulo hacia arriba
     const s = brushSize * 2.5;
     tc.beginPath();
     tc.moveTo(x, y - s);
@@ -134,19 +131,56 @@ function drawMark(x, y) {
     tc.lineTo(x - s, y + s);
     tc.closePath();
     tc.fill();
-  } else if (currentShape === "star") {
+  } else if (currentShape === "triangle-down") {
+    // triángulo invertido
     const s = brushSize * 2.5;
     tc.beginPath();
+    tc.moveTo(x, y + s);
+    tc.lineTo(x + s, y - s);
+    tc.lineTo(x - s, y - s);
+    tc.closePath();
+    tc.fill();
+  } else if (currentShape === "star") {
+    // Estrella ✷ (8 puntas simétricas tipo floral)
+    const s = brushSize * 2.5;
+    const inner = s * 0.38;
+    tc.beginPath();
     for (let i = 0; i < 8; i++) {
-      const r = i % 2 === 0 ? s : s * 0.42;
-      const a = (i * Math.PI) / 4 - Math.PI / 2;
-      i === 0
-        ? tc.moveTo(x + r * Math.cos(a), y + r * Math.sin(a))
-        : tc.lineTo(x + r * Math.cos(a), y + r * Math.sin(a));
+      const aOuter = (i * Math.PI * 2) / 8 - Math.PI / 2;
+      const aInner = aOuter + Math.PI / 8;
+      tc.lineTo(x + s * Math.cos(aOuter), y + s * Math.sin(aOuter));
+      tc.lineTo(x + inner * Math.cos(aInner), y + inner * Math.sin(aInner));
     }
     tc.closePath();
     tc.fill();
+  } else if (currentShape === "heart") {
+    const s = brushSize * 2;
+    tc.save();
+    tc.translate(x, y);
+    tc.scale(s / 30, s / 30);
+    tc.beginPath();
+    tc.moveTo(0, -10);
+    tc.bezierCurveTo(10, -25, 30, -15, 30, 0);
+    tc.bezierCurveTo(30, 15, 15, 25, 0, 35);
+    tc.bezierCurveTo(-15, 25, -30, 15, -30, 0);
+    tc.bezierCurveTo(-30, -15, -10, -25, 0, -10);
+    tc.closePath();
+    tc.fill();
+    tc.restore();
+  } else if (currentShape === "diamond") {
+    const s = brushSize * 2.5;
+    tc.beginPath();
+    tc.moveTo(x, y - s);
+    tc.lineTo(x + s * 0.65, y);
+    tc.lineTo(x, y + s);
+    tc.lineTo(x - s * 0.65, y);
+    tc.closePath();
+    tc.fill();
+  } else if (currentShape === "square") {
+    const s = brushSize * 2;
+    tc.fillRect(x - s / 2, y - s / 2, s, s);
   } else {
+    // round — traza continua
     tc.lineWidth = brushSize;
     tc.lineCap = "round";
     tc.lineJoin = "round";
@@ -247,10 +281,10 @@ function renderCard(entry) {
   card.className = "shirt-card";
   card.dataset.id = entry.id;
   card.innerHTML = `
-          <img src="${entry.img}" alt="${entry.title}">
-          <div class="card-title">${entry.title}</div>
-          <div class="card-desc">${entry.desc || ""}</div>
-        `;
+    <img src="${entry.img}" alt="${entry.title}">
+    <div class="card-title">${entry.title}</div>
+    <div class="card-desc">${entry.desc || ""}</div>
+  `;
   card.addEventListener("click", () => {
     document.getElementById("modalImg").src = entry.img;
     document.getElementById("modalTitle").textContent = entry.title;
@@ -305,18 +339,16 @@ document.getElementById("btnSubmit").addEventListener("click", async () => {
     const res = await fetch(API, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ title, desc, img, userId }), // ← userId incluido
+      body: JSON.stringify({ title, desc, img, userId }),
     });
     if (res.ok) {
       const entry = await res.json();
-      // el servidor no devuelve userId, lo añadimos localmente para el botón eliminar
       entry.userId = userId;
       galleryEmpty.style.display = "none";
       renderCard(entry);
       galleryGrid.insertBefore(galleryGrid.lastChild, galleryGrid.firstChild);
     }
   } catch (e) {
-    // fallback sin servidor
     galleryEmpty.style.display = "none";
     const entry = {
       id: Date.now(),
@@ -353,7 +385,7 @@ document.getElementById("modalId").addEventListener("click", async function () {
     const res = await fetch(`${API}/${id}`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ userId }), // ← userId para validar en servidor
+      body: JSON.stringify({ userId }),
     });
     if (!res.ok) {
       alert("No puedes borrar una equipación que no es tuya.");
