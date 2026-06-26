@@ -22,7 +22,6 @@ body {
   color: var(--pink);
   line-height: 1;
   letter-spacing: 0.01em;
-  text-transform: uppercase;
   text-align: center;
   position: relative;
   top: 0.06em;
@@ -77,6 +76,21 @@ body {
   display: block;
 }
 
+.card-front-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.card-front-logo img {
+  width: 55%;
+  height: auto;
+  object-fit: cover;
+}
+.contain {
+  object-fit: contain !important;
+  background: var(--cream);
+}
+
 .card-back {
   background: var(--cream);
   border: 2.5px solid var(--pink);
@@ -92,19 +106,21 @@ body {
 .card-alias {
   font-family: "Outreque", sans-serif;
   font-size: clamp(0.6rem, 1vw, 0.8rem);
+  font-weight: 500;
   color: var(--pink);
   letter-spacing: 0.08em;
-  text-transform: uppercase;
   opacity: 0.7;
   line-height: 1;
 }
+
 .card-name {
   font-family: "Outreque", sans-serif;
   font-size: clamp(1rem, 1.8vw, 1.5rem);
+  font-weight: 700;
   color: var(--pink);
   line-height: 1.05;
-  text-transform: uppercase;
 }
+
 .card-meta {
   font-family: "Outreque", sans-serif;
   font-size: clamp(0.58rem, 0.8vw, 0.7rem);
@@ -112,19 +128,44 @@ body {
   opacity: 0.5;
   line-height: 1.3;
 }
+
+/* ── LIGAS con colores por categoría ── */
+.card-ligas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
 .card-liga {
   display: inline-block;
   font-family: "Outreque", sans-serif;
   font-size: 12px;
+  font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  background: var(--pink);
-  color: white;
   border-radius: 999px;
   padding: 1px 7px;
-  margin: 0.1rem 0;
-  align-self: flex-start;
+  color: white;
+  background: var(--pink);
 }
+
+.card-liga--queer {
+  background: #fd7145;
+  color: #fff;
+}
+.card-liga--gorda {
+  background: #ff3773;
+  color: #fff;
+}
+.card-liga--crip {
+  background: #ffd9ba;
+  color: #fd5e96;
+}
+.card-liga--rarite {
+  background: #fd5e96;
+  color: #fff;
+}
+
 .card-desc {
   font-family: "Outreque", sans-serif;
   font-size: 14px;
@@ -150,10 +191,40 @@ body {
     gap: 0.6rem;
     padding: 0.8rem;
   }
-  .card-wrap:hover .card-inner {
-    transform: none;
+  .card-wrap {
+    aspect-ratio: unset;
+    height: auto;
   }
+  .card-inner {
+    position: relative;
+    height: auto;
+    transform-style: flat;
+    transition: none;
+  }
+  .card-front {
+    position: relative;
+    inset: unset;
+    aspect-ratio: 4/3;
+    backface-visibility: visible;
+    -webkit-backface-visibility: visible;
+  }
+  .card-back {
+    position: relative;
+    inset: unset;
+    transform: none;
+    backface-visibility: visible;
+    -webkit-backface-visibility: visible;
+    display: flex;
+    overflow-y: visible;
+    height: auto;
+  }
+  .card-desc {
+    display: block;
+    -webkit-line-clamp: unset;
+    overflow: visible;
+  }
+  .card-wrap:hover .card-inner,
   .card-wrap.flipped .card-inner {
-    transform: rotateY(180deg);
+    transform: none;
   }
 }

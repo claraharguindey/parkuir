@@ -6,7 +6,6 @@ const JUGADORXS = [
     meta: "1992, Alzira · Ella / Elle",
     liga: "Gorda · Queer",
     desc: "Ha sobrevivido a maestros de educación física, clases de natación para bajar de peso, prescripciones médicas y la expulsión de las clases de Hip hop. Finalmente se convirtió en una de las más grandes atletas de Parkuir.",
-    img: "./images/jugadorxs/maria.jpg",
   },
   {
     name: "Guiu Gimeno Bardis",
@@ -14,7 +13,6 @@ const JUGADORXS = [
     meta: "1996, Sant Vicenç dels Horts · Elle / El",
     liga: "Queer",
     desc: 'Una infancia "marimacho" con habilidades deportivas, pero a medida que fue transicionando hacia persona no binaria, espacios como la piscina se convirtieron en hostiles y no deseables.',
-    img: "./images/jugadorxs/guiu.jpg",
   },
   {
     name: "Costa Badia",
@@ -95,7 +93,7 @@ const JUGADORXS = [
     meta: "1977, Madrid",
     liga: "",
     desc: "Club deportivo que introdujo el arte en el deporte, poniendo lo competitivo en segundo plano. Fundado por ex-jugadores del Real Madrid y Estudiantes. Fueron multados por antideportividad.",
-    img: "fotos/16.jpg", 
+    img: "fotos/16.jpg",
   },
   {
     name: "John Bonello",
@@ -103,7 +101,7 @@ const JUGADORXS = [
     meta: "1958, Msida, Malta · Él",
     liga: "",
     desc: 'Portero que encajó 12 goles contra España en 1983. En 2006 protagonizó anuncios de Amstel parodiándose a sí mismo como "el amigo perfecto que hizo felices a muchos españoles."',
-    img: "fotos/47.webp", 
+    img: "fotos/47.webp",
   },
   {
     name: "Florence Griffith",
@@ -111,21 +109,21 @@ const JUGADORXS = [
     meta: "1959, Los Ángeles · Ella",
     liga: "",
     desc: "Récords mundiales de 100 y 200m en 1988, aún imbatibles. Uñas larguísimas, trajes de una sola pierna. Recibió una campaña de acoso racista, misógino y transfóbico que ponía en duda su mérito.",
-    img: "fotos/60.jpeg", 
+    img: "fotos/60.jpeg",
   },
   {
     name: "Petra",
     meta: "1990, Barcelona",
     liga: "",
     desc: "Mascota paralímpica de Barcelona 92, creada por Javier Mariscal. Primera mascota paralímpica con discapacidad física visible. Inspirada en la artista Lorenza Böttner.",
-    img: "fotos/35.jpg", 
+    img: "fotos/35.jpg",
   },
   {
     name: "Lorenza Böttner",
     meta: "1959, Punta Arenas, Chile · Ella",
     liga: "",
     desc: "Pintora y performer activista trans, anticapacitista y de la lucha contra el VIH. Perdió ambos brazos a los ocho años. Pintaba con la boca y los pies. Se negó a usar prótesis como acto de resistencia.",
-    img: "fotos/24.png", 
+    img: "fotos/24.png",
   },
   {
     name: "James Miller",
@@ -141,14 +139,14 @@ const JUGADORXS = [
     meta: "1964, Liverpool · Él",
     liga: "",
     desc: "El espontáneo más prolífico de la historia: más de 500 eventos interrumpidos. Wimbledon, Super Bowl, Copa Mundial de Rugby. Se retiró en 2013 alegando que ya era demasiado viejo para correr delante de los guardias.",
-    img: "fotos/23.png", 
+    img: "fotos/23.png",
   },
   {
     name: "Daniel Plaza",
     meta: "1966, Barcelona · Él",
     liga: "",
     desc: "Oro en marcha atlética en Barcelona 92. Dio positivo en dopaje. Declaró que la nandrolona llegó a su cuerpo al practicar sexo oral con su mujer, que estaba embarazada.",
-    img: "fotos/39.jpg", 
+    img: "fotos/39.jpg",
   },
   {
     name: "Eric Moussambani",
@@ -161,7 +159,7 @@ const JUGADORXS = [
     meta: "1913",
     liga: "",
     desc: "Atleta de pista checo y trans.",
-    img: "fotos/51.avif", 
+    img: "fotos/51.avif",
   },
   {
     name: "Mark Edward Louis Weston",
@@ -253,6 +251,28 @@ const JUGADORXS = [
   },
 ];
 
+// Mapeo de liga a clase CSS
+const LIGA_CLASS = {
+  queer: "card-liga--queer",
+  gorda: "card-liga--gorda",
+  crip: "card-liga--crip",
+  rarite: "card-liga--rarite",
+};
+
+function ligaChips(ligaStr) {
+  if (!ligaStr) return "";
+  const chips = ligaStr
+    .split("·")
+    .map((l) => l.trim())
+    .filter(Boolean)
+    .map((l) => {
+      const key = l.toLowerCase();
+      const cls = LIGA_CLASS[key] || "";
+      return `<span class="card-liga ${cls}">${l}</span>`;
+    });
+  return `<div class="card-ligas">${chips.join("")}</div>`;
+}
+
 const isTouchDevice = () => window.matchMedia("(hover: none)").matches;
 
 const grid = document.getElementById("jugadorxs-grid");
@@ -261,13 +281,12 @@ JUGADORXS.forEach((j) => {
   const wrap = document.createElement("div");
   wrap.className = "card-wrap";
 
-  const front = j.img
-    ? `<div class="card-front"><img src="${j.img}" alt="${j.name}"></div>`
-    : `<div class="card-front"></div>`;
+  const imgSrc = j.img || "images/logo_parkuir.png";
+  const front = `<div class="card-front"><img class="${j.img ? "" : "contain"}" src="${imgSrc}" alt="${j.name}"></div>`;
 
   const alias = j.alias ? `<div class="card-alias">${j.alias}</div>` : "";
   const meta = j.meta ? `<div class="card-meta">${j.meta}</div>` : "";
-  const liga = j.liga ? `<span class="card-liga">${j.liga}</span>` : "";
+  const ligas = ligaChips(j.liga);
   const desc = j.desc ? `<div class="card-desc">${j.desc}</div>` : "";
 
   wrap.innerHTML = `
@@ -277,7 +296,7 @@ JUGADORXS.forEach((j) => {
         ${alias}
         <div class="card-name">${j.name}</div>
         ${meta}
-        ${liga}
+        ${ligas}
         ${desc}
       </div>
     </div>`;
