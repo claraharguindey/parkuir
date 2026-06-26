@@ -55,7 +55,7 @@ const JUGADORXS = [
     meta: "1884, Essen",
     liga: "Queer · Rarite",
     desc: 'Artista de circo y sufragista. En 1902 derrotó al "padre del culturismo" levantando 136 kg sobre su cabeza. Fundó la primera sociedad sufragista del mundo del circo: Suffragette Ladies of Barnum & Bailey, 800 mujeres.',
-    img: "fotos/48.jpg",
+    img: "./../fotos/48.jpg",
   },
   {
     name: "Fred Lorz",
@@ -63,14 +63,14 @@ const JUGADORXS = [
     meta: "1884, Nueva York · Él",
     liga: "",
     desc: 'Maratonista famoso por sus trampas en San Luis 1904. Subió al coche de su representante tras 14 km, volvió a correr cuando se averió y cruzó la meta en primera posición. "Era una broma."',
-    img: "fotos/22.png",
+    img: "./../fotos/22.png",
   },
   {
     name: "Ana María Martínez Sagi",
     meta: "1907, Barcelona · Ella",
     liga: "",
     desc: "Atleta, poetisa, sindicalista, lesbiana, feminista y periodista. Primera mujer en la junta directiva del FCB. Intentó fundar el equipo femenino y la obligaron a dimitir. Corresponsal de guerra herida en el frente de Aragón.",
-    img: "fotos/31.jpg",
+    img: "./../fotos/31.jpg",
   },
   {
     name: "Jesse Owens",
@@ -78,14 +78,14 @@ const JUGADORXS = [
     meta: "1913, Oakville · Él",
     liga: "",
     desc: "Pulverizó el mito de la supremacía aria en Berlín 1936 con cuatro oros ante Hitler. Apoyó las movilizaciones antirracistas en México 1968, aunque fue criticado por el movimiento Black Power.",
-    img: "fotos/46.jpg",
+    img: "./../fotos/46.jpg",
   },
   {
     name: "Las Gardenias de Tepito",
     meta: "1960, Tepito, Ciudad de México",
     liga: "",
     desc: "El equipo de fútbol trans/travesti más famoso de México. Cada 4 de octubre juegan contra equipos de hombres con outfits de fantasía, maquilladas, con lentejuelas y medias. Fundado por Doña Bárbara.",
-    img: "fotos/50.jpg",
+    img: "./../fotos/50.jpg",
   },
   {
     name: "Passion D.I.",
@@ -93,7 +93,7 @@ const JUGADORXS = [
     meta: "1977, Madrid",
     liga: "",
     desc: "Club deportivo que introdujo el arte en el deporte, poniendo lo competitivo en segundo plano. Fundado por ex-jugadores del Real Madrid y Estudiantes. Fueron multados por antideportividad.",
-    img: "fotos/16.jpg",
+    img: "./../fotos/16.jpg",
   },
   {
     name: "John Bonello",
@@ -101,7 +101,7 @@ const JUGADORXS = [
     meta: "1958, Msida, Malta · Él",
     liga: "",
     desc: 'Portero que encajó 12 goles contra España en 1983. En 2006 protagonizó anuncios de Amstel parodiándose a sí mismo como "el amigo perfecto que hizo felices a muchos españoles."',
-    img: "fotos/47.webp",
+    img: "./../fotos/47.webp",
   },
   {
     name: "Florence Griffith",
@@ -109,21 +109,21 @@ const JUGADORXS = [
     meta: "1959, Los Ángeles · Ella",
     liga: "",
     desc: "Récords mundiales de 100 y 200m en 1988, aún imbatibles. Uñas larguísimas, trajes de una sola pierna. Recibió una campaña de acoso racista, misógino y transfóbico que ponía en duda su mérito.",
-    img: "fotos/60.jpeg",
+    img: "./../fotos/60.jpeg",
   },
   {
     name: "Petra",
     meta: "1990, Barcelona",
     liga: "",
     desc: "Mascota paralímpica de Barcelona 92, creada por Javier Mariscal. Primera mascota paralímpica con discapacidad física visible. Inspirada en la artista Lorenza Böttner.",
-    img: "fotos/35.jpg",
+    img: "./../fotos/35.jpg",
   },
   {
     name: "Lorenza Böttner",
     meta: "1959, Punta Arenas, Chile · Ella",
     liga: "",
     desc: "Pintora y performer activista trans, anticapacitista y de la lucha contra el VIH. Perdió ambos brazos a los ocho años. Pintaba con la boca y los pies. Se negó a usar prótesis como acto de resistencia.",
-    img: "fotos/24.png",
+    img: "./../fotos/24.png",
   },
   {
     name: "James Miller",
@@ -131,7 +131,7 @@ const JUGADORXS = [
     meta: "1963, Hagerstown · Él",
     liga: "",
     desc: "Paracaidista que aterrizó en el ring durante un combate por el título mundial. Irrumpió en la NFL, el Arsenal y el Palacio de Buckingham, donde se bajó los pantalones mostrando que estaba pintado de verde.",
-    img: "fotos/20.png",
+    img: "./../fotos/20.png",
   },
   {
     name: "Mark Roberts",
@@ -139,27 +139,27 @@ const JUGADORXS = [
     meta: "1964, Liverpool · Él",
     liga: "",
     desc: "El espontáneo más prolífico de la historia: más de 500 eventos interrumpidos. Wimbledon, Super Bowl, Copa Mundial de Rugby. Se retiró en 2013 alegando que ya era demasiado viejo para correr delante de los guardias.",
-    img: "fotos/23.png",
+    img: "./../fotos/23.png",
   },
   {
     name: "Daniel Plaza",
     meta: "1966, Barcelona · Él",
     liga: "",
     desc: "Oro en marcha atlética en Barcelona 92. Dio positivo en dopaje. Declaró que la nandrolona llegó a su cuerpo al practicar sexo oral con su mujer, que estaba embarazada.",
-    img: "fotos/39.jpg",
+    img: "./../fotos/39.jpg",
   },
   {
     name: "Eric Moussambani",
     liga: "",
     desc: "Sidney 2000: completó los 100m en 1:52.72, más del doble del tiempo ganador. Aprendió a nadar 8 meses antes en una piscina de hotel de 12 metros.",
-    img: "fotos/17.avif",
+    img: "./../fotos/17.avif",
   },
   {
     name: "Zdeněk Koubek",
     meta: "1913",
     liga: "",
     desc: "Atleta de pista checo y trans.",
-    img: "fotos/51.avif",
+    img: "./../fotos/51.avif",
   },
   {
     name: "Mark Edward Louis Weston",
@@ -185,13 +185,13 @@ const JUGADORXS = [
     name: "Caster Semenya",
     liga: "",
     desc: "Atleta intersex que desde 2009 lucha contra World Athletics para competir sin medicarse. Ha llevado su caso hasta el Tribunal Europeo de Derechos Humanos.",
-    img: "fotos/59.jpg",
+    img: "./../fotos/59.jpg",
   },
   {
     name: "Imane Khelif",
     liga: "",
     desc: "Boxeadora argelina, oro en París 2024. Recibió una campaña de odio transfóbica siendo mujer cis. Entre los atacantes: Elon Musk y J.K. Rowling.",
-    img: "fotos/44.jpg",
+    img: "./../fotos/44.jpg",
   },
   {
     name: "Valentía Berr",
@@ -204,20 +204,20 @@ const JUGADORXS = [
     alias: "Mi carril es mi pasarela",
     liga: "",
     desc: "Descalificada de Tokio por dar positivo en marihuana. Acusó a la AMA de trato racista: única descalificada y la única negra entre las que dieron positivo.",
-    img: "fotos/33.webp",
+    img: "./../fotos/33.webp",
   },
   {
     name: "Jimmy Jump",
     liga: "",
     desc: 'Uno de los mayores espontáneos del estado, exiliado a Alemania para evitar pagar más de 350.000€. Regresó en 2026. "Yo los saltos me los preparaba como si fuera un examen de Selectividad."',
-    img: "fotos/65.avif",
+    img: "./../fotos/65.avif",
   },
   {
     name: "Walking Football Barcelona",
     meta: "2024",
     liga: "",
     desc: "El fútbol que se juega a otro ritmo. Donde no se corre, no se para, solo se disfruta.",
-    img: "fotos/62.jpg",
+    img: "./../fotos/62.jpg",
   },
   {
     name: "Natalia Mayara",
@@ -229,25 +229,25 @@ const JUGADORXS = [
     name: "Senior Parkour",
     liga: "",
     desc: "",
-    img: "fotos/40.jpg",
+    img: "./../fotos/40.jpg",
   },
   {
     name: "Nu Passión",
     liga: "",
     desc: "Homenaje al Grupo Passion, creado en 2009 por artistas y personas vinculadas con la cultura. Revisaron las jugadas de 1977, las entrenaron y las modificaron.",
-    img: "fotos/34.jpg",
+    img: "./../fotos/34.jpg",
   },
   {
     name: "Teresa Almeida",
     liga: "",
     desc: 'Portera angoleña que en el Mundial de 2015 se autodenominó con orgullo "la abanderada de la grasa". Con casi 96 kilos desafió los cánones estéticos del deporte.',
-    img: "fotos/38.jpg",
+    img: "./../fotos/38.jpg",
   },
   {
     name: "Aaron Tichenor",
     liga: "",
     desc: "",
-    img: "fotos/53.jpg",
+    img: "./../fotos/53.jpg",
   },
 ];
 
@@ -281,7 +281,7 @@ JUGADORXS.forEach((j) => {
   const wrap = document.createElement("div");
   wrap.className = "card-wrap";
 
-  const imgSrc = j.img || "images/logo_parkuir.png";
+  const imgSrc = j.img || "./../images/logo_parkuir.png";
   const front = `<div class="card-front"><img class="${j.img ? "" : "contain"}" src="${imgSrc}" alt="${j.name}"></div>`;
 
   const alias = j.alias ? `<div class="card-alias">${j.alias}</div>` : "";

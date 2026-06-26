@@ -7,7 +7,7 @@
 
     <!-- Open Graph / compartir -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://parkuir.com/cronograma.html" />
+    <meta property="og:url" content="https://parkuir.com/linea-del-tiempo" />
     <meta property="og:title" content="PARKUIR — Línea del tiempo" />
     <meta
       property="og:description"
@@ -17,7 +17,7 @@
 
     <!-- Twitter/X -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:url" content="https://parkuir.com/cronograma.html" />
+    <meta name="twitter:url" content="https://parkuir.com/linea-del-tiempo" />
     <meta name="twitter:title" content="PARKUIR — Línea del tiempo" />
     <meta
       name="twitter:description"
@@ -28,20 +28,20 @@
     <!-- Color del navegador -->
     <meta name="theme-color" content="#fd8aaa" />
 
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="css/cronograma.css" />
+    <link rel="stylesheet" href="./../style.css" />
+    <link rel="stylesheet" href="./../css/cronograma.css" />
   </head>
   <body>
     <header>
       <a href="/">parkuir</a>
       <button id="menu-toggle" aria-label="Abrir menú">☰</button>
       <nav id="main-nav">
-        <a href="/about.html">qué es parkuir</a>
-        <a class="active" href="/cronograma.html">línea del tiempo</a>
-        <a href="/reglamento.html">reglamento</a>
-        <a href="/jugadorxs.html">jugadorxs</a>
-        <a href="/equipacion.html">equipación</a>
-        <a href="/acciones.html">acciones</a>
+        <a href="/about/">qué es parkuir</a>
+        <a class="active" href="/linea-del-tiempo/">línea del tiempo</a>
+        <a href="/reglamento/">reglamento</a>
+        <a href="/jugadorxs/">jugadorxs</a>
+        <a href="/equipacion/">equipación</a>
+        <a href="/acciones/">acciones</a>
       </nav>
     </header>
 
@@ -64,7 +64,7 @@
       <div id="world">
         <div id="ground-line"></div>
         <div id="player">
-          <img id="player-img" src="./images/idle.png" alt="" />
+          <img id="player-img" src="./../images/idle.png" alt="" />
         </div>
       </div>
     </div>
@@ -77,7 +77,7 @@
     <div id="footer-hint">← → moverse · ↑ saltar</div>
 
     <!-- 1. datos -->
-    <script src="js/cronograma-data.js"></script>
+    <script src="./cronograma-data.js"></script>
 
     <!-- 2. generar edificios desde datos -->
     <script>
@@ -102,7 +102,7 @@
       })();
     </script>
 
-    <script src="js/cronograma.js"></script>
-    <script src="js/menu.js"></script>
+    <script src="./cronograma.js"></script>
+    <script src="./../js/menu.js"></script>
   </body>
 </html>

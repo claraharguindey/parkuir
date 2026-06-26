@@ -7,7 +7,7 @@
 
     <!-- Open Graph / compartir -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://parkuir.com/equipacion.html" />
+    <meta property="og:url" content="https://parkuir.com/equipacion" />
     <meta property="og:title" content="PARKUIR — Equipación" />
     <meta
       property="og:description"
@@ -17,7 +17,7 @@
 
     <!-- Twitter/X -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:url" content="https://parkuir.com/equipacion.html" />
+    <meta name="twitter:url" content="https://parkuir.com/equipacion" />
     <meta name="twitter:title" content="PARKUIR — Equipación" />
     <meta
       name="twitter:description"
@@ -28,20 +28,20 @@
     <!-- Color del navegador -->
     <meta name="theme-color" content="#fd8aaa" />
 
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="css/equipacion.css" />
+    <link rel="stylesheet" href="./../style.css" />
+    <link rel="stylesheet" href="./../css/equipacion.css" />
   </head>
   <body>
     <header>
       <a href="/">parkuir</a>
       <button id="menu-toggle" aria-label="Abrir menú">☰</button>
       <nav id="main-nav">
-        <a href="/about.html">qué es parkuir</a>
-        <a href="/cronograma.html">línea del tiempo</a>
-        <a href="/reglamento.html">reglamento</a>
-        <a href="/jugadorxs.html">jugadorxs</a>
-        <a class="active" href="/equipacion.html">equipación</a>
-        <a href="/acciones.html">acciones</a>
+        <a href="/about/">qué es parkuir</a>
+        <a href="/linea-del-tiempo/">línea del tiempo</a>
+        <a href="/reglamento/">reglamento</a>
+        <a href="/jugadorxs/">jugadorxs</a>
+        <a class="active" href="/equipacion/">equipación</a>
+        <a href="/acciones/">acciones</a>
       </nav>
     </header>
 
@@ -72,7 +72,7 @@
             <div class="tools-label">Pinceles</div>
             <button class="tool-btn" data-shape="stamp" title="Logo Parkuir">
               <span class="tool-icon stamp-icon">
-                <img src="./images/logo_parkuir.png" alt="logo" />
+                <img src="./../images/logo_parkuir.png" alt="logo" />
               </span>
             </button>
             <button
@@ -108,13 +108,13 @@
           <div class="shirt-container">
             <img
               class="shirt-bg"
-              src="./images/camiseta.png"
+              src="./../images/camiseta.png"
               alt="camiseta fondo"
             />
             <canvas id="paintCanvas"></canvas>
             <img
               class="shirt-overlay"
-              src="./images/camiseta2.png"
+              src="./../images/camiseta2.png"
               alt="camiseta bordes"
             />
           </div>
@@ -195,12 +195,12 @@
 
     <img
       id="stampImg"
-      src="./images/logo_parkuir.png"
+      src="./../images/logo_parkuir.png"
       style="display: none"
       alt=""
     />
 
-    <script src="js/equipacion.js"></script>
-    <script src="js/menu.js"></script>
+    <script src="./equipacion.js"></script>
+    <script src="./../js/menu.js"></script>
   </body>
 </html>
