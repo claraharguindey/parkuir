@@ -61,6 +61,7 @@ header {
   align-items: start;
 }
 
+/* ── SIDEBAR: barra vertical + pinceles ── */
 .tools-sidebar {
   display: flex;
   flex-direction: row;
@@ -69,11 +70,13 @@ header {
   padding-top: 0;
 }
 
+/* La barra empieza al nivel de los botones, no del label */
 .size-vertical {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding-top: 2rem;
+  /* el ancho del contenedor = alto del slider rotado */
   width: 20px;
   height: 160px;
   justify-content: center;
@@ -82,6 +85,7 @@ header {
 .size-slider-v {
   -webkit-appearance: none;
   appearance: none;
+  /* ancho real = altura visual deseada */
   width: 160px;
   height: 4px;
   background: var(--orange, #fd7145);
@@ -89,6 +93,7 @@ header {
   cursor: pointer;
   outline: none;
   flex-shrink: 0;
+  /* rotar en su sitio: origen central */
   transform: rotate(-90deg);
   transform-origin: center center;
 }
@@ -102,6 +107,7 @@ header {
   background: var(--pink, #ff3773);
   border: none;
   cursor: pointer;
+  /* sin transform: el thumb ya queda centrado sobre el track */
 }
 
 .size-slider-v::-moz-range-track {
@@ -133,6 +139,7 @@ header {
   text-transform: uppercase;
   color: var(--ink);
   margin-bottom: 0.1rem;
+  font-weight: bold;
   align-self: flex-start;
   white-space: nowrap;
 }
@@ -150,9 +157,7 @@ header {
   color: var(--ink);
   line-height: 1;
   opacity: 0.3;
-  transition:
-    opacity 0.15s,
-    transform 0.15s;
+  transition: opacity 0.15s, transform 0.15s;
   border-radius: 8px;
 }
 .tool-btn:hover {
@@ -165,10 +170,27 @@ header {
 }
 
 .tool-icon {
-  font-size: 2.4rem;
+  font-size: 3rem;
   pointer-events: none;
   line-height: 1;
   display: block;
+}
+
+
+/* ── STAMP (PNG logo) ── */
+.stamp-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+.stamp-icon img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  display: block;
+  /* hereda la opacidad del .tool-btn padre */
 }
 
 /* ── ÁREA CAMISETA ── */
@@ -236,9 +258,7 @@ header {
   border-radius: 50%;
   border: 2.5px solid var(--ink);
   cursor: pointer;
-  transition:
-    transform 0.15s,
-    box-shadow 0.15s;
+  transition: transform 0.15s, box-shadow 0.15s;
   min-width: 0;
 }
 .color-btn:hover {
@@ -266,9 +286,9 @@ header {
   border-radius: 14px;
   padding: 0.5rem;
   cursor: pointer;
-  font-weight: bold;
   transition: background 0.15s;
   white-space: nowrap;
+  font-weight: bold;
   color: var(--ink);
 }
 .btn-action:hover {
@@ -316,9 +336,9 @@ header {
   font-family: "Outreque", sans-serif;
   font-size: 0.9rem;
   text-transform: uppercase;
+  font-weight: bold;
   color: var(--pink);
   margin-bottom: 0.4rem;
-  font-weight: bold;
 }
 .field-desc textarea {
   width: 100%;
@@ -436,6 +456,7 @@ header {
   display: none;
   position: fixed;
   inset: 0;
+  background: rgba(26, 26, 26, 0.7);
   z-index: 100;
   align-items: center;
   justify-content: center;

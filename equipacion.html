@@ -26,8 +26,9 @@
     <div class="equip-main">
       <!-- IZQUIERDA -->
       <div class="left-panel">
-
+        <!-- SIDEBAR: barra de tamaño vertical + pinceles -->
         <div class="tools-sidebar">
+          <!-- Barra de tamaño vertical -->
           <div class="size-vertical">
             <input
               type="range"
@@ -45,16 +46,26 @@
           <!-- Pinceles -->
           <div class="tools-col">
             <div class="tools-label">Pinceles</div>
-            <button class="tool-btn active" data-shape="round" title="Pincel redondo">
+            <button class="tool-btn" data-shape="stamp" title="Logo Parkuir">
+              <span class="tool-icon stamp-icon">
+                <img src="./images/logo_parkuir.png" alt="logo" />
+              </span>
+            </button>
+            <button
+              class="tool-btn active"
+              data-shape="round"
+              title="Pincel redondo"
+            >
               <span class="tool-icon">●</span>
             </button>
             <button class="tool-btn" data-shape="square" title="Cuadrado">
               <span class="tool-icon">■</span>
             </button>
-            <button class="tool-btn" data-shape="triangle" title="Triángulo">
-              <span class="tool-icon">▲</span>
-            </button>
-            <button class="tool-btn" data-shape="triangle-down" title="Triángulo invertido">
+            <button
+              class="tool-btn"
+              data-shape="triangle-down"
+              title="Triángulo invertido"
+            >
               <span class="tool-icon">▼</span>
             </button>
             <button class="tool-btn" data-shape="diamond" title="Rombo">
@@ -148,6 +159,14 @@
         </button>
       </div>
     </div>
+
+    <!-- PNG oculto para el sello -->
+    <img
+      id="stampImg"
+      src="./images/logo_parkuir.png"
+      style="display: none"
+      alt=""
+    />
 
     <script src="js/equipacion.js"></script>
     <script src="js/menu.js"></script>

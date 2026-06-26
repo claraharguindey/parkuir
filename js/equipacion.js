@@ -63,6 +63,9 @@ const shirtImg = new Image();
 shirtImg.src = "./images/camiseta.png";
 let maskCanvas = null;
 
+// Precarga el stamp
+const stampImg = document.getElementById("stampImg");
+
 shirtImg.onload = () => {
   initCanvas();
 };
@@ -122,17 +125,22 @@ function drawMark(x, y) {
   tc.fillStyle = currentColor;
   tc.strokeStyle = currentColor;
 
-  if (currentShape === "triangle") {
-    // triángulo hacia arriba
-    const s = brushSize * 2.5;
-    tc.beginPath();
-    tc.moveTo(x, y - s);
-    tc.lineTo(x + s, y + s);
-    tc.lineTo(x - s, y + s);
-    tc.closePath();
-    tc.fill();
-  } else if (currentShape === "triangle-down") {
-    // triángulo invertido
+  if (currentShape === "stamp") {
+    if (!stampImg.complete || !stampImg.naturalWidth) return;
+    const s = brushSize * 5;
+    const ratio = stampImg.naturalWidth / stampImg.naturalHeight;
+    const w = ratio >= 1 ? s : s * ratio;
+    const h = ratio >= 1 ? s / ratio : s;
+    tc.drawImage(stampImg, x - w / 2, y - h / 2, w, h);
+    ctx.globalCompositeOperation = erasing ? "destination-out" : "source-over";
+    ctx.drawImage(tmp, 0, 0);
+    ctx.globalCompositeOperation = "source-over";
+    lastX = x;
+    lastY = y;
+    return;
+  }
+
+  if (currentShape === "triangle-down") {
     const s = brushSize * 2.5;
     tc.beginPath();
     tc.moveTo(x, y + s);
@@ -141,7 +149,6 @@ function drawMark(x, y) {
     tc.closePath();
     tc.fill();
   } else if (currentShape === "star") {
-    // Estrella ✷ (8 puntas simétricas tipo floral)
     const s = brushSize * 2.5;
     const inner = s * 0.38;
     tc.beginPath();
@@ -180,7 +187,7 @@ function drawMark(x, y) {
     const s = brushSize * 2;
     tc.fillRect(x - s / 2, y - s / 2, s, s);
   } else {
-    // round — traza continua
+    // round
     tc.lineWidth = brushSize;
     tc.lineCap = "round";
     tc.lineJoin = "round";
@@ -293,7 +300,6 @@ function renderCard(entry) {
       entry.date,
     ).toLocaleDateString("es-ES");
     document.getElementById("modalId").dataset.id = entry.id;
-    // mostrar botón eliminar solo si es tuya
     const esNuestro = !entry.userId || entry.userId === userId;
     document.getElementById("modalId").style.display = esNuestro
       ? "block"
