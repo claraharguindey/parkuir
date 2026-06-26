@@ -1,3 +1,8 @@
+
+html {
+  background: #fd8aaa;
+}
+
 @font-face {
   font-family: "BebasNeue";
   src: url("../fonts/bebasneue.woff2") format("woff2");
@@ -31,7 +36,7 @@
 }
 
 * {
-  margin: 0;
+    margin: 0;
   padding: 0;
   box-sizing: border-box;
   scrollbar-width: thin;
@@ -49,10 +54,6 @@
   background: var(--pink);
   border-radius: 999px;
 }
-*::-webkit-scrollbar-thumb:hover {
-  background: var(--pink);
-}
-
 
 /* ── FONDO MESH ANIMADO ── */
 body {
