@@ -17,3 +17,18 @@ function showSection(id, btn) {
     .forEach((b) => b.classList.remove("active"));
   btn.classList.add("active");
 }
+// Lightbox
+document.querySelector(".galeria-grid").addEventListener("click", (e) => {
+  const img = e.target.closest("img");
+  if (!img) return;
+
+  const lb = document.createElement("div");
+  lb.className = "lightbox";
+  lb.innerHTML = `
+    <div class="lightbox-bg"></div>
+    <img src="${img.src}" alt="${img.alt}" />
+  `;
+
+  lb.addEventListener("click", () => lb.remove());
+  document.body.appendChild(lb);
+});
