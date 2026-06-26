@@ -26,70 +26,328 @@
 
     <div id="reglamento-grid">
       <nav id="reglamento-nav">
-        <button class="reg-btn active" onclick="showSection('deporte', this)">A. deporte</button>
-        <button class="reg-btn" onclick="showSection('cuir', this)">B. lo Cuir</button>
-        <button class="reg-btn" onclick="showSection('gordo', this)">D. gordo</button>
-        <button class="reg-btn" onclick="showSection('crip', this)">E. tullido/Crip</button>
-        <button class="reg-btn reg-btn--refs" onclick="showSection('refs', this)">Referencias</button>
+        <button class="reg-btn active" onclick="showSection('deporte', this)">
+          A. deporte
+        </button>
+        <button class="reg-btn" onclick="showSection('cuir', this)">
+          B. lo Cuir
+        </button>
+        <button class="reg-btn" onclick="showSection('gordo', this)">
+          D. gordo
+        </button>
+        <button class="reg-btn" onclick="showSection('crip', this)">
+          E. tullido/Crip
+        </button>
+        <button class="reg-btn reg-btn--refs" onclick="showSection('refs', this)">
+          referencias
+        </button>
       </nav>
 
       <div id="reglamento-text">
-
         <!-- A. DEPORTE -->
         <div class="reg-section active" id="sec-deporte">
-          <p>A los diez años Maria fue expulsada de las clases de hiphop por no tener suficiente <em>flow</em>, obligada a correr en las clases de Educación Física durante sus años de escolarización, obligada a saltar el plinto, subir la cuerda, medirse, pesarse o participar en la carrera anual del instituto.</p>
-          <p>Desde edades muy tempranas se corrigió nuestra forma de movernos, se ridiculizaron nuestros errores y se castigó nuestra torpeza. Eran tantas las violencias que recibimos en entornos deportivos que nunca pudimos creernos aquel mantra de "el deporte es salud". ¿Por qué el deporte deja fuera a tanta gente? ¿Por qué nos excluía de su disfrute, de su práctica y, por supuesto, de su éxito?</p>
-          <p>Se enseña a competir antes que a jugar, a aguantar antes que a escuchar el cuerpo, y a entender el valor propio en términos de capacidad, rendimiento, potencia... creando unas jerarquías de valor que muchas veces nos acompañan durante toda la vida.</p>
-          <p>Nos interesa el deporte, pero no tanto su práctica como su significado. Nos interesa de dónde viene y, sobre todo, qué deja fuera. Existe la actividad física (término atribuido al movimiento <em>libre</em>) pero el deporte es otra cosa: un sistema de valores, una maquinaria de jerarquías y exclusiones.</p>
-          <p>El deporte, en su concepción moderna, es profundamente disciplinario. Promueve una idea de cuerpo, de raza y cualidades idóneas. No es casual su papel en los totalitarismos europeos: el deporte como pedagogía del cuerpo obediente, como laboratorio de la eficiencia.</p>
-          <p>Los Juegos Olímpicos han funcionado históricamente como un gran escenario de representación del poder, donde el deporte se convierte en propaganda y el cuerpo atlético en metáfora de orden, disciplina y supremacía. Bajo la retórica de la paz, la fraternidad y la excelencia, los Juegos Olímpicos han servido para escenificar proyectos nacionales autoritarios, siendo el caso del nazismo uno de los ejemplos más evidentes: la celebración de Berlín 1936 consolidó una estética del cuerpo fuerte, blanco, productivo y obediente como ideal político, mientras ocultaba y expulsaba todo aquello que desbordaba esa norma. A día de hoy, la lógica olímpica sigue vinculando rendimiento, sacrificio y grandeza nacional, naturalizando jerarquías, exclusiones y violencias bajo la apariencia de espectáculo universal.</p>
-          <p>El deporte, lejos de ser neutral, se revela así como un lenguaje privilegiado para fabricar consenso, glorificar la competencia y legitimar formas de control.</p>
-          <p>Hoy en día seguimos teniendo la ilusión de que el deporte es neutro, pero encarna los valores neoliberales de nuestro tiempo. ¿Qué capacidades tienen valor? ¿Quién puede ganar? ¿Qué cuerpos quedan fuera del campo de juego?</p>
-          <p>En <em>La ética protestante y el espíritu del capitalismo</em>, Max Weber menciona cómo los <em>sports</em> ingleses del siglo XIX se convierten en una vía de entrenamiento moral para la nueva ética burguesa. Pestalozzi, pedagogo fundamental de aquella época, consideraba la gimnasia un elemento esencial de la formación del ciudadano. Y con la institucionalización, el deporte se replegó hacia el interior de la ciudad hasta convertirse en una pieza más de la organización urbanística y moral del capitalismo industrial.</p>
-          <p>Henry Ford no solo revolucionó la producción industrial mediante la cadena de montaje, sino que extendió su lógica de control más allá de la fábrica, llegando a escribir y promover manuales donde defendía la necesidad de vigilar y moralizar el tiempo libre de la clase trabajadora. Para Ford, el descanso no debía ser un espacio de autonomía o placer, sino una prolongación disciplinada del trabajo: el cuerpo obrero debía dormir, alimentarse, reproducirse y divertirse de manera ordenada para garantizar su rendimiento productivo.</p>
-          <p>El deporte nació como juego, pero perdió toda fantasía. En el siglo XX se democratizó y se reglamentó hasta volverse rígido, burocrático y previsible. Las piscinas, los gimnasios y los estadios sustituyeron a los juegos abiertos. Aquella primitiva ludomotricidad se transformó en ergomotricidad, el cuerpo al servicio del rendimiento. Creando la ficción de igualdad corporal y mental, promoviendo la idea de "la cultura del esfuerzo" donde se establece una falsa meritocracia.</p>
-          <p>El deporte refleja, quizá mejor que ninguna otra práctica, qué capacidades son valoradas en una sociedad productivista: la fuerza, la resistencia, la competitividad, la superación individual. Lo que empezó como juego colectivo terminó como dispositivo de control.</p>
-          <p>Escribimos estas líneas mientras leemos en eldiario.es la noticia de la muerte repentina de Daniel Naroditsky, campeón mundial de ajedrez de 21 años. Nosotres, que creíamos que el ajedrez o el ping-pong podían ser rendijas dentro del imaginario del "súper hombre deportivo", vemos cómo incluso ahí aparece la sombra del agotamiento, del rendimiento extremo y de la presión. Hoy el periódico trae otras noticias en la sección de deportes: muertes súbitas, corrupción y apuestas ilegales. Ninguna parece ejemplo de salud.</p>
+          <p>
+            A los diez años Maria fue expulsada de las clases de hiphop por no
+            tener suficiente <i>flow</i>, obligada a correr en las clases de
+            Educación Física durante sus años de escolarización, obligada a
+            saltar el plinto, subir la cuerda, medirse, pesarse o participar en
+            la carrera anual del instituto.
+          </p>
+          <p>
+            Desde edades muy tempranas se corrigió nuestra forma de movernos, se
+            ridiculizaron nuestros errores y se castigó nuestra torpeza. Eran
+            tantas las violencias que recibimos en entornos deportivos que nunca
+            pudimos creernos aquel mantra de "el deporte es salud". ¿Por qué el
+            deporte deja fuera a tanta gente? ¿Por qué nos excluía de su
+            disfrute, de su práctica y, por supuesto, de su éxito?
+          </p>
+          <p>
+            Se enseña a competir antes que a jugar, a aguantar antes que a
+            escuchar el cuerpo, y a entender el valor propio en términos de
+            capacidad, rendimiento, potencia... creando unas jerarquías de valor
+            que muchas veces nos acompañan durante toda la vida.
+          </p>
+          <p>
+            Nos interesa el deporte, pero no tanto su práctica como su
+            significado. Nos interesa de dónde viene y, sobre todo, qué deja
+            fuera. Existe la actividad física (término atribuido al movimiento
+            <i>libre</i>) pero el deporte es otra cosa: un sistema de valores,
+            una maquinaria de jerarquías y exclusiones.
+          </p>
+          <p>
+            El deporte, en su concepción moderna, es profundamente
+            disciplinario. Promueve una idea de cuerpo, de raza y cualidades
+            idóneas. No es casual su papel en los totalitarismos europeos: el
+            deporte como pedagogía del cuerpo obediente, como laboratorio de la
+            eficiencia.
+          </p>
+          <p>
+            Los Juegos Olímpicos han funcionado históricamente como un gran
+            escenario de representación del poder, donde el deporte se convierte
+            en propaganda y el cuerpo atlético en metáfora de orden, disciplina
+            y supremacía. Bajo la retórica de la paz, la fraternidad y la
+            excelencia, los Juegos Olímpicos han servido para escenificar
+            proyectos nacionales autoritarios, siendo el caso del nazismo uno de
+            los ejemplos más evidentes: la celebración de Berlín 1936 consolidó
+            una estética del cuerpo fuerte, blanco, productivo y obediente como
+            ideal político, mientras ocultaba y expulsaba todo aquello que
+            desbordaba esa norma. A día de hoy, la lógica olímpica sigue
+            vinculando rendimiento, sacrificio y grandeza nacional,
+            naturalizando jerarquías, exclusiones y violencias bajo la
+            apariencia de espectáculo universal.
+          </p>
+          <p>
+            El deporte, lejos de ser neutral, se revela así como un lenguaje
+            privilegiado para fabricar consenso, glorificar la competencia y
+            legitimar formas de control.
+          </p>
+          <p>
+            Hoy en día seguimos teniendo la ilusión de que el deporte es neutro,
+            pero encarna los valores neoliberales de nuestro tiempo. ¿Qué
+            capacidades tienen valor? ¿Quién puede ganar? ¿Qué cuerpos quedan
+            fuera del campo de juego?
+          </p>
+          <p>
+            En <i>La ética protestante y el espíritu del capitalismo</i>, Max
+            Weber menciona cómo los <i>sports</i> ingleses del siglo XIX se
+            convierten en una vía de entrenamiento moral para la nueva ética
+            burguesa. Pestalozzi, pedagogo fundamental de aquella época,
+            consideraba la gimnasia un elemento esencial de la formación del
+            ciudadano. Y con la institucionalización, el deporte se replegó
+            hacia el interior de la ciudad hasta convertirse en una pieza más de
+            la organización urbanística y moral del capitalismo industrial.
+          </p>
+          <p>
+            Henry Ford no solo revolucionó la producción industrial mediante la
+            cadena de montaje, sino que extendió su lógica de control más allá
+            de la fábrica, llegando a escribir y promover manuales donde
+            defendía la necesidad de vigilar y moralizar el tiempo libre de la
+            clase trabajadora. Para Ford, el descanso no debía ser un espacio de
+            autonomía o placer, sino una prolongación disciplinada del trabajo:
+            el cuerpo obrero debía dormir, alimentarse, reproducirse y
+            divertirse de manera ordenada para garantizar su rendimiento
+            productivo.
+          </p>
+          <p>
+            El deporte nació como juego, pero perdió toda fantasía. En el siglo
+            XX se democratizó y se reglamentó hasta volverse rígido, burocrático
+            y previsible. Las piscinas, los gimnasios y los estadios
+            sustituyeron a los juegos abiertos. Aquella primitiva ludomotricidad
+            se transformó en ergomotricidad, el cuerpo al servicio del
+            rendimiento. Creando la ficción de igualdad corporal y mental,
+            promoviendo la idea de "la cultura del esfuerzo" donde se establece
+            una falsa meritocracia.
+          </p>
+          <p>
+            El deporte refleja, quizá mejor que ninguna otra práctica, qué
+            capacidades son valoradas en una sociedad productivista: la fuerza,
+            la resistencia, la competitividad, la superación individual. Lo que
+            empezó como juego colectivo terminó como dispositivo de control.
+          </p>
+          <p>
+            Escribimos estas líneas mientras leemos en eldiario.es la noticia de
+            la muerte repentina de Daniel Naroditsky, campeón mundial de ajedrez
+            de 21 años. Nosotres, que creíamos que el ajedrez o el ping-pong
+            podían ser rendijas dentro del imaginario del "súper hombre
+            deportivo", vemos cómo incluso ahí aparece la sombra del
+            agotamiento, del rendimiento extremo y de la presión. Hoy el
+            periódico trae otras noticias en la sección de deportes: muertes
+            súbitas, corrupción y apuestas ilegales. Ninguna parece ejemplo de
+            salud.
+          </p>
         </div>
 
         <!-- B. LO CUIR -->
         <div class="reg-section" id="sec-cuir">
-          <p>¿Por qué Parkuir? ¿Por qué este nombre? Primero de todo porque queda muy bien. La verdad es que es un buen nombre, siempre decimos que es lo mejor del proyecto. También porque lo cuir nos atraviesa. Pero sobre todo porque entendemos lo cuir como un hacer, una perspectiva desde donde nos situamos. Un sitio que además nos permite establecer alianzas.</p>
-          <p>Antes de nada, necesitamos explicar por qué usamos esta palabra y no <em>queer</em>. No hablamos inglés, y nos incomoda que la genealogía desde la que se nos ha narrado de forma normativa esté anclada casi exclusivamente en referentes anglosajones y norteamericanos, aunque sepamos que nuestra propia posición sigue siendo blanca y europea. Decir cuir es una manera de situarnos con el término, de marcar desde dónde hablamos y de asumir una distancia crítica respecto a esa hegemonía lingüística y teórica.</p>
-          <p>Cuando hablamos de lo cuir, en un sentido amplio, nos referimos a la disidencia sexo-género y a todo aquello que se deriva de esa experiencia: una forma de entender el mundo, unas prácticas concretas de habitarlo y una manera de nombrarnos. Sin embargo, en Parkuir no nos interesa lo cuir como identidad individual ligada exclusivamente a la sexualidad o al género. Nos interesa, sobre todo, su potencial para generar colectividad, y especialmente una colectividad que no se limite a una comunidad cerrada, sino que se abra y se contamine de otros cuerpos, otras experiencias y otros saberes.</p>
-          <p>Nos fijamos en lo cuir no como un ser, sino como un hacer. En las formas, estrategias y herramientas que ha desarrollado para crear vínculos, alianzas y modos de relación que desbordan la norma.</p>
+          <p>
+            ¿Por qué Parkuir? ¿Por qué este nombre? Primero de todo porque queda
+            muy bien. La verdad es que es un buen nombre, siempre decimos que es
+            lo mejor del proyecto. También porque lo cuir nos atraviesa. Pero
+            sobre todo porque entendemos lo cuir como un hacer, una perspectiva
+            desde donde nos situamos. Un sitio que además nos permite establecer
+            alianzas.
+          </p>
+          <p>
+            Antes de nada, necesitamos explicar por qué usamos esta palabra y no
+            <i>queer</i>. No hablamos inglés, y nos incomoda que la genealogía
+            desde la que se nos ha narrado de forma normativa esté anclada casi
+            exclusivamente en referentes anglosajones y norteamericanos, aunque
+            sepamos que nuestra propia posición sigue siendo blanca y europea.
+            Decir cuir es una manera de situarnos con el término, de marcar
+            desde dónde hablamos y de asumir una distancia crítica respecto a
+            esa hegemonía lingüística y teórica.
+          </p>
+          <p>
+            Cuando hablamos de lo cuir, en un sentido amplio, nos referimos a la
+            disidencia sexo-género y a todo aquello que se deriva de esa
+            experiencia: una forma de entender el mundo, unas prácticas
+            concretas de habitarlo y una manera de nombrarnos. Sin embargo, en
+            Parkuir no nos interesa lo cuir como identidad individual ligada
+            exclusivamente a la sexualidad o al género. Nos interesa, sobre
+            todo, su potencial para generar colectividad, y especialmente una
+            colectividad que no se limite a una comunidad cerrada, sino que se
+            abra y se contamine de otros cuerpos, otras experiencias y otros
+            saberes.
+          </p>
+          <p>
+            Nos fijamos en lo cuir no como un ser, sino como un hacer. En las
+            formas, estrategias y herramientas que ha desarrollado para crear
+            vínculos, alianzas y modos de relación que desbordan la norma.
+          </p>
           <h3>el fracaso</h3>
-          <p>Una de nuestras metodologías vitales por excelencia. Desde lo gordo siempre hemos fracasado en el deporte (en la idea de salud, en la hegemonía corporal, belleza...). Desde lo trans siempre hemos fracasado en la idea de masculinidad/feminidad. Aunque esto nos ha supuesto más de un disgusto por el camino, ahora nos parece un aprendizaje y una metodología que, como maestres del fracaso, queremos implementar.</p>
-          <p>Parkuir es un deporte que se estructura a través del fracaso. Por lo tanto, si te gusta competir, fracasar aquí siempre implica ganar, y si no, solo implica pura diversión. Entendemos el fracaso como un espacio fértil para la desviación, la experimentación y el trabajo con el ridículo.</p>
-          <p>Fracasar juntes, no para aprender del error, sino para aprender a errar más y mejor. Nos interesa lo que no sale bien, lo que es un cuadro, da cringe o da lache.</p>
+          <p>
+            Una de nuestras metodologías vitales por excelencia. Desde lo gordo
+            siempre hemos fracasado en el deporte (en la idea de salud, en la
+            hegemonía corporal, belleza...). Desde lo trans siempre hemos
+            fracasado en la idea de masculinidad/feminidad. Aunque esto nos ha
+            supuesto más de un disgusto por el camino, ahora nos parece un
+            aprendizaje y una metodología que, como maestres del fracaso,
+            queremos implementar.
+          </p>
+          <p>
+            Parkuir es un deporte que se estructura a través del fracaso. Por lo
+            tanto, si te gusta competir, fracasar aquí siempre implica ganar, y
+            si no, solo implica pura diversión. Entendemos el fracaso como un
+            espacio fértil para la desviación, la experimentación y el trabajo
+            con el ridículo.
+          </p>
+          <p>
+            Fracasar juntes, no para aprender del error, sino para aprender a
+            errar más y mejor. Nos interesa lo que no sale bien, lo que es un
+            cuadro, da cringe o da lache.
+          </p>
           <h3>lo disfrutón</h3>
-          <p>Si de algo hacemos gala las personas cuir es de disfrutar y pasarlo bien. En Parkuir cogemos esta herramienta y ponemos el deseo en el centro de nuestro deporte. En nuestro deporte, gozar se convierte en una forma de resistencia frente a la austeridad afectiva.</p>
-          <p>En un contexto social donde nuestra existencia se valora en términos de eficiencia, rendimiento o utilidad, lo disfrutón reivindica el tiempo improductivo, el juego sin finalidad, el cuerpo que se mueve por deseo y no por deber.</p>
+          <p>
+            Si de algo hacemos gala las personas cuir es de disfrutar y pasarlo
+            bien. En Parkuir cogemos esta herramienta y ponemos el deseo en el
+            centro de nuestro deporte. En nuestro deporte, gozar se convierte en
+            una forma de resistencia frente a la austeridad afectiva.
+          </p>
+          <p>
+            En un contexto social donde nuestra existencia se valora en términos
+            de eficiencia, rendimiento o utilidad, lo disfrutón reivindica el
+            tiempo improductivo, el juego sin finalidad, el cuerpo que se mueve
+            por deseo y no por deber.
+          </p>
           <h3>el Drag y el travestismo</h3>
-          <p>Para practicar Parkuir lo primero es generar tu personaje drag. Entendemos lo travesti como una práctica de transformación constante que juega con los constructos estéticos y sociales de lo que entendemos por feminidad y masculinidad.</p>
-          <p>En Parkuir cogemos lo travesti para habitar el espacio público desde la exageración, lo torcido y el exceso. Al relacionarnos con la arquitectura desde ahí pensamos que se pueden modificar los propios espacios. Parkuir traviste el gesto, el salto o la caída.</p>
+          <p>
+            Para practicar Parkuir lo primero es generar tu personaje drag.
+            Entendemos lo travesti como una práctica de transformación constante
+            que juega con los constructos estéticos y sociales de lo que
+            entendemos por feminidad y masculinidad.
+          </p>
+          <p>
+            En Parkuir cogemos lo travesti para habitar el espacio público desde
+            la exageración, lo torcido y el exceso. Al relacionarnos con la
+            arquitectura desde ahí pensamos que se pueden modificar los propios
+            espacios. Parkuir traviste el gesto, el salto o la caída.
+          </p>
         </div>
 
         <!-- D. GORDO -->
         <div class="reg-section" id="sec-gordo">
-          <p>Maria es gorda desde los siete años. En su comunión llevó un traje a medida y unos zapatos de novia. Nunca había encajado, pero esa vez fue literal. Está demostrado que la nutrición determina apenas un 20 o 25 % del peso corporal; el resto es genética. Sin embargo, dentro de la moral colectiva persiste un discurso culpabilizante, una especie de condena por no cumplir con la normatividad corporal.</p>
-          <p>Las violencias que nos atraviesan son diversas. En cuanto a lo cultural, solo el 4,6 % de las actrices son gordas (dato extraído de un estudio del Observatorio de la Diversidad en Medios Audiovisuales). La representación de los cuerpos grandes sigue anclada en la monstruosidad o la parodia.</p>
-          <p>El ámbito médico continúa siendo uno de los territorios más hostiles. Se recetan dietas antes de buscar diagnósticos, se atribuyen síntomas exclusivamente al peso y se recomiendan prácticas que en personas delgadas serían vistas como trastornos de la conducta alimentaria.</p>
-          <p>La moralidad delgada sigue gobernando el relato de la salud. Como escribió Itziar Castro poco antes de morir, "no debemos salud a nadie".</p>
-          <p>Por eso no decimos que estamos "gorditas", estamos gordas. Porque el diminutivo no suaviza, corrige. Marca un límite. Decir gorda es un gesto político porque nombra sin pedir permiso y porque afirma la presencia de un cuerpo que no ha sido diseñado para moverse cómodamente en los espacios que habitamos.</p>
-          <p>Parkuir nace precisamente en ese desajuste. No como una respuesta correctiva, sino como una práctica que expone la violencia de las expectativas corporales. La salud no es un imperativo moral ni una condición para la dignidad. No se le debe salud a nadie.</p>
-          <p>En Parkuir no se parte de diagnósticos ni de promesas de mejora; se parte del cuerpo que hay, del cuerpo que llega o no llega, del cuerpo que decide cómo y cuándo moverse.</p>
-          <p>Recuerdo una presentación importante, una de esas ocasiones en las que todo parece medirse por la primera impresión. Mi madre solía decirme: "l'esport no està fet per a tu". Y tenía razón: el deporte no estaba hecho para mí. Por eso hoy queremos crear uno nuevo. Un deporte para nosotres en el que se pueda participar con la barriga llena.</p>
+          <p>
+            Maria es gorda desde los siete años. En su comunión llevó un traje a
+            medida y unos zapatos de novia. Nunca había encajado, pero esa vez
+            fue literal. Está demostrado que la nutrición determina apenas un 20
+            o 25 % del peso corporal; el resto es genética. Sin embargo, dentro
+            de la moral colectiva persiste un discurso culpabilizante, una
+            especie de condena por no cumplir con la normatividad corporal.
+          </p>
+          <p>
+            Las violencias que nos atraviesan son diversas. En cuanto a lo
+            cultural, solo el 4,6 % de las actrices son gordas (dato extraído de
+            un estudio del Observatorio de la Diversidad en Medios
+            Audiovisuales). La representación de los cuerpos grandes sigue
+            anclada en la monstruosidad o la parodia.
+          </p>
+          <p>
+            El ámbito médico continúa siendo uno de los territorios más
+            hostiles. Se recetan dietas antes de buscar diagnósticos, se
+            atribuyen síntomas exclusivamente al peso y se recomiendan prácticas
+            que en personas delgadas serían vistas como trastornos de la
+            conducta alimentaria.
+          </p>
+          <p>
+            La moralidad delgada sigue gobernando el relato de la salud. Como
+            escribió Itziar Castro poco antes de morir, "no debemos salud a
+            nadie".
+          </p>
+          <p>
+            Por eso no decimos que estamos "gorditas", estamos gordas. Porque el
+            diminutivo no suaviza, corrige. Marca un límite. Decir gorda es un
+            gesto político porque nombra sin pedir permiso y porque afirma la
+            presencia de un cuerpo que no ha sido diseñado para moverse
+            cómodamente en los espacios que habitamos.
+          </p>
+          <p>
+            Parkuir nace precisamente en ese desajuste. No como una respuesta
+            correctiva, sino como una práctica que expone la violencia de las
+            expectativas corporales. La salud no es un imperativo moral ni una
+            condición para la dignidad. No se le debe salud a nadie.
+          </p>
+          <p>
+            En Parkuir no se parte de diagnósticos ni de promesas de mejora; se
+            parte del cuerpo que hay, del cuerpo que llega o no llega, del
+            cuerpo que decide cómo y cuándo moverse.
+          </p>
+          <p>
+            Recuerdo una presentación importante, una de esas ocasiones en las
+            que todo parece medirse por la primera impresión. Mi madre solía
+            decirme: "l'esport no està fet per a tu". Y tenía razón: el deporte
+            no estaba hecho para mí. Por eso hoy queremos crear uno nuevo. Un
+            deporte para nosotres en el que se pueda participar con la barriga
+            llena.
+          </p>
         </div>
 
         <!-- E. TULLIDO/CRIP -->
         <div class="reg-section" id="sec-crip">
-          <p>Parkuir empezó a ser contemplado desde nuestra diversidad (cuir y gorda), pero más pronto que tarde tuvimos el deseo de introducir otros parámetros, y Jose Vaquerizo nos convenció de que él tenía que ser una estrella del Parkuir. Gracias a él, a Costa Badía y a Clara López (referentes de lo tullido) revisamos el capacitismo en nuestra práctica.</p>
-          <p>Al hablar de un nuevo deporte, no podemos dejar de hablar del colectivo <em>crip</em>, el tullido, pues muchos de los negocios deportivos tienen su opción paralímpica. No se trata únicamente de añadir rampas, adaptar normas o ampliar categorías. Se trata de cuestionar la idea misma de rendimiento, progreso y superación que atraviesa el deporte, la arquitectura y los imaginarios corporales que habitamos.</p>
-          <p>Incluso la accesibilidad suele pensarse como una solución técnica: una serie de ajustes que permiten que "más personas" puedan participar. Pero ¿participar en qué? ¿Y bajo qué condiciones? La accesibilidad opera como una forma de normalización amable: se adapta el entorno para que ciertos cuerpos puedan acercarse lo máximo posible a la norma sin cuestionarla.</p>
-          <p>No queremos solo que se acceda al juego: queremos cambiar sus reglas. Queremos que el ritmo se desordene, que el objetivo se vuelva borroso, que el error deje de ser una falta y se convierta en una posibilidad.</p>
-          <p>En Parkuir, la accesibilidad no es un <em>checklist</em>. Es una práctica situada, frágil, negociada. A veces contradictoria. No siempre sabemos cómo hacerla bien. La capacidad no es una propiedad del cuerpo, sino una relación entre cuerpos, espacios, tiempos y deseos.</p>
-          <p>Parkuir no pretende ser un modelo ni una solución. No aspira a ser universal ni replicable. Es una práctica situada, atravesada por nuestros cuerpos concretos, con sus límites, contradicciones y deseos. Un espacio donde no participar en la acción no significa quedarse fuera.</p>
+          <p>
+            Parkuir empezó a ser contemplado desde nuestra diversidad (cuir y
+            gorda), pero más pronto que tarde tuvimos el deseo de introducir
+            otros parámetros, y Jose Vaquerizo nos convenció de que él tenía que
+            ser una estrella del Parkuir. Gracias a él, a Costa Badía y a Clara
+            López (referentes de lo tullido) revisamos el capacitismo en nuestra
+            práctica.
+          </p>
+          <p>
+            Al hablar de un nuevo deporte, no podemos dejar de hablar del
+            colectivo <i>crip</i>, el tullido, pues muchos de los negocios
+            deportivos tienen su opción paralímpica. No se trata únicamente de
+            añadir rampas, adaptar normas o ampliar categorías. Se trata de
+            cuestionar la idea misma de rendimiento, progreso y superación que
+            atraviesa el deporte, la arquitectura y los imaginarios corporales
+            que habitamos.
+          </p>
+          <p>
+            Incluso la accesibilidad suele pensarse como una solución técnica:
+            una serie de ajustes que permiten que "más personas" puedan
+            participar. Pero ¿participar en qué? ¿Y bajo qué condiciones? La
+            accesibilidad opera como una forma de normalización amable: se
+            adapta el entorno para que ciertos cuerpos puedan acercarse lo
+            máximo posible a la norma sin cuestionarla.
+          </p>
+          <p>
+            No queremos solo que se acceda al juego: queremos cambiar sus
+            reglas. Queremos que el ritmo se desordene, que el objetivo se
+            vuelva borroso, que el error deje de ser una falta y se convierta en
+            una posibilidad.
+          </p>
+          <p>
+            En Parkuir, la accesibilidad no es un <i>checklist</i>. Es una
+            práctica situada, frágil, negociada. A veces contradictoria. No
+            siempre sabemos cómo hacerla bien. La capacidad no es una propiedad
+            del cuerpo, sino una relación entre cuerpos, espacios, tiempos y
+            deseos.
+          </p>
+          <p>
+            Parkuir no pretende ser un modelo ni una solución. No aspira a ser
+            universal ni replicable. Es una práctica situada, atravesada por
+            nuestros cuerpos concretos, con sus límites, contradicciones y
+            deseos. Un espacio donde no participar en la acción no significa
+            quedarse fuera.
+          </p>
         </div>
 
         <!-- REFERENCIAS -->
@@ -97,47 +355,48 @@
           <div class="refs-block">
             <h3 class="refs-cat">Libros y revistas</h3>
             <ul class="refs-list">
-              <li>Anarquía Muscular, Jose Vaquerizo 'Vake'</li>
-              <li>Arquitectura de la discapacidad</li>
-              <li>Arquitectura travesti: cosmética subversiva, Francisco Calbacho</li>
-              <li>Chandaleras. Masculinidad femenina vs feminidad obligatoria en el deporte, Ana Pastor Pascual</li>
-              <li>Cinco lorzas metafísicas, María von Touceda</li>
-              <li>Contra el running. Corriendo hasta morir en la ciudad postindustrial, Luis de la Cruz</li>
-              <li>Correr sin marca. Deporte, lucha, solidaridad, Juan Cruz López</li>
-              <li>Cosmologías Vulnerables: Prácticas artísticas, cuidados y diversidad funcional. Carlos Almela, Costa Badía, Carlota Mir, Lola Barrera, Debajo del Sombrero, Andrea García-Santesmases, hablarenarte, Clara López, Fátima Masoud, María Oliver, Project Art Works, Elena Prous, Ivan Sette, Perla Zúñiga</li>
-              <li>El arte queer del fracaso y Masculinidad femenina, Jack Halberstam</li>
-              <li>El derecho a las cosas bellas: Vindicación de la vida holgada, Juan Evaristo Valls Boix</li>
-              <li>Gordofobia, otra herramienta de dominación, Adriana Torres</li>
-              <li>La arquitectura de la discapacidad. Edificios, ciudades y paisajes más allá del acceso, David Gissen</li>
-              <li>Las cuatro heridas del deporte moderno, Raúl Sánchez García</li>
-              <li>L'Illa Negra. Revista d'història social. Monogràfic: L'esport, entre la mercantilització i la mobilització</li>
-              <li>Masculinidad femenina, Jack Halberstam</li>
-              <li>Melé en las gradas. Reflexiones para la recuperación del deporte obrero, Alberto Luque</li>
-              <li>Metafísica de la pereza, Juan Evaristo Valls Boix</li>
-              <li>Puta Gorda, Yolanda Larreategui y Helena Azkarragaurizar</li>
-              <li>Queer Spaces: An Atlas of LGBTQ+ Places and Stories</li>
-              <li>Siempre saltando vallas, deporte femenino y medios de comunicación, Fonsi Loaiza</li>
-              <li>Sobre el deporte, Pier Paolo Pasolini</li>
-              <li>Stop gordofobia y las panzas subversivas, Magdalena Piñeyro</li>
-              <li>The Other Olympians: Fascism, Queerness, and the Making of Modern Sports</li>
-              <li>Transparencia queer: el edificio ciudad como objeto contra la matriz heterosexual, P. Vines Lopez</li>
-              <li>Utopia queer: el entonces y el allí de la futuridad antinormativa, Jose Esteban Muñoz</li>
-              <li>Vestir, revestir, travestir, Sebastian Marchant</li>
+              <li><i>Anarquía Muscular</i>, Jose Vaquerizo 'Vake'</li>
+              <li><i>Arquitectura de la discapacidad</i></li>
+              <li><i>Arquitectura travesti: cosmética subversiva</i>, Francisco Calbacho</li>
+              <li><i>Chandaleras. Masculinidad femenina vs feminidad obligatoria en el deporte</i>, Ana Pastor Pascual</li>
+              <li><i>Cinco lorzas metafísicas</i>, María von Touceda</li>
+              <li><i>Contra el running. Corriendo hasta morir en la ciudad postindustrial</i>, Luis de la Cruz</li>
+              <li><i>Correr sin marca. Deporte, lucha, solidaridad</i>, Juan Cruz López</li>
+              <li><i>Cosmologías Vulnerables: Prácticas artísticas, cuidados y diversidad funcional</i>. Carlos Almela, Costa Badía, Carlota Mir, Lola Barrera, Debajo del Sombrero, Andrea García-Santesmases, hablarenarte, Clara López, Fátima Masoud, María Oliver, Project Art Works, Elena Prous, Ivan Sette, Perla Zúñiga</li>
+              <li><i>El arte queer del fracaso</i> y <i>Masculinidad femenina</i>, Jack Halberstam</li>
+              <li><i>El derecho a las cosas bellas: Vindicación de la vida holgada</i>, Juan Evaristo Valls Boix</li>
+              <li><i>Gordofobia, otra herramienta de dominación</i>, Adriana Torres</li>
+              <li><i>La arquitectura de la discapacidad. Edificios, ciudades y paisajes más allá del acceso</i>, David Gissen</li>
+              <li><i>Las cuatro heridas del deporte moderno</i>, Raúl Sánchez García</li>
+              <li><i>L'Illa Negra. Revista d'història social</i>. Monogràfic: L'esport, entre la mercantilització i la mobilització</li>
+              <li><i>Masculinidad femenina</i>, Jack Halberstam</li>
+              <li><i>Melé en las gradas. Reflexiones para la recuperación del deporte obrero</i>, Alberto Luque</li>
+              <li><i>Metafísica de la pereza</i>, Juan Evaristo Valls Boix</li>
+              <li><i>Puta Gorda</i>, Yolanda Larreategui y Helena Azkarragaurizar</li>
+              <li><i>Queer Spaces: An Atlas of LGBTQ+ Places and Stories</i></li>
+              <li><i>Siempre saltando vallas, deporte femenino y medios de comunicación</i>, Fonsi Loaiza</li>
+              <li><i>Sobre el deporte</i>, Pier Paolo Pasolini</li>
+              <li><i>Stop gordofobia y las panzas subversivas</i>, Magdalena Piñeyro</li>
+              <li><i>The Other Olympians: Fascism, Queerness, and the Making of Modern Sports</i></li>
+              <li><i>Transparencia queer: el edificio ciudad como objeto contra la matriz heterosexual</i>, P. Vines Lopez</li>
+              <li><i>Utopia queer: el entonces y el allí de la futuridad antinormativa</i>, Jose Esteban Muñoz</li>
+              <li><i>Vestir, revestir, travestir</i>, Sebastian Marchant</li>
             </ul>
           </div>
 
           <div class="refs-block">
             <h3 class="refs-cat">Audiovisuales</h3>
             <ul class="refs-list">
-              <li>Crip Camp. 2020 · Documental · 1h 42m</li>
-              <li>King Ray. 2019. Documental. 85 min</li>
-              <li><a href="https://www.youtube.com/watch?v=BzrI15uw92k" target="_blank" rel="noopener">Monty Python - Silly Olympics</a>. 1972. 4 min</li>
-              <li>One More Jump. 2019. 83 min</li>
-              <li>We All Play. 2024. 97 min</li>
+              <li><i>Crip Camp</i>. 2020 · Documental · 1h 42m</li>
+              <li><i>King Ray</i>. 2019. Documental. 85 min</li>
+              <li>
+                <a href="https://www.youtube.com/watch?v=BzrI15uw92k" target="_blank" rel="noopener"><i>Monty Python - Silly Olympics</i></a>. 1972. 4 min
+              </li>
+              <li><i>One More Jump</i>. 2019. 83 min</li>
+              <li><i>We All Play</i>. 2024. 97 min</li>
             </ul>
           </div>
         </div>
-
       </div>
     </div>
 
