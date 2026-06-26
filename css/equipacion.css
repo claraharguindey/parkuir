@@ -160,10 +160,12 @@ header {
   transition: opacity 0.15s, transform 0.15s;
   border-radius: 8px;
 }
+
 .tool-btn:hover {
   opacity: 0.65;
   transform: scale(1.1);
 }
+
 .tool-btn.active {
   opacity: 1;
   background: rgba(255, 55, 115, 0.1);
@@ -456,7 +458,6 @@ header {
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(26, 26, 26, 0.7);
   z-index: 100;
   align-items: center;
   justify-content: center;
