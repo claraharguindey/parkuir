@@ -10,9 +10,9 @@ body {
   flex-shrink: 0;
   background: var(--cream);
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
-  padding: 0.4rem 2rem 1rem;
+  padding: 0.6rem 2rem 0.8rem;
   height: clamp(80px, 12vw, 160px);
 }
 .reglamento-band h1 {
@@ -22,9 +22,12 @@ body {
   line-height: 1;
   letter-spacing: 0.01em;
   text-transform: uppercase;
+  text-align: center;
+  position: relative;
+  top: 0.06em;
 }
 
-/* ── GRID 2 COLUMNAS ── */
+/* ── GRID ── */
 #reglamento-grid {
   flex: 1;
   display: grid;
@@ -33,7 +36,7 @@ body {
   min-height: 0;
 }
 
-/* ── COL IZQUIERDA — botones ── */
+/* ── COL IZQUIERDA ── */
 #reglamento-nav {
   padding: 2rem 1.5rem;
   display: flex;
@@ -86,7 +89,7 @@ body {
   opacity: 0.7;
 }
 
-/* ── COL DERECHA — texto ── */
+/* ── COL DERECHA ── */
 #reglamento-text {
   padding: 2rem 2.5rem 2rem 1.5rem;
   overflow-y: auto;
@@ -102,17 +105,22 @@ body {
 
 .reg-section h3 {
   font-family: "Outreque", sans-serif;
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 700;
   color: var(--pink);
   letter-spacing: 0.03em;
   text-transform: uppercase;
+  margin-bottom: 0.8rem;
+  margin-top: 1.5rem;
+}
+.reg-section h3:first-child {
+  margin-top: 0;
 }
 
 .reg-section p {
   font-family: "Outreque", sans-serif;
-  font-size: 24px;
-  line-height: 1.8;
+  font-size: 20px;
+  line-height: 1.75;
   color: black;
   margin-bottom: 1rem;
   max-width: 80%;
@@ -154,20 +162,18 @@ body {
   display: flex;
   flex-direction: column;
 }
-
 .refs-list li {
   font-family: "Outreque", sans-serif;
-  font-size: 24px;
+  font-size: 20px;
   line-height: 1.5;
   color: black;
   padding: 0.55rem 0;
   max-width: 80%;
+  border-bottom: 1px solid rgba(255, 55, 115, 0.2);
 }
-
 .refs-list li:first-child {
   border-top: 1px solid var(--pink);
 }
-
 .refs-list a {
   color: black;
   text-decoration: underline;

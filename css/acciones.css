@@ -1,0 +1,232 @@
+body {
+  height: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.acciones-band {
+  flex-shrink: 0;
+  background: var(--cream);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.6rem 2rem 0.8rem;
+  height: clamp(80px, 12vw, 160px);
+}
+.acciones-band h1 {
+  font-family: "BebasNeue", sans-serif;
+  font-size: clamp(2.5rem, 9vw, 8rem);
+  color: var(--pink);
+  line-height: 1;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  text-align: center;
+  position: relative;
+  top: 0.06em;
+}
+
+/* ── JUEGO ── */
+#juego {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 2rem 4rem;
+  gap: 1.5rem;
+  min-height: 70vh;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── FILTROS — estilo botones reglamento ── */
+#filtros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  justify-content: center;
+  max-width: 700px;
+}
+
+.filtro-btn {
+  font-family: "Outreque", sans-serif;
+  font-size: clamp(1.1rem, 1.6vw, 1.4rem);
+  font-weight: 700;
+  color: #ffd9ba;
+  border: none;
+  border-radius: 14px;
+  padding: 0.55rem 1.4rem;
+  cursor: pointer;
+  letter-spacing: 0.01em;
+  transition:
+    transform 0.1s,
+    filter 0.15s;
+}
+.filtro-btn:hover {
+  transform: scale(1.02);
+  filter: brightness(1.08);
+}
+.filtro-btn.active {
+  outline: 3px solid #ffd9ba;
+  outline-offset: -3px;
+}
+
+.filtro-btn[data-cat="todos"] {
+  background: var(--ink);
+}
+.filtro-btn[data-cat="basicos"] {
+  background: #fd5e96;
+}
+.filtro-btn[data-cat="arquitectura"] {
+  background: #fd7145;
+}
+.filtro-btn[data-cat="material"] {
+  background: #ff3773;
+}
+.filtro-btn[data-cat="grupo"] {
+  background: #ffd9ba;
+  color: #fd5e96;
+}
+
+.filtro-btn[data-cat="grupo"].active {
+  outline-color: #fd5e96;
+}
+
+/* ── TARJETA ── */
+#card-area {
+  width: 100%;
+  max-width: 560px;
+}
+
+.accion-card {
+  background: var(--cream);
+  border-radius: 24px;
+  padding: 2.5rem 2.5rem 2rem;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.12);
+  min-height: 260px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  animation: cardIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes cardIn {
+  from {
+    opacity: 0;
+    transform: scale(0.92) rotate(-2deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+.accion-num {
+  font-family: "Outreque", sans-serif;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0.35;
+  color: var(--ink);
+}
+
+.accion-cat-badge {
+  display: inline-block;
+  font-family: "Outreque", sans-serif;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #ffd9ba;
+  border-radius: 14px;
+  padding: 0.2rem 0.8rem;
+  align-self: flex-start;
+}
+.accion-cat-badge[data-cat="grupo"] {
+  color: #fd5e96;
+}
+
+.accion-titulo {
+  font-family: "Outreque", sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--pink);
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.accion-desc {
+  font-family: "Outreque", sans-serif;
+  font-size: 24px;
+  line-height: 1.8;
+  color: black;
+  flex: 1;
+  max-width: 80%;
+}
+
+.accion-material {
+  font-family: "Outreque", sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #ff3773;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.8;
+}
+
+#btn-tirar {
+  font-family: "Outreque", sans-serif;
+  font-size: clamp(1rem, 1.6vw, 1.4rem);
+  font-weight: 700;
+  color: #ffd9ba;
+  background: var(--pink);
+  border: none;
+  border-radius: 14px;
+  padding: 0.6rem 1.8rem;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+  transition:
+    background 0.15s,
+    transform 0.1s;
+}
+#btn-tirar:hover {
+  background: #fd7145;
+  transform: scale(1.03);
+}
+#btn-tirar:active {
+  transform: scale(0.97);
+}
+
+#contador {
+  font-family: "Outreque", sans-serif;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink);
+  opacity: 0.3;
+}
+
+@media (max-width: 600px) {
+  .accion-card {
+    padding: 1.8rem 1.5rem 1.5rem;
+    min-height: 200px;
+  }
+  .accion-desc {
+    max-width: 100%;
+  }
+  #btn-tirar {
+    width: 100%;
+  }
+  #filtros {
+    gap: 0.5rem;
+  }
+  .filtro-btn {
+    font-size: 0.95rem;
+    padding: 0.4rem 0.9rem;
+    width: 100%;
+  }
+}

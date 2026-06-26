@@ -11,9 +11,9 @@ body {
   flex-shrink: 0;
   background: var(--cream);
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
-  padding: 0.4rem 2rem 1rem;
+  padding: 0.6rem 2rem 0.8rem;
   height: clamp(80px, 12vw, 160px);
 }
 .jugadorxs-band h1 {
@@ -21,7 +21,11 @@ body {
   font-size: clamp(2.5rem, 9vw, 8rem);
   color: var(--pink);
   line-height: 1;
+  letter-spacing: 0.01em;
   text-transform: uppercase;
+  text-align: center;
+  position: relative;
+  top: 0.06em;
 }
 
 #jugadorxs-grid {

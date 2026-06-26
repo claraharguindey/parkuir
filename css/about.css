@@ -1,6 +1,11 @@
+html {
+  background: #fd8aaa;
+}
+
 body {
-  height: 100vh;
-  overflow: hidden;
+  height: auto;
+  min-height: 100vh;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   user-select: none;
@@ -11,9 +16,9 @@ body {
   flex-shrink: 0;
   background: var(--cream);
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
-  padding: 0.4rem 2rem 1rem;
+  padding: 0.6rem 2rem 0.8rem;
   height: clamp(80px, 12vw, 160px);
 }
 .about-band h1 {
@@ -24,6 +29,8 @@ body {
   letter-spacing: 0.01em;
   text-transform: uppercase;
   text-align: center;
+  position: relative;
+  top: 0.06em;
 }
 
 /* ── GRID 3 COLUMNAS ── */
@@ -32,14 +39,14 @@ body {
   display: grid;
   grid-template-columns: 0.8fr 2.5fr 0.7fr;
   gap: 0;
-  overflow: hidden;
+  overflow: visible;
   min-height: 0;
 }
 
 /* ── COL IZQUIERDA — frase destacada ── */
 #about-left {
   padding: 2rem 1.5rem;
-  overflow-y: auto;
+  overflow: visible;
 }
 
 #about-quote {
@@ -47,6 +54,7 @@ body {
   font-size: 1.5rem;
   color: var(--pink);
   font-weight: 600;
+  line-height: 1.5;
 }
 
 #about-quote a {
@@ -57,31 +65,27 @@ body {
   color: black;
 }
 
-/* ── COL CENTRO — texto corrido ── */
 #about-center {
   position: relative;
-  margin: 2rem;
-  overflow-y: auto;
+  margin: 2rem 2rem 2rem 2.5rem;
+  overflow: visible;
+}
+
+#text-block {
+  width: 80%;
 }
 
 #text-block p {
   font-family: "Outreque", sans-serif;
-  font-size: 24px;
-  line-height: 1.75;
+  font-size: 20px;
   color: var(--ink);
-  margin-bottom: 1rem;
+  margin-bottom: 0.9rem;
 }
 
 #text-block p:last-child {
   margin-bottom: 0;
 }
 
-/* ── CANVAS LÍQUIDO — ya no se usa, se oculta siempre ── */
-#flow-canvas {
-  display: none !important;
-}
-
-/* ── COL DERECHA — controles ── */
 #about-right {
   padding: 2rem 1.5rem 2rem 0.5rem;
   display: flex;
@@ -91,35 +95,60 @@ body {
 }
 
 .mode-btn {
-  font-family: "BebasNeue", sans-serif;
-  font-size: 1.4rem;
-  letter-spacing: 0.05em;
-  color: white;
+  display: block;
+  font-family: "Outreque", sans-serif;
+  font-size: clamp(1.1rem, 1.6vw, 1.4rem);
+  font-weight: 700;
+  color: #ffd9ba;
   border: none;
-  border-radius: 999px;
-  padding: 0.5rem 1.2rem;
+  border-radius: 14px;
+  padding: 0.55rem 1.4rem;
   cursor: pointer;
-  text-align: center;
-  transition: transform 0.1s, opacity 0.15s;
-  background: var(--pink);
+  text-align: left;
+  letter-spacing: 0.01em;
+  width: 100%;
+  transition:
+    transform 0.1s,
+    filter 0.15s;
 }
 .mode-btn:hover {
   transform: scale(1.02);
+  filter: brightness(1.08);
 }
+.mode-btn.active {
+  outline: 3px solid #ffd9ba;
+  outline-offset: -3px;
+}
+
 .mode-btn#btn-leer {
-  background: var(--orange, #fd7145);
+  background: #fd5e96;
+}
+.mode-btn#btn-travestir {
+  background: #fd7145;
+}
+.mode-btn#btn-fracasar {
+  background: #ff3773;
+}
+.mode-btn#btn-ilegibilidad {
+  background: #ffd9ba;
+  color: #fd5e96;
 }
 
-/* botón activo según modo del body */
-body.reading            .mode-btn#btn-leer         { outline: 3px solid white; outline-offset: -3px; }
-body.mode-travestir     .mode-btn#btn-travestir     { outline: 3px solid white; outline-offset: -3px; }
-body.mode-fracasar      .mode-btn#btn-fracasar      { outline: 3px solid white; outline-offset: -3px; }
-body.mode-ilegibilidad  .mode-btn#btn-ilegibilidad  { outline: 3px solid white; outline-offset: -3px; }
-
-/* ── MODO LECTURA ── */
-body.reading #about-grid {
-  overflow: visible;
-  height: auto;
+body.reading .mode-btn#btn-leer {
+  outline: 3px solid #ffd9ba;
+  outline-offset: -3px;
+}
+body.mode-travestir .mode-btn#btn-travestir {
+  outline: 3px solid #ffd9ba;
+  outline-offset: -3px;
+}
+body.mode-fracasar .mode-btn#btn-fracasar {
+  outline: 3px solid #ffd9ba;
+  outline-offset: -3px;
+}
+body.mode-ilegibilidad .mode-btn#btn-ilegibilidad {
+  outline: 3px solid #fd5e96;
+  outline-offset: -3px;
 }
 
 /* ── MOBILE ── */
@@ -137,7 +166,6 @@ body.reading #about-grid {
     flex-direction: column;
   }
 
-  /* botones arriba */
   #about-right {
     order: 1;
     flex-direction: row;
@@ -152,13 +180,11 @@ body.reading #about-grid {
     font-size: 1.1rem;
   }
 
-  /* frase destacada */
   #about-left {
     order: 2;
     padding: 0.8rem 1rem 0;
   }
 
-  /* texto */
   #about-center {
     order: 3;
     padding: 0.8rem 1rem 2rem;
