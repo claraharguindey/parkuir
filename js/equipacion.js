@@ -2,7 +2,10 @@
 const userId =
   localStorage.getItem("parkuir_userId") ||
   (() => {
-    const id = crypto.randomUUID();
+    const id = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (c) => {
+      const r = (Math.random() * 16) | 0;
+      return (c === "x" ? r : (r & 0x3) | 0x8).toString(16);
+    });
     localStorage.setItem("parkuir_userId", id);
     return id;
   })();
@@ -281,7 +284,7 @@ document.getElementById("btnX").addEventListener("click", () => {
 // ── GALERÍA ─────────────────────────────────────────────
 const galleryGrid = document.getElementById("galleryGrid");
 const galleryEmpty = document.getElementById("galleryEmpty");
-const API = "/api/liga";
+const API = "https://parkuir.vitrin.as/api/liga";
 
 function renderCard(entry) {
   const card = document.createElement("div");
