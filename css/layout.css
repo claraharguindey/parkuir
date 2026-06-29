@@ -167,11 +167,7 @@ body {
   }
 
   .page-right {
-    order: 1;
-    flex-wrap: wrap;
-    padding: 1.2rem 1rem 0.5rem;
-    gap: 0.5rem;
-    align-items: flex-start;
+    display: none;
   }
 
   .panel-btn {
@@ -182,12 +178,12 @@ body {
 
   .page-left {
     order: 3;
-    padding: 0.8rem 1rem 0;
+    padding: 0 1.5rem 1rem;
   }
 
   .page-center {
     order: 2;
-    padding: 0.8rem 1rem 2rem;
+    padding: 1.5rem;
     overflow: visible;
   }
 }

@@ -150,7 +150,12 @@
 /* ── Mobile ── */
 @media (max-width: 768px) {
   .page-center {
-    padding: 0.8rem 1rem 5rem;
+    padding: 1.2rem;
+    order: 3;
+  }
+  
+  .page-left {
+    padding: 0.8rem;
   }
 
   .reg-section p,
