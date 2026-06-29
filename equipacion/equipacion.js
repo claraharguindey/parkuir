@@ -63,7 +63,7 @@ sizeSlider.addEventListener("input", () => {
 const canvas = document.getElementById("paintCanvas");
 const ctx = canvas.getContext("2d");
 const shirtImg = new Image();
-shirtImg.src = "./images/camiseta.png";
+shirtImg.src = "./../images/camiseta.png";
 let maskCanvas = null;
 
 // Precarga el stamp
