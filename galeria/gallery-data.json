@@ -1,0 +1,227 @@
+[
+  {
+    "id": "cigarreras",
+    "titulo": "Las Cigarreras 2026",
+    "subsecciones": [
+      {
+        "id": "cigarreras-cronograma",
+        "titulo": "Cronograma de la historia del deporte",
+        "texto": "Iniciamos el proyecto con una introducción colectiva a Parkuir a través de la construcción de un cronograma alternativo de la historia del deporte. Desde una perspectiva queer, anticapacitista y antigordofóbica, compartimos referentes, experiencias personales y relatos de ficción para imaginar otras formas de entender la práctica deportiva.",
+        "imagenes": [
+          "./../fotos/galeria/cigarreras/cronograma/1.jpg",
+          "./../fotos/galeria/cigarreras/cronograma/2.jpg",
+          "./../fotos/galeria/cigarreras/cronograma/3.jpeg",
+          "./../fotos/galeria/cigarreras/cronograma/4.jpeg",
+          "./../fotos/galeria/cigarreras/cronograma/5.jpeg"
+        ]
+      },
+      {
+        "id": "cigarreras-desvios",
+        "titulo": "Ruta de desvíos arquitectónicos",
+        "texto": "En la librería Fahrenheit 451 presentamos la publicación Parkuir, resultado de los meses de investigación desarrollados en Alicante. Tras la presentación, realizamos una ruta por los alrededores explorando la arquitectura urbana como un espacio de juego, experimentación y resignificación colectiva.",
+        "imagenes": [
+          "./../fotos/galeria/cigarreras/desvios/1.jpg",
+          "./../fotos/galeria/cigarreras/desvios/2.jpg",
+          "./../fotos/galeria/cigarreras/desvios/3.jpg",
+          "./../fotos/galeria/cigarreras/desvios/4.jpg",
+          "./../fotos/galeria/cigarreras/desvios/5.jpg",
+          "./../fotos/galeria/cigarreras/desvios/6.jpg",
+          "./../fotos/galeria/cigarreras/desvios/7.jpg",
+          "./../fotos/galeria/cigarreras/desvios/8.jpg"
+        ]
+      },
+      {
+        "id": "cigarreras-gimnasio",
+        "titulo": "Ejercicios para desobedecer en el gimnasio. Con Costa Badia",
+        "texto": "Junto a Costa Badia activamos recuerdos vinculados a las clases de educación física y a los contextos deportivos. A través de la conversación, el movimiento y la performance, revisitamos experiencias de violencia, exclusión y normatividad, reordenando la arquitectura del gimnasio para imaginar nuevos usos y formas de habitarla.",
+        "imagenes": []
+      },
+      {
+        "id": "cigarreras-drag",
+        "titulo": "Explorar el drag desde la estética deportiva",
+        "texto": "Junto a Feña Celedón y Lu Chieregati (M0nster.L4b.) desarrollamos una sesión dedicada a explorar las relaciones entre el drag, el deporte y las prácticas escénicas. A través del vestuario, la performance y el juego, experimentamos con la construcción de personajes e imaginamos nuevas estéticas deportivas desde la disidencia.",
+        "imagenes": [
+          "./../fotos/galeria/cigarreras/explorar-drag/1.jpg",
+          "./../fotos/galeria/cigarreras/explorar-drag/2.jpg",
+          "./../fotos/galeria/cigarreras/explorar-drag/3.jpg",
+          "./../fotos/galeria/cigarreras/explorar-drag/4.jpg",
+          "./../fotos/galeria/cigarreras/explorar-drag/5.jpg",
+          "./../fotos/galeria/cigarreras/explorar-drag/6.jpg",
+          "./../fotos/galeria/cigarreras/explorar-drag/7.jpg",
+          "./../fotos/galeria/cigarreras/explorar-drag/8.jpg",
+          "./../fotos/galeria/cigarreras/explorar-drag/9.jpg",
+          "./../fotos/galeria/cigarreras/explorar-drag/10.jpg",
+          "./../fotos/galeria/cigarreras/explorar-drag/11.jpg",
+          "./../fotos/galeria/cigarreras/explorar-drag/12.jpg"
+        ]
+      },
+      {
+        "id": "cigarreras-jornadas",
+        "titulo": "II Jornadas Mundiales de Parkuir",
+        "texto": "Para cerrar el proyecto celebramos las II Jornadas Mundiales de Parkuir, un gran evento lúdico inspirado en el imaginario de los Juegos Olímpicos, pero atravesado por el humor, el fracaso, el absurdo y el mamarracherío. El evento contó con la colaboración de Maker Alcant, Pastelerías Amada, Aimar Ito Gatogrande, Sarah Way y Pachón Rima Con, quien interpretó en directo el Himno Oficial de Parkuir compuesto por Walki Talkis.",
+        "imagenes": [
+          "./../fotos/galeria/cigarreras/jornadas-parkuir/1.jpg",
+          "./../fotos/galeria/cigarreras/jornadas-parkuir/3.jpg",
+          "./../fotos/galeria/cigarreras/jornadas-parkuir/4.jpg",
+          "./../fotos/galeria/cigarreras/jornadas-parkuir/5.jpg",
+          "./../fotos/galeria/cigarreras/jornadas-parkuir/6.jpg",
+          "./../fotos/galeria/cigarreras/jornadas-parkuir/8.jpg",
+          "./../fotos/galeria/cigarreras/jornadas-parkuir/10.jpg",
+          "./../fotos/galeria/cigarreras/jornadas-parkuir/11.jpg",
+          "./../fotos/galeria/cigarreras/jornadas-parkuir/12.jpg",
+          "./../fotos/galeria/cigarreras/jornadas-parkuir/13.jpg"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "reina-sofia",
+    "titulo": "Equipo Diverso · Reina Sofía",
+    "subsecciones": [
+      {
+        "id": "reina-sofia-main",
+        "titulo": "Equipo Diverso con Clara López en el Reina Sofía",
+        "texto": "Participamos con la mediación Travesti convaleciente en Descanso y motín, la cuarta edición de equipoDIVERSO, un proyecto coordinado por Clara López sobre arte y discapacidad. A través del juego, el movimiento y la acción colectiva, exploramos la convalecencia como experiencia corporal, reivindicando formas de autonomía, disfrute y agencia frente a los imaginarios de pasividad asociados a ella.",
+        "imagenes": [
+          "./../fotos/galeria/equipo-diverso/1.jpg",
+          "./../fotos/galeria/equipo-diverso/2.jpg",
+          "./../fotos/galeria/equipo-diverso/3.jpg",
+          "./../fotos/galeria/equipo-diverso/4.jpg"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "notar",
+    "titulo": "NOTAR 2025",
+    "subsecciones": [
+      {
+        "id": "notar-travesti",
+        "titulo": "Travesti Convaleciente. Sesión PAN con Clara López (mesa.camilla)",
+        "texto": "En el marco del programa PAN de la residencia NOTAR, invitamos a Clara López para coordinar juntes una mediación interna que nombramos Travesti Convaleciente. La sesión propuso una reivindicación de la figura de la persona convaleciente más allá del estigma, explorando formas de recuperar agencia a través del juego, el disfrute y la imaginación. Un pequeño peregrinaje colectivo hacia otras maneras de habitar la vulnerabilidad.",
+        "imagenes": [
+          "./../fotos/galeria/notar-2025/travesti/1.JPG",
+          "./../fotos/galeria/notar-2025/travesti/2.JPG",
+          "./../fotos/galeria/notar-2025/travesti/3.JPG",
+          "./../fotos/galeria/notar-2025/travesti/4.JPG",
+          "./../fotos/galeria/notar-2025/travesti/5.JPG",
+          "./../fotos/galeria/notar-2025/travesti/6.JPG",
+          "./../fotos/galeria/notar-2025/travesti/7.JPG",
+          "./../fotos/galeria/notar-2025/travesti/8.JPG",
+          "./../fotos/galeria/notar-2025/travesti/9.JPG",
+          "./../fotos/galeria/notar-2025/travesti/10.JPG",
+          "./../fotos/galeria/notar-2025/travesti/11.JPG"
+        ]
+      },
+      {
+        "id": "notar-fundacion",
+        "titulo": "Fundación 26 de Diciembre",
+        "texto": "Desarrollamos varias sesiones de Parkuir en la Fundación 26 de Diciembre, una entidad dedicada al acompañamiento y cuidado de personas mayores LGTBIQ+. Las sesiones generaron un espacio de encuentro intergeneracional que nos permitió compartir relatos, afectos y maneras diversas de habitar la disidencia a lo largo del tiempo.",
+        "imagenes": [
+          "./../fotos/galeria/notar-2025/fundacion/1.JPG",
+          "./../fotos/galeria/notar-2025/fundacion/2.JPG",
+          "./../fotos/galeria/notar-2025/fundacion/3.JPG",
+          "./../fotos/galeria/notar-2025/fundacion/4.JPG",
+          "./../fotos/galeria/notar-2025/fundacion/5.JPG",
+          "./../fotos/galeria/notar-2025/fundacion/6.JPG"
+        ]
+      },
+      {
+        "id": "notar-presentacion",
+        "titulo": "Presentación en Infinito Delicias",
+        "texto": "Realizamos una activación de Parkuir en Infinito Delicias a través de un recorrido performativo por el edificio. La sesión culminó con un bautizo arquitectónico colectivo, en el que especulamos sobre la identidad del edificio y sus posibles formas de habitar el mundo.",
+        "imagenes": [
+          "./../fotos/galeria/notar-2025/presentacion/1.jpg",
+          "./../fotos/galeria/notar-2025/presentacion/2.jpg",
+          "./../fotos/galeria/notar-2025/presentacion/3.jpg",
+          "./../fotos/galeria/notar-2025/presentacion/4.jpg",
+          "./../fotos/galeria/notar-2025/presentacion/5.jpg",
+          "./../fotos/galeria/notar-2025/presentacion/6.jpg",
+          "./../fotos/galeria/notar-2025/presentacion/7.jpg",
+          "./../fotos/galeria/notar-2025/presentacion/8.jpg",
+          "./../fotos/galeria/notar-2025/presentacion/9.jpg"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "cultura",
+    "titulo": "Cultura Resident 2024",
+    "subsecciones": [
+      {
+        "id": "cultura-flojo",
+        "titulo": "FLO JO: Salón de uñas para repensar el deporte",
+        "texto": "Desarrollamos una sesión en torno a la historia del deporte desde una perspectiva queer y anticapacitista. Mientras nos hacíamos uñas de gel, compartimos referentes, experiencias personales y reflexiones sobre la relación entre deporte, estados-nación, neoliberalismo y diversidad corporal.",
+        "imagenes": [
+          "./../fotos/galeria/cultura-resident-2024/flo-jo/1.jpg",
+          "./../fotos/galeria/cultura-resident-2024/flo-jo/2.jpg",
+          "./../fotos/galeria/cultura-resident-2024/flo-jo/3.jpg"
+        ]
+      },
+      {
+        "id": "cultura-en-busca",
+        "titulo": "En busca de un lugar parkuir: ruta arquitectónica desde una perspectiva cuir",
+        "texto": "Realizamos una ruta urbana para explorar la ciudad desde las metodologías de Parkuir. A través del juego y la observación colectiva, analizamos cómo la arquitectura condiciona nuestros movimientos y relaciones con el espacio público.",
+        "imagenes": [
+          "./../fotos/galeria/cultura-resident-2024/en-busca/1.jpg",
+          "./../fotos/galeria/cultura-resident-2024/en-busca/2.jpg",
+          "./../fotos/galeria/cultura-resident-2024/en-busca/3.jpg",
+          "./../fotos/galeria/cultura-resident-2024/en-busca/4.jpg",
+          "./../fotos/galeria/cultura-resident-2024/en-busca/5.jpg",
+          "./../fotos/galeria/cultura-resident-2024/en-busca/6.jpg",
+          "./../fotos/galeria/cultura-resident-2024/en-busca/7.jpg"
+        ]
+      },
+      {
+        "id": "cultura-personaje",
+        "titulo": "Crea tu personaje Parkuir",
+        "texto": "Dedicamos una sesión a la creación de personajes Parkuir, explorando las normas no escritas que atraviesan los contextos deportivos. Utilizando herramientas procedentes del drag, experimentamos con la vestimenta, el maquillaje, los gestos y la performatividad para inventar nuevas identidades deportivas.",
+        "imagenes": [
+          "./../fotos/galeria/cultura-resident-2024/crea-tu-personaje/1.jpg",
+          "./../fotos/galeria/cultura-resident-2024/crea-tu-personaje/2.jpg",
+          "./../fotos/galeria/cultura-resident-2024/crea-tu-personaje/3.jpg",
+          "./../fotos/galeria/cultura-resident-2024/crea-tu-personaje/4.jpg",
+          "./../fotos/galeria/cultura-resident-2024/crea-tu-personaje/5.jpg",
+          "./../fotos/galeria/cultura-resident-2024/crea-tu-personaje/6.jpg",
+          "./../fotos/galeria/cultura-resident-2024/crea-tu-personaje/7.jpg"
+        ]
+      },
+      {
+        "id": "cultura-jornadas",
+        "titulo": "I Jornadas Mundiales de Parkuir",
+        "texto": "Celebramos las I Jornadas Mundiales de Parkuir coincidiendo con la inauguración de los Juegos Olímpicos de París 2024. A través de una ceremonia absurda y festiva, pusimos en práctica muchas de las metodologías desarrolladas durante el proyecto. La jornada contó con la participación de la drag Ferrxn como maestra de ceremonia, y concluyó con un concierto de Walki Talkis.",
+        "imagenes": [
+          "./../fotos/galeria/cultura-resident-2024/i-jornadas/1.jpg",
+          "./../fotos/galeria/cultura-resident-2024/i-jornadas/2.jpg",
+          "./../fotos/galeria/cultura-resident-2024/i-jornadas/3.jpg",
+          "./../fotos/galeria/cultura-resident-2024/i-jornadas/4.jpg",
+          "./../fotos/galeria/cultura-resident-2024/i-jornadas/5.jpg",
+          "./../fotos/galeria/cultura-resident-2024/i-jornadas/6.jpg",
+          "./../fotos/galeria/cultura-resident-2024/i-jornadas/7.jpg",
+          "./../fotos/galeria/cultura-resident-2024/i-jornadas/8.jpg",
+          "./../fotos/galeria/cultura-resident-2024/i-jornadas/9.jpg"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "mostra",
+    "titulo": "Mostra d'Art Públic 2023",
+    "subsecciones": [
+      {
+        "id": "mostra-main",
+        "titulo": "Mostra d'Art Públic 2023",
+        "texto": "Desarrollamos una mediación con el alumnado de la Facultad de Ciencias de la Actividad Física y el Deporte en torno a Parkuir. A través de la creación de personajes, derivas por el espacio universitario y acciones performativas, exploramos las relaciones entre cuerpo, arquitectura, género y accesibilidad.\n\nDurante las jornadas convertimos la facultad en un terreno de juego desde el que cuestionar los usos normativos de los espacios e imaginar nuevas formas de habitarlos a través del humor, el juego y la disidencia.",
+        "imagenes": [
+          "./../fotos/galeria/mostra/1.png",
+          "./../fotos/galeria/mostra/2.png",
+          "./../fotos/galeria/mostra/3.png",
+          "./../fotos/galeria/mostra/4.jpg",
+          "./../fotos/galeria/mostra/5.jpg",
+          "./../fotos/galeria/mostra/6.jpg",
+          "./../fotos/galeria/mostra/7.jpg"
+        ]
+      }
+    ]
+  }
+]

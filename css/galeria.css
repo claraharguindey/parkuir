@@ -1,7 +1,11 @@
 /* ── GALERÍA — página propia ── */
 
-.gal-section { display: none; }
-.gal-section.active { display: block; }
+.gal-section {
+  display: none;
+}
+.gal-section.active {
+  display: block;
+}
 
 .gal-block {
   margin-bottom: 3rem;
@@ -44,21 +48,24 @@
   cursor: zoom-in;
   transition: opacity 0.15s;
 }
-.gal-grid img:hover { opacity: 0.85; }
+.gal-grid img:hover {
+  opacity: 0.85;
+}
 
-/* separador entre bloques */
 .gal-block + .gal-block {
-  padding-top: 2.5rem;
-  border-top: 1px solid rgba(255, 55, 115, 0.2);
+  padding-top: 2rem;
 }
 
 /* ── MOBILE ── */
 @media (max-width: 768px) {
-  .gal-block p { max-width: 100%; }
-  .gal-grid { columns: 1; }
+  .gal-block p {
+    max-width: 100%;
+  }
+  .gal-grid {
+    columns: 1;
+  }
 }
 
-/* ── MOBILE — botones arriba ── */
 @media (max-width: 1024px) {
   .page-grid {
     display: flex;
@@ -87,10 +94,16 @@
     overflow: visible;
   }
 
-  .page-right { display: none; }
+  .page-right {
+    display: none;
+  }
 
-  .gal-block p { max-width: 100%; }
-  .gal-grid { columns: 1; }
+  .gal-block p {
+    max-width: 100%;
+  }
+  .gal-grid {
+    columns: 1;
+  }
 }
 
 /* ── LIGHTBOX ── */
