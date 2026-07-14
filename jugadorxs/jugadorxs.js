@@ -122,7 +122,7 @@ const JUGADORXS = [
     meta: "1964, Liverpool · Él",
     liga: "",
     desc: "El espontáneo más prolífico de la historia: más de 500 eventos interrumpidos. Wimbledon, Super Bowl, Copa Mundial de Rugby. Usaba disfraces para burlar la seguridad y mensajes pintados en el cuerpo. Se retiró en 2013 alegando que ya era demasiado viejo para correr delante de los guardias.",
-    img: "./../fotos/29.avif",
+    img: "./../fotos/MARKROBERTS.jpg",
   },
   {
     name: "Daniel Plaza",
