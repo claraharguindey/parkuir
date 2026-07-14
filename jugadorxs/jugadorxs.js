@@ -13,7 +13,7 @@ const JUGADORXS = [
     meta: "1996, Sant Vicenç dels Horts · Elle / El",
     liga: "Queer",
     desc: 'Una infancia "marimacho", que no le llevó muchos problemas con el deporte, puesto que tenía ciertas habilidades y normatividad corporal, pero a medida que fue creciendo y transicionando hacia persona no binaria, aquellos entornos como la piscina, que hasta el momento habían sido seguros, se fueron convirtiendo en espacios hostiles y no deseables.',
-    img: "./../fotos/guiu.jpg",
+    img: "./../fotos/guiu.png",
   },
   {
     name: "Costa Badia",
@@ -29,7 +29,7 @@ const JUGADORXS = [
     meta: "Él",
     liga: "Queer",
     desc: "Como niño marica, aprendió a odiarse y a odiar lo masculino, lo deportivo y lo físico. De mayor, se ha reconciliado con todo eso y está superando su fobia a los vestuarios y cogiéndole el gusto a nadar. Al fin y al cabo le encanta el movimiento, el tacto y la acción, y eso es y debe ser de todes. Su capacidad: hacer muchas preguntas.",
-    img: "./../fotos/costa.jpg",
+    img: "./../fotos/christian.jpg",
   },
 
   {
