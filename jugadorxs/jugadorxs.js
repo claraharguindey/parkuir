@@ -5,7 +5,7 @@ const JUGADORXS = [
     meta: "1992, Alzira · Ella / Elle",
     liga: "Gorda · Queer",
     desc: "En su infancia tenía unos dientes diferentes, una medida diferente y un peso diferente, esto junto con el asma la llevó a tener malas experiencias en el deporte. Obligada a correr durante 15 min en el patio de primaria o a saltar el plinto en el instituto. Ha sobrevivido a varios maestros de educación física, a clases de natación para bajar de peso, a las prescripciones médicas y a la expulsión de las clases de Hip hop.",
-    img: "./../fotos/maria.jpg",
+    img: "./../fotos/maria.png",
   },
   {
     name: "Guiu Gimeno Bardis",
@@ -277,7 +277,7 @@ const JUGADORXS = [
     meta: "1905",
     liga: "Queer",
     desc: "Ganó muchos premios de lanzamiento de peso, disco y jabalina en los años veinte. Referente trans e intersex en el deporte de entreguerras.",
-    img: "./../fotos/mark.webp",
+    img: "./../fotos/mark-edw.jpg",
   },
   {
     name: "Senior Parkour",
